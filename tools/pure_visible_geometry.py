@@ -73,10 +73,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--cap", type=int, default=64)
     ap.add_argument("--boot", type=int, default=200)
     ap.add_argument("--expect-folds", default="26483,26856,27190,26586,25441")
+    # p71 (TEST replication) additions. Defaults reproduce p69 exactly; the p69
+    # artifact runs/p69_pure_visible_geometry/est.json is unaffected.
+    ap.add_argument("--anchor-a", type=float, default=P60_A_RELFEAT)
+    ap.add_argument("--anchor-b", type=float, default=P60_B_GEOMETRY)
+    ap.add_argument("--skip-anchor-gates", action="store_true",
+                    help="held-out TEST has no p60 anchor; it establishes its own")
+    ap.add_argument("--split-label", default="validation")
     args = ap.parse_args(argv)
 
     _log("=" * 108)
-    _log("p69 PURE-VISIBLE GEOMETRY, matched estimator -- CPU only, NO GPU")
+    _log(f"PURE-VISIBLE GEOMETRY, matched estimator, split={args.split_label} "
+         f"-- CPU only, NO GPU")
     _log("=" * 108)
 
     B = Mech(args.dump, args.prior, "raw50")
@@ -164,7 +172,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         "columns": {"pure_visible": COLS_PURE_VISIBLE, "sizes": COLS_SIZES},
         "estimator": {"hidden": args.hidden, "epochs": args.epochs,
                       "lr": args.lr, "l2": args.l2, "loss": "softmax CE",
-                      "opt": "AdamW", "regime": "5-fold CV on validation, salt 0"},
+                      "opt": "AdamW",
+                      "regime": f"5-fold CV on {args.split_label}, salt 0"},
+        "split": args.split_label, "dump": args.dump,
         "gates": gates, "arms": {}}
 
     _log(f"\n{'-'*104}")
@@ -201,16 +211,22 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     g1 = abs(pr - 0.5) < 1e-6
     g2 = 0.49 <= sh <= 0.51
-    g4 = abs(A - P60_A_RELFEAT) < 0.005
-    g5 = abs(Bg - P60_B_GEOMETRY) < 0.005
+    g4 = abs(A - args.anchor_a) < 0.005
+    g5 = abs(Bg - args.anchor_b) < 0.005
     gates.insert(0, {"gate": "G4 prior exactly 0.5000", "pass": bool(g1),
                      "detail": f"{pr:.6f}"})
     gates.insert(1, {"gate": "G5 shuffled at chance", "pass": bool(g2),
                      "detail": f"{sh:.4f}"})
-    gates.insert(2, {"gate": "G1 A_relfeat reproduces p60 0.5732 +-0.005",
-                     "pass": bool(g4), "detail": f"{A:.4f} (delta {A-P60_A_RELFEAT:+.4f})"})
-    gates.insert(3, {"gate": "G2 B_geometry reproduces p60 0.5976 +-0.005",
-                     "pass": bool(g5), "detail": f"{Bg:.4f} (delta {Bg-P60_B_GEOMETRY:+.4f})"})
+    if args.skip_anchor_gates:
+        gates.insert(2, {"gate": "G1 A_relfeat anchor (SKIPPED: no anchor on this split)",
+                         "pass": True, "detail": f"{A:.4f} observed"})
+        gates.insert(3, {"gate": "G2 B_geometry anchor (SKIPPED: no anchor on this split)",
+                         "pass": True, "detail": f"{Bg:.4f} observed"})
+    else:
+        gates.insert(2, {"gate": f"G1 A_relfeat reproduces {args.anchor_a:.4f} +-0.005",
+                         "pass": bool(g4), "detail": f"{A:.4f} (delta {A-args.anchor_a:+.4f})"})
+        gates.insert(3, {"gate": f"G2 B_geometry reproduces {args.anchor_b:.4f} +-0.005",
+                         "pass": bool(g5), "detail": f"{Bg:.4f} (delta {Bg-args.anchor_b:+.4f})"})
 
     d_missing = Bg - P
     d_size = Q - P
