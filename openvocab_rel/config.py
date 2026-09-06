@@ -379,6 +379,17 @@ class TrainConfig:
     asymmetric_pair_fusion_hidden_mult: float = 2.0
     predicate_metadata_path: str = "configs/predicate_metadata_vg150.json"
     geom_fourier_dim: int = 256
+    # --- p73 (C1a/C1b) geometry-pathway interventions. Both default to the
+    # historical behaviour, so C0 is bit-exact with these fields present.
+    # C1a: geom_feats_torch uses clamp_min(1.0) on widths/heights, which assumes
+    # PIXEL-scale boxes, but relational_model.py divides boxes by img_res first,
+    # so the clamp binds on every box and 6 of 8 channels become bit-exactly
+    # constant (p68). True skips that division, restoring the function's
+    # designed domain. VERIFIED DEFECT, see docs/GEOMETRY_INPUT_DEGENERACY_RESULT.md.
+    geom_input_pixel_space: bool = False
+    # C1b: multiplies the random-Fourier frequency. geom_B is frozen at std 9.91,
+    # a phase rate of ~41 rad per unit dx (p69/p72). 1.0 is the historical value.
+    geom_fourier_scale: float = 1.0
     logit_adj_tau: float = 0.0
     eval_logit_adj_tau: float = -1.0  # negative means reuse logit_adj_tau for eval
     pure_phase: str = "core"  # core, scaling, eval

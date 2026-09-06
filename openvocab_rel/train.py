@@ -738,6 +738,9 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--asymmetric_pair_fusion_include_reverse_diff", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "asymmetric_pair_fusion_include_reverse_diff", True))
     p.add_argument("--asymmetric_pair_fusion_hidden_mult", type=float, default=getattr(TrainConfig, "asymmetric_pair_fusion_hidden_mult", 2.0))
     p.add_argument("--geom_fourier_dim", type=int, default=TrainConfig.geom_fourier_dim)
+    p.add_argument("--geom_input_pixel_space", type=_str2bool, nargs="?", const=True,
+                   default=TrainConfig.geom_input_pixel_space)
+    p.add_argument("--geom_fourier_scale", type=float, default=TrainConfig.geom_fourier_scale)
     p.add_argument("--logit_adj_tau", type=float, default=TrainConfig.logit_adj_tau)
     p.add_argument("--eval_logit_adj_tau", type=float, default=TrainConfig.eval_logit_adj_tau)
     p.add_argument("--pure_phase", type=str, default=getattr(TrainConfig, "pure_phase", "core"))
@@ -942,6 +945,8 @@ def _active_branch_report(cfg: TrainConfig, train_objective_name: str) -> Dict[s
         },
         "architecture": {
             "geom_bias": bool(getattr(cfg, "use_geom_bias", True)),
+            "geom_input_pixel_space": bool(getattr(cfg, "geom_input_pixel_space", False)),
+            "geom_fourier_scale": float(getattr(cfg, "geom_fourier_scale", 1.0)),
             "vector_fusion_gate": bool(getattr(cfg, "vector_fusion_gate", True)),
             "deformable_router": bool(getattr(cfg, "deformable_routing_enabled", True)),
             "node_layers": int(getattr(cfg, "progressive_node_layers", 0)),

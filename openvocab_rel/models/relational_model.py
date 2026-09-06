@@ -247,6 +247,8 @@ class ProgressiveRelationalDecoder(nn.Module):
             nn.GELU(),
             nn.Linear(self.dim, self.dim),
         )
+        # C1b. 1.0 reproduces the historical forward pass exactly.
+        self.geom_fourier_scale = float(getattr(cfg, "geom_fourier_scale", 1.0))
         if self.use_geom_bias:
             f_dim = int(getattr(cfg, "geom_fourier_dim", 256))
             self.geom_B = nn.Parameter(torch.randn(8, f_dim) * 10.0, requires_grad=False)
@@ -443,7 +445,8 @@ class ProgressiveRelationalDecoder(nn.Module):
             geom_feat_raw_clamp = torch.nan_to_num(geom_feat_raw_clamp, nan=0.0, posinf=1.0, neginf=-1.0)
             geom_feat_raw_clamp = torch.clamp(geom_feat_raw_clamp, -10.0, 10.0)
             
-            proj = (2.0 * math.pi * geom_feat_raw_clamp) @ self.geom_B
+            proj = (2.0 * math.pi * float(getattr(self, "geom_fourier_scale", 1.0))
+                    * geom_feat_raw_clamp) @ self.geom_B
             fourier = torch.cat([torch.sin(proj), torch.cos(proj)], dim=-1)
             geom_feat_proj = self.geom_mlp(fourier)
             
@@ -557,6 +560,8 @@ class RelationalModel(nn.Module):
         self.text_dim = int(text_dim) if text_dim is not None else None
         self.default_prune_k = int(getattr(cfg, "learned_prune_k", 0))
         self.use_checkpoint = bool(getattr(cfg, "gradient_checkpointing", False))
+        # C1a. False reproduces the historical forward pass exactly.
+        self.geom_input_pixel_space = bool(getattr(cfg, "geom_input_pixel_space", False))
         self.cfg = cfg
         self.predicate_classifier_enabled = bool(getattr(cfg, "predicate_classifier_enabled", True))
         self.predicate_classifier_classes = int(getattr(cfg, "predicate_classifier_classes", 51))
@@ -722,7 +727,15 @@ class RelationalModel(nn.Module):
             sub_feat = obj_feats[bi].index_select(0, s_idx)
             obj_feat = obj_feats[bi].index_select(0, o_idx)
 
-            norm_boxes = obj_boxes[bi] / float(self.decoder.img_res)
+            # C1a. Historically this ALWAYS divided by img_res, which makes
+            # geom_feats_torch's clamp_min(1.0) bind on every width and height
+            # and zeroes 6 of its 8 output channels (p68). With
+            # geom_input_pixel_space the boxes are passed in the pixel units the
+            # function was written for.
+            if self.geom_input_pixel_space:
+                norm_boxes = obj_boxes[bi]
+            else:
+                norm_boxes = obj_boxes[bi] / float(self.decoder.img_res)
 
             geom_feat = geom_feats_torch(
                 norm_boxes[s_idx], norm_boxes[o_idx]
