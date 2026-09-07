@@ -57,9 +57,20 @@ degenerated the encoder toward a linear map). It is **not** tuned here.
   (sha256 `8845c3af…`), `--reset_epoch true`. The checkpoint file is never
   modified.
 - **Seed** — `1234` for both arms (paired intervention comparison).
-- **Budget** — 3 epochs × 12,000 samples/epoch = **36,000 samples**, batch 12,
-  accum 2, lr 2e-5 cosine, 300 warmup steps, bf16, `clip_input_res 336`.
-  Measured throughput ≈ 3.7 img/s ⇒ ≈ 3 h/arm.
+- **Budget** — 3 epochs × 12,000 samples/epoch = **36,000 samples**, batch 6,
+  accum 4 (**effective batch 24**), lr 2e-5 cosine, 300 warmup steps, bf16,
+  `clip_input_res 336`. Measured throughput ≈ 5.8 img/s, peak VRAM 12.1 GB of
+  23.0 GB ⇒ ≈ 1.8 h/arm.
+
+  > **Amendment, recorded before either arm ran.** This was first written as
+  > batch 12 × accum 2. That configuration **OOM'd** on heavy batches
+  > (`max_objects 32`, `max_pairs 64`, CLIP unfrozen at res 336) after ~25
+  > steps. It is replaced by batch 6 × accum 4, which is the **same effective
+  > batch of 24**, the same number of optimizer updates, the same LR and the
+  > same schedule, at half the activation memory — and batch 6 is the
+  > `l4_24gb` preset's own stage-3 default. Applied identically to both arms,
+  > so it cannot bias the paired comparison. The failed launch was deleted; no
+  > partial C0 artifact survives.
 - **Sequential, never concurrent.** `nvidia-smi` is checked before each launch.
 - **Evaluated checkpoint** — the **final epoch** of each arm, at the identical
   fixed budget. **Never a per-arm "best" epoch**: that selection would differ

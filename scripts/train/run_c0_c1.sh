@@ -78,8 +78,13 @@ ARGS=(
   --negative_pair_ratio 2.0
   # ---- optimisation: identical for both arms -----------------------------
   --epochs "${EPOCHS}"
-  --batch_size 12
-  --accum_steps 2
+  # batch 6 x accum 4 = the SAME effective batch of 24 as batch 12 x accum 2,
+  # the same number of optimizer updates, the same LR and schedule -- but half
+  # the activation memory. batch 12 OOM'd on heavy batches (max_objects 32,
+  # max_pairs 64) with CLIP unfrozen at res 336; 6 is also the l4_24gb preset's
+  # own stage-3 default. Applied identically to both arms.
+  --batch_size 6
+  --accum_steps 4
   --num_workers 4
   --lr 2e-5
   --lr_schedule cosine
