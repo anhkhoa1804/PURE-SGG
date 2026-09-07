@@ -69,3 +69,9 @@ def test_fourier_scale_one_is_the_identity():
     hist = (2.0 * math.pi * x) @ B
     flagged = (2.0 * math.pi * 1.0 * x) @ B
     assert torch.equal(hist, flagged)
+
+
+def test_save_best_checkpoints_defaults_to_historical_behaviour():
+    """The C0/C1 disk guard must not silently change any historical run."""
+    from openvocab_rel.config import TrainConfig
+    assert TrainConfig.save_best_checkpoints is True

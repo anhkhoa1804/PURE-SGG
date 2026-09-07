@@ -386,6 +386,11 @@ class TrainConfig:
     # so the clamp binds on every box and 6 of 8 channels become bit-exactly
     # constant (p68). True skips that division, restoring the function's
     # designed domain. VERIFIED DEFECT, see docs/GEOMETRY_INPUT_DEGENERACY_RESULT.md.
+    # Write the four best_* selection checkpoints (~5 GB each). True is the
+    # historical behaviour. Set False when the experiment evaluates a FIXED
+    # budget rather than a selected best epoch, as the C0/C1 pair does -- there
+    # the selection would differ per arm and contaminate a paired comparison.
+    save_best_checkpoints: bool = True
     geom_input_pixel_space: bool = False
     # C1b: multiplies the random-Fourier frequency. geom_B is frozen at std 9.91,
     # a phase rate of ~41 rad per unit dx (p69/p72). 1.0 is the historical value.

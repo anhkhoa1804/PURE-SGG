@@ -738,6 +738,8 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--asymmetric_pair_fusion_include_reverse_diff", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "asymmetric_pair_fusion_include_reverse_diff", True))
     p.add_argument("--asymmetric_pair_fusion_hidden_mult", type=float, default=getattr(TrainConfig, "asymmetric_pair_fusion_hidden_mult", 2.0))
     p.add_argument("--geom_fourier_dim", type=int, default=TrainConfig.geom_fourier_dim)
+    p.add_argument("--save_best_checkpoints", type=_str2bool, nargs="?", const=True,
+                   default=TrainConfig.save_best_checkpoints)
     p.add_argument("--geom_input_pixel_space", type=_str2bool, nargs="?", const=True,
                    default=TrainConfig.geom_input_pixel_space)
     p.add_argument("--geom_fourier_scale", type=float, default=TrainConfig.geom_fourier_scale)
@@ -2650,25 +2652,30 @@ def main(argv: Optional[List[str]] = None) -> None:
             )
             save_dir = os.path.dirname(str(cfg.save_path)) or "."
             save_stem = os.path.splitext(os.path.basename(str(cfg.save_path)))[0]
+            _save_best = bool(getattr(cfg, "save_best_checkpoints", True))
             if predcls_r50 > best_predcls_r50:
                 best_predcls_r50 = predcls_r50
                 best_path = os.path.join(save_dir, f"{save_stem}_best_R50.pt")
-                torch.save(ckpt, best_path)
+                if _save_best:
+                    torch.save(ckpt, best_path)
                 print(f"[System] Saved best PredCls R@50 checkpoint to {best_path} ({predcls_r50:.4f})", flush=True)
             if predcls_mr50 > best_predcls_mr50:
                 best_predcls_mr50 = predcls_mr50
                 best_path = os.path.join(save_dir, f"{save_stem}_best_mR50.pt")
-                torch.save(ckpt, best_path)
+                if _save_best:
+                    torch.save(ckpt, best_path)
                 print(f"[System] Saved best PredCls mR@50 checkpoint to {best_path} ({predcls_mr50:.4f})", flush=True)
             if predcls_tail_mr50 > best_predcls_tail_mr50:
                 best_predcls_tail_mr50 = predcls_tail_mr50
                 best_path = os.path.join(save_dir, f"{save_stem}_best_tail_mR50.pt")
-                torch.save(ckpt, best_path)
+                if _save_best:
+                    torch.save(ckpt, best_path)
                 print(f"[System] Saved best PredCls tail mR@50 checkpoint to {best_path} ({predcls_tail_mr50:.4f})", flush=True)
             if selection_score > best_predcls_selection:
                 best_predcls_selection = selection_score
                 best_path = os.path.join(save_dir, f"{save_stem}_best_selection.pt")
-                torch.save(ckpt, best_path)
+                if _save_best:
+                    torch.save(ckpt, best_path)
                 print(f"[System] Saved best selection checkpoint to {best_path} ({selection_score:.4f})", flush=True)
             metrics_dump["selection_score"] = float(selection_score)
             metrics_dump["best_so_far"] = {
