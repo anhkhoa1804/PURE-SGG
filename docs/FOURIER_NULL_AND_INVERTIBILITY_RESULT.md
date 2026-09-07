@@ -144,3 +144,51 @@ survived its gates.
   of the raw channels, upstream of the encoder. This measures what the encoder
   does to them. Both hold simultaneously, and together they say the geometry
   pathway is broken in **two independent places**.
+
+---
+
+## Part C — the bandwidth curve: the knee is at `scale ≈ 0.01`
+
+Registered in the amendment before running. Same probe, same gates (4/4 PASS),
+same rows and folds; only the scale grid changes. Run:
+`runs/p73c_fourier_bandwidth_curve`. `scale = 1.0` retained, and reproduces
+`I_s1 = −0.3314` exactly.
+
+| `geom_fourier_scale` | **mean R²** | dx | dy | rw | rh | ar1 | ar2 | a1 | a2 |
+|---|---|---|---|---|---|---|---|---|---|
+| **1.0** (the checkpoint's) | **−0.3314** | −0.12 | −0.20 | −0.55 | −0.55 | −0.22 | −0.22 | −0.39 | −0.40 |
+| 0.05 | +0.1064 | −0.09 | −0.14 | +0.14 | +0.19 | +0.12 | +0.07 | +0.35 | +0.21 |
+| 0.02 | +0.8433 | 0.70 | 0.70 | 0.90 | 0.91 | 0.86 | 0.85 | 0.92 | 0.91 |
+| **0.01** | **+0.9839** | 0.98 | 0.97 | 0.99 | 0.99 | 0.99 | 0.99 | 0.98 | 0.99 |
+| 0.005 | +0.9964 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 0.99 | 0.99 |
+| 0.002 | +0.9972 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 0.99 | 0.99 |
+| *(no Fourier — `I_raw`)* | *+0.9997* | | | | | | | | |
+| *(null — `I_shuffled_rows`)* | *−0.3197* | | | | | | | | |
+
+The transition is **abrupt and complete**: −0.33 (null floor) → +0.84 → +0.98
+across a factor of 50 in scale. Between 1.0 and 0.05 nothing is recoverable;
+by 0.01 everything is.
+
+**Selected value: `geom_fourier_scale = 0.01`**, by the criterion registered in
+advance — the *knee*, the largest scale that recovers the input, not the argmax.
+The reasoning:
+
+- 0.02 is the first scale above the floor but is **channel-selective**: the four
+  size channels reach 0.90+ while `dx`/`dy` lag at 0.70. Since `p69`/`p71`
+  attribute 90–95% of the missing information to box size, 0.02 would restore
+  most of the *value* but would still be attenuating the two channels PURE
+  already has — an awkward, hard-to-interpret intervention.
+- 0.01 is the first scale where **all eight channels clear 0.97**.
+- 0.005 and 0.002 buy +0.013 more R² and are on the far side of the registered
+  caveat: as `geom_B·s → 0` the Fourier features degenerate toward a constant
+  plus a linear map, so their near-perfect R² indicates the encoder has become
+  **trivial**, not good. Choosing them would silently delete the nonlinear
+  encoder rather than repair it.
+
+`geom_B` has std 9.91, so `scale = 0.01` is an effective std of **0.099** — a
+100× reduction, and the first setting at which PURE's geometry encoder is an
+encoder rather than a hash.
+
+**This is now a measured setting, not a guess.** `C1b`'s free parameter has been
+fixed by a label-free probe before any GPU time is spent, which is what the
+`p72`/`p73` sequence was for.

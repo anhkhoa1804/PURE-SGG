@@ -244,20 +244,54 @@ not have is the intervention.
 
 ## 16. Recommended next action
 
-**Do not launch `C1a`. Do not launch `C0` yet.**
+**Do not launch `C1a`.** `p73` Part B predicts it is null or harmful, for a
+reason unrelated to the units hypothesis.
 
-`p73` establishes that the registered `C1b` scale grid is mostly on the null
-floor and that the informative region starts at 0.05 and goes *down*. Launching
-a multi-hour GPU factorial whose `C1b` arm is pinned to an uninformative
-bandwidth would waste the L4 and produce an uninterpretable null — the exact
-failure mode `p72` was written to prevent.
+The bandwidth question that blocked the factorial has been **closed this
+session** by `p73` Part C (CPU, `runs/p73c_fourier_bandwidth_curve`, 4/4 gates):
 
-The correct next step is the **cheapest decisive one**, and it is CPU-only:
-extend `p73`'s invertibility probe into a proper bandwidth curve over
-`geom_fourier_scale ∈ {0.05, 0.02, 0.01, 0.005, 0.002}`, plus a
-`fourier-disabled` arm (raw 8-vector straight into `geom_mlp`), and pick the
-scale that maximises recovered R² while keeping the encoding smooth. **Only
-then** launch the `C0`/`C1` pair on the L4 with that scale pre-registered.
+| `geom_fourier_scale` | 1.0 | 0.05 | 0.02 | **0.01** | 0.005 | 0.002 | raw |
+|---|---|---|---|---|---|---|---|
+| mean R² (input recovery) | −0.331 | +0.106 | +0.843 | **+0.984** | +0.996 | +0.997 | +0.9997 |
 
-This is ~15 CPU-minutes and it converts `C1b` from a guess into a measured
-setting before any GPU is spent.
+**`geom_fourier_scale = 0.01` is selected** — the knee, the largest scale that
+recovers all eight channels above 0.97. (0.02 is channel-selective, restoring
+the size channels to 0.90+ while `dx`/`dy` lag at 0.70; 0.005 and below have
+degenerated the encoder toward a linear map.) `geom_B`'s std is 9.91, so this is
+an effective std of 0.099 — a 100× reduction.
+
+**The next action is therefore the `C0` / `C1` GPU pair**, with `C1` =
+`geom_input_pixel_space=True` **and** `geom_fourier_scale=0.01` together, both
+pre-registered. Both fixes are required and neither is sufficient:
+
+- `C1a` alone: restores six channels at the input, then the encoder destroys all
+  eight (`p73` Part B, VERIFIED).
+- `C1b` alone: un-hashes the pathway, but the six channels carrying 90–95% of
+  the information (`p69`/`p71`) are still zeroed by the units bug.
+
+Before that launch, what remains is preregistration, not measurement: fix the
+seed, budget, split, success thresholds and the prior/calibration controls, and
+smoke-test `C0` for bit-exactness against the historical evaluator (the flags'
+defaults are already asserted bit-exact in
+`tests/test_geometry_contract_flags.py`). The GPU is idle and the experiment is
+justified by four independently gated results (`p68`, `p69`/`p71`, `p70`,
+`p73`), but it is a multi-hour training run and its registration does not yet
+exist — so it is prepared, not started.
+
+## 17. What was NOT done, and why
+
+- **No GPU job was launched.** The L4 was idle throughout; every result here is
+  CPU-only or a re-analysis of artifacts that already existed.
+- **No completed experiment was rerun.** `p70`'s GPU pass was recovered, not
+  repeated.
+- **`p72` was not rescued.** Its null gate failed a pre-registered rule and the
+  amendment's Part A confirmed the draw sits at 2.28 sd, outside the 2 sd the
+  amendment fixed in advance. Its `+0.0892` is discarded and cited nowhere. The
+  DESTRUCTIVE conclusion is carried entirely by `p73`, which passed its own
+  gates against its own null.
+- **The VCTree checkpoint was not chased**, per the standing instruction.
+- **Paper A was not reopened.** No historical metric was altered. `p70`'s
+  `A_full` reproducing `p33`'s 0.5542 to ±0.0000 is an independent
+  re-verification of a frozen claim, not a revision of one. The `p68`/`p73`
+  mechanism is recorded as a **new mechanistic explanation** of the frozen
+  geometry-deficit result, not as a contradiction of it.
