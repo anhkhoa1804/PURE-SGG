@@ -204,6 +204,60 @@ class weights the base run used. Label/group relaxation are inherited at
 whatever the base checkpoint's `cfg` already sets (**off**, per the base
 run's own recorded config — verified, not assumed, in §3).
 
+> **CORRECTION (post-preregistration, pre-GPU audit).** The claim above is
+> **factually wrong** and is left in place, struck through in spirit but not
+> in text, so the error is visible rather than silently erased. The base
+> `C1` run (`scripts/train/run_c0_c1.sh` line 104) actually passes
+> `--predicate_label_relaxation_enabled true`. §3's audit table (row
+> "predicate CE loss (training)") stated the **`TrainConfig` class default**
+> (`False`) and this section then wrongly equated that class default with
+> "the base run's own recorded config" — those are two different things,
+> and the base run's *actual* recorded config (its own launch command) has
+> it `True`. This was caught by a dedicated pre-GPU audit, not by this
+> document's own review.
+>
+> **This does not change the hypothesis.** It changes one training-protocol
+> choice: **Readout v2's primary pilot deliberately sets
+> `predicate_label_relaxation_enabled=false`**, i.e. it does *not* inherit
+> this particular base-run setting. This is an isolation choice, made
+> explicitly here rather than by accident: label relaxation is itself an
+> intervention on the CE loss (soft-label smoothing toward
+> `pred_sim_matrix`-similar predicates), and `H_readout` is a claim about
+> prototype adaptation alone. Running Readout v2 with label relaxation on
+> would test "prototype adaptation + soft labels," a different, uncontrolled
+> question. `_predicate_ce_loss` is still called unmodified, exactly as
+> stated above — only the flag governing which of its internal branches
+> fire is a Readout-v2-specific choice now stated explicitly, not inherited.
+>
+> **`explicit_spoa_enabled` and `text_conditioned_projection_enabled` were
+> never named in this document at all** — a second, related omission caught
+> by the same audit. Both must also be `false` for Readout v2 training, for
+> a stronger reason than label relaxation: `explicit_spoa_enabled` changes
+> `rel_feat` itself (`ProgressiveRelationalDecoder.forward_pairs`:
+> `rel_feat = rel_seed(fused_feat) + spoa_fusion(spoa_state)` when `true`,
+> vs. `rel_seed(fused_feat)` alone when `false`), and
+> `text_conditioned_projection_enabled` changes what
+> `adaptive_predicate_logits` scores (via `text_relation_features`). Every
+> existing WPRD number this programme has ever reported (`C0`, `C1` seed
+>1234, `C1` seed 5678) was evaluated with **both flags `false`**
+> (`tools/c0_c1_evaluate.py` hardcodes them) — so `true` during Readout v2
+> training would not even have matched what "the `C1` checkpoint's `rel_feat`"
+> means anywhere else in this programme, quite apart from the new train/eval
+> mismatch it would introduce within this experiment specifically.
+>
+> **Resolved value for all three, Readout v2 primary pilot only:**
+> `explicit_spoa_enabled=false`, `text_conditioned_projection_enabled=false`,
+> `predicate_label_relaxation_enabled=false`. §10's "held fixed" list is
+> amended below to name these explicitly by value, not just by module.
+>
+> **Historical results are unaffected.** `docs/PAPER_C_C1_RESULT.md` and
+> `docs/PAPER_C_C1_SEED2_RESULT.md` (seed 1234 / seed 5678 `C1` WPRD) were
+> produced by `tools/c0_c1_evaluate.py`, which already hardcodes all three
+> flags to their eval-time values independent of what any training script
+> passes. Nothing about the locked `WPRD=0.5749881522134409` /
+> `WPRD=0.572551887041989` results, their replication classification, or
+> the geometry-repair conclusion changes because of this correction.
+
 **Total Readout v2 training objective:**
 
 ```
@@ -299,6 +353,14 @@ Held fixed, all inherited unmodified from `checkpoints/C1_seed1234.pt`:
 - backbone (CLIP vision + text encoders, as loaded from the checkpoint)
 - `ProgressiveRelationalDecoder` (all of it — node/edge layers, fusion gate,
   Fourier encoder)
+- **`explicit_spoa_enabled=false`, `text_conditioned_projection_enabled=false`,
+  `predicate_label_relaxation_enabled=false`** — pinned by value, not just by
+  module, after the pre-GPU audit correction above. `explicit_spoa_enabled`
+  and `text_conditioned_projection_enabled` must match
+  `tools/readout_v2_evaluate.py`'s hardcoded eval-time values exactly (both
+  `false`) or `rel_feat`/the readout's scoring input differ between train and
+  eval; `predicate_label_relaxation_enabled=false` keeps `l_readout_v2_ce`
+  a vanilla weighted/focal CE with no second intervention.
 - dataset, split (VG150, `datasets_vg150_clean`, local-jsonl)
 - GT boxes, pair construction (`eval_sgg_use_gt_pairs=true`, PredCls)
 - prior (`frequency_prior_train.json`, `alpha=3.75` where composed at all —
