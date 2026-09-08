@@ -490,6 +490,14 @@ With that caveat, three internal comparisons:
    geometry, reaches **0.5750**. The direction of `p39`/`p40`/`p60` is unchanged
    by the repair: **on prior-free relational discrimination, the full model still
    does not beat boxes.**
+
+   > **CORRECTION (added by `docs/PAPER_C_PURE_READOUT_FORENSIC.md`).** This
+   > holds for the **deployed text head** only, and as written it over-generalises
+   > to the architecture. Read through `C1`'s own trained classifier head — the
+   > same `rel_feat`, the same registered estimator, the same 20,016 cells — the
+   > repaired model reads **0.5994**, at or slightly above `B_geometry`'s 0.5976.
+   > The deficit is a property of the deployed readout, not of the representation.
+   > See §4 and §15 of the readout forensic.
 3. **Fusion is lossy in this codebase.** `C_fusion` (0.5922, 789 dims) is
    *below* `B_geometry` (0.5976, 20 dims) — under a matched estimator, adding
    `rel_feat` to geometry **subtracts**. The same signature appears inside the
