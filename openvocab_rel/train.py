@@ -693,6 +693,9 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--predicate_sampler_max_weight", type=float, default=getattr(TrainConfig, "predicate_sampler_max_weight", 20.0))
     p.add_argument("--text_conditioned_projection_enabled", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "text_conditioned_projection_enabled", False))
     p.add_argument("--text_conditioned_projection_residual", type=float, default=getattr(TrainConfig, "text_conditioned_projection_residual", 0.35))
+    p.add_argument("--readout_v2_enabled", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "readout_v2_enabled", False))
+    p.add_argument("--readout_v2_lambda_anchor", type=float, default=getattr(TrainConfig, "readout_v2_lambda_anchor", 0.5))
+    p.add_argument("--readout_v2_lr", type=float, default=getattr(TrainConfig, "readout_v2_lr", 2e-3))
     p.add_argument("--open_vocab_predicate_primary", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "open_vocab_predicate_primary", False))
     p.add_argument("--open_vocab_classifier_aux_weight", type=float, default=getattr(TrainConfig, "open_vocab_classifier_aux_weight", 0.5))
     p.add_argument("--lambda_text_predicate_ce", type=float, default=getattr(TrainConfig, "lambda_text_predicate_ce", 0.0))
@@ -1671,6 +1674,41 @@ def main(argv: Optional[List[str]] = None) -> None:
         if int(cfg.stage) == 2 and start_epoch == 0:
             print("[System] Stage 2 detected: Purging stale Stage 1 queue to prevent divergence.")
             rel_queue = RingQueue(int(cfg.emb_dim), int(cfg.rel_queue_size), device=device)
+    if bool(getattr(cfg, "readout_v2_enabled", False)):
+        # Paper C -- Readout v2 (docs/PAPER_C_READOUT_V2_PREREGISTRATION.md).
+        # Runs strictly after the resume block above so E is built from the
+        # LOADED checkpoint's own (possibly fine-tuned) CLIP text encoder --
+        # not the pre-resume pred_emb_s2o computed at line ~1529, which
+        # predates the "[System] Loaded fine-tuned CLIP weights." load.
+        mdl = model.module if isinstance(model, DDP) else model
+        _, readout_v2_e = encode_predicate_vocab(
+            clip_model, processor, global_pred_pool, device,
+            prompt_fn=pred_prompt_roles, direction="s2o",
+        )
+        for _p in unwrap_ddp(clip_model).parameters():
+            _p.requires_grad_(False)
+        for _name, _p in mdl.named_parameters():
+            _p.requires_grad_(False)
+        mdl.init_readout_v2(readout_v2_e)
+        mdl.predicate_prototypes.requires_grad_(True)
+        optim.add_param_group({"params": [mdl.predicate_prototypes]})
+        # Every other parameter is now frozen (requires_grad=False), so the
+        # nominal per-step LR the schedule below assigns to their param
+        # groups is inert for them (.grad stays None, optimizer step is a
+        # no-op). Overriding base_lr here is therefore sufficient to give
+        # predicate_prototypes its own effective LR without a second
+        # schedule or a separate param-group LR override.
+        base_lr = float(getattr(cfg, "readout_v2_lr", base_lr))
+        if is_main():
+            n_trainable = sum(1 for _p in mdl.parameters() if _p.requires_grad) + sum(
+                1 for _p in unwrap_ddp(clip_model).parameters() if _p.requires_grad
+            )
+            print(
+                f"[ReadoutV2] enabled: P=predicate_prototypes {tuple(mdl.predicate_prototypes.shape)} "
+                f"init=E (copy, not alias) lambda_anchor={float(getattr(cfg, 'readout_v2_lambda_anchor', 0.5))} "
+                f"lr={base_lr:.2e} trainable_tensors={n_trainable} (must be exactly 1)",
+                flush=True,
+            )
     if is_main():
         print(
             "[Config] "
@@ -2190,6 +2228,8 @@ def main(argv: Optional[List[str]] = None) -> None:
                 l_triplet_rank = torch.tensor(0.0, device=device)
                 l_role_swap_rank = torch.tensor(0.0, device=device)
                 l_object_bridge = torch.tensor(0.0, device=device)
+                l_readout_v2_ce = torch.tensor(0.0, device=device)
+                l_readout_v2_anchor = torch.tensor(0.0, device=device)
                 prior_residual_last = None
                 train_objective = train_objective_name
                 logit_adj_tau = float(getattr(cfg, "logit_adj_tau", 0.0))
@@ -2270,6 +2310,21 @@ def main(argv: Optional[List[str]] = None) -> None:
                             cfg,
                             pred_sim_matrix=pred_sim_matrix,
                         )
+                if bool(getattr(cfg, "readout_v2_enabled", False)) and int(pos_pred_ids.numel()) > 0 and hasattr(out, "predicate_prototypes"):
+                    # Paper C -- Readout v2 (docs/PAPER_C_READOUT_V2_PREREGISTRATION.md
+                    # section 6). Section 8: no prior tensor of any kind enters this
+                    # branch -- only rel_feat, the trainable P, and the GT label.
+                    valid_v2 = (pos_pred_ids >= 0) & (pos_pred_ids < int(out.predicate_prototypes.shape[0]))
+                    if bool(valid_v2.any()):
+                        v2_logits = out.adaptive_predicate_logits(x_pos[valid_v2]).float()
+                        l_readout_v2_ce = _predicate_ce_loss(
+                            v2_logits,
+                            pos_pred_ids[valid_v2].long(),
+                            pred_ce_weights,
+                            cfg,
+                            pred_sim_matrix=pred_sim_matrix,
+                        )
+                    l_readout_v2_anchor = out.readout_v2_anchor_loss()
                 if float(getattr(cfg, "lambda_role_swap_rank", 0.0)) > 0.0 and int(pos_pred_ids.numel()) > 0:
                     role_mask = pos_non_sym_mask if "pos_non_sym_mask" in locals() else torch.zeros_like(pos_pred_ids, dtype=torch.bool)
                     valid_role = role_mask & (pos_pred_ids >= 0) & (pos_pred_ids < int(pred_emb_s2o.shape[0]))
@@ -2398,13 +2453,14 @@ def main(argv: Optional[List[str]] = None) -> None:
                 object_bridge_term = float(getattr(cfg, "lambda_object_bridge", 0.0)) * l_object_bridge
                 triplet_rank_term = float(getattr(cfg, "lambda_triplet_rank", 0.0)) * l_triplet_rank
                 role_swap_term = float(getattr(cfg, "lambda_role_swap_rank", 0.0)) * l_role_swap_rank
+                readout_v2_term = l_readout_v2_ce + (float(getattr(cfg, "readout_v2_lambda_anchor", 0.5)) * l_readout_v2_anchor)
                 gate_reg = None
                 gate_val = 0.5
                 decoder = model.module.decoder if isinstance(model, DDP) else model.decoder
                 if hasattr(decoder, "last_gate_reg") and decoder.last_gate_reg is not None:
                     gate_reg = decoder.last_gate_reg
                     gate_val = decoder.last_gate_val
-                loss_total = spoa_term + ground_term + pred_ce_term + cal_kl_term + cal_rank_term + text_ce_term + relationness_term + relationness_rank_term + pair_topk_term + pair_balanced_topk_term + object_bridge_term + triplet_rank_term + role_swap_term
+                loss_total = spoa_term + ground_term + pred_ce_term + cal_kl_term + cal_rank_term + text_ce_term + relationness_term + relationness_rank_term + pair_topk_term + pair_balanced_topk_term + object_bridge_term + triplet_rank_term + role_swap_term + readout_v2_term
                 calib_reg_weight = float(getattr(cfg, "lambda_calibration_reg", 0.0))
                 if bool(getattr(cfg, "adaptive_calibration_enabled", False)) and calib_reg_weight > 0.0 and hasattr(out, "calibration_regularizer"):
                     calib_reg = out.calibration_regularizer()

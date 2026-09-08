@@ -859,6 +859,42 @@ class RelationalModel(nn.Module):
     def text_predicate_logits(self, rel_feats: torch.Tensor, text_feats: torch.Tensor) -> torch.Tensor:
         return self.score(self.text_relation_features(rel_feats), text_feats)
 
+    # ---------------------------------------------------------- Readout v2
+    # Paper C -- docs/PAPER_C_READOUT_V2_PREREGISTRATION.md. Additive only:
+    # nothing below is reachable unless init_readout_v2() has been called
+    # explicitly (gated by cfg.readout_v2_enabled in train.py/evals.py), so
+    # every existing code path is byte-unmodified when the flag is off.
+    def init_readout_v2(self, E: torch.Tensor) -> None:
+        """Create the trainable predicate-prototype matrix P = copy(E).
+
+        E must be the frozen CLIP predicate embeddings for THIS loaded
+        checkpoint (encode_predicate_vocab's return value), already on the
+        model's device. P is a clone, never an alias, of E (section 7 of
+        the preregistration) -- verified by tests/test_readout_v2.py.
+        """
+        if hasattr(self, "predicate_prototypes"):
+            raise RuntimeError("init_readout_v2() called twice on the same model.")
+        p0 = E.detach().clone()
+        self.predicate_prototypes = nn.Parameter(p0, requires_grad=True)
+        self.register_buffer("_readout_v2_anchor", E.detach().clone(), persistent=False)
+
+    def adaptive_predicate_logits(self, rel_feats: torch.Tensor) -> torch.Tensor:
+        """score(rel_feat, P) -- the Readout v2 R2 channel. No prior, no
+        classifier branch, no ensemble: exactly one cosine score against the
+        trainable prototypes, mirroring text_predicate_logits's contract.
+        """
+        if not hasattr(self, "predicate_prototypes"):
+            raise RuntimeError("adaptive_predicate_logits() requires init_readout_v2() first.")
+        return self.score(self.text_relation_features(rel_feats), self.predicate_prototypes)
+
+    def readout_v2_anchor_loss(self) -> torch.Tensor:
+        """L_anchor = mean_i (1 - cos(P_i, E_i)) -- section 6 of the preregistration."""
+        if not hasattr(self, "predicate_prototypes"):
+            raise RuntimeError("readout_v2_anchor_loss() requires init_readout_v2() first.")
+        p = F.normalize(self.predicate_prototypes.float(), dim=-1)
+        e = F.normalize(self._readout_v2_anchor.float(), dim=-1)
+        return (1.0 - (p * e).sum(dim=-1)).mean()
+
     def predicate_scores(
         self,
         rel_feats: torch.Tensor,
@@ -870,6 +906,10 @@ class RelationalModel(nn.Module):
         if mode is None:
             mode = "text" if bool(getattr(self.cfg, "open_vocab_predicate_primary", False)) else str(getattr(self.cfg, "eval_sgg_predicate_score_mode", "ensemble"))
         mode = str(mode).strip().lower()
+
+        if mode in {"adaptive", "readout_v2"}:
+            return self.adaptive_predicate_logits(rel_feats).float()
+
         text_logits: Optional[torch.Tensor] = None
         if predicate_text_feats is not None:
             text_logits = self.text_predicate_logits(rel_feats, predicate_text_feats).float()

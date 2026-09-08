@@ -1254,6 +1254,13 @@ def _collect_pair_dump(
             else:
                 dump[key].append(torch.full((n, width), float("nan")))
                 dump["missing_" + key] = int(dump.get("missing_" + key, 0)) + 1
+        if "adaptive_logits" in dump:
+            t = comps.get("adaptive_logits")
+            if isinstance(t, torch.Tensor) and tuple(t.shape) == (n, width):
+                dump["adaptive_logits"].append(t.detach().float().cpu())
+            else:
+                dump["adaptive_logits"].append(torch.full((n, width), float("nan")))
+                dump["missing_adaptive_logits"] = int(dump.get("missing_adaptive_logits", 0)) + 1
         if dump.get("_want_rel_feat"):
             if "pred_emb" not in dump:
                 pe = comps.get("pred_emb")
@@ -1503,6 +1510,14 @@ def _predicate_logit_components(
         # matter how good rel_feat is -- a readout-geometry failure that is
         # invisible from the logits alone.
         "pred_emb": pred_emb,
+        # Paper C -- Readout v2 (docs/PAPER_C_READOUT_V2_PREREGISTRATION.md).
+        # Populated only when the model carries a trained predicate-prototype
+        # matrix; None otherwise, so the existing branches above never see a
+        # new key they don't already handle.
+        "adaptive_logits": (
+            out.adaptive_predicate_logits(rel_feat).float()
+            if hasattr(out, "predicate_prototypes") else None
+        ),
     }
     if not use_classifier or mode in {"text", "cosine", "clip"}:
         comp["branch"] = "text_only"
@@ -1812,6 +1827,11 @@ def eval_sgg_standard(
         # the artifact is byte-comparable with the p24 schema.
         pair_dump["rel_feat"] = []
         pair_dump["_want_rel_feat"] = True
+    if pair_dump is not None and bool(getattr(cfg, "readout_v2_enabled", False)):
+        # Paper C -- Readout v2. Purely additive: existing keys (text_logits,
+        # cls_logits, ...) and their consumers are byte-unmodified. Default
+        # OFF -- when off, the dump dict has no "adaptive_logits" key at all.
+        pair_dump["adaptive_logits"] = []
     global_hits = {t: {k: {p: 0 for p in pred_vocab} for k in ks} for t in tasks}
     zs_gt_counts = {p: 0 for p in pred_vocab}
     zs_hits = {t: {k: {p: 0 for p in pred_vocab} for k in ks} for t in tasks}

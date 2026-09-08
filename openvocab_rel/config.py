@@ -327,6 +327,12 @@ class TrainConfig:
     predicate_sampler_max_weight: float = 20.0
     text_conditioned_projection_enabled: bool = False
     text_conditioned_projection_residual: float = 0.35
+    # Paper C -- Readout v2 (docs/PAPER_C_READOUT_V2_PREREGISTRATION.md).
+    # Flag OFF must reproduce Readout v0 bit-exactly -- see that document's
+    # regression-test section before changing any default here.
+    readout_v2_enabled: bool = False
+    readout_v2_lambda_anchor: float = 0.5
+    readout_v2_lr: float = 2e-3
     open_vocab_predicate_primary: bool = False
     open_vocab_classifier_aux_weight: float = 0.5
     lambda_text_predicate_ce: float = 0.0
