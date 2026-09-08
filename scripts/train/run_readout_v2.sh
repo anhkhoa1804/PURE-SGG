@@ -100,7 +100,27 @@ ARGS=(
   --amp_dtype bf16
   --channels_last true
   --gradient_checkpointing false
-  --freeze_clip true
+  # POST-PILOT CORRECTION: freeze_clip=true also gates whether CLIP weights
+  # are written into the checkpoint at all (train.py:2572-2573,
+  # `if not bool(cfg.freeze_clip): ckpt["clip"] = ...`). The first pilot run
+  # used freeze_clip=true and silently saved a checkpoint with NO CLIP
+  # weights (413 MB vs the base checkpoint's 5.29 GB) -- reloading it in a
+  # fresh process would fall back to un-finetuned pretrained CLIP, which
+  # would invalidate any WPRD comparison against R0. Naively flipping
+  # freeze_clip to false is NOT enough on its own: the per-epoch toggle at
+  # train.py:1880 (`_set_clip_trainable(not bool(cfg.freeze_clip))`) would
+  # then RE-ENABLE requires_grad on every CLIP parameter at the start of
+  # each epoch, undoing the readout_v2_enabled block's explicit freeze and
+  # letting l_readout_v2_ce's gradient flow into CLIP itself -- a worse
+  # violation than the one this script was already corrected for. Fixed by
+  # decoupling the two via the existing clip_unfreeze_after_epochs warmup
+  # mechanism: clip_warmup_frozen (train.py:1874) takes priority over the
+  # freeze_clip toggle and forces _set_clip_trainable(false) unconditionally
+  # for any epoch below this count, and also forces clip_model.train(false)
+  # (eval mode, no dropout/batchnorm drift) for the same epochs. Set far
+  # above any pilot or full-budget epoch count so it always fires.
+  --freeze_clip false
+  --clip_unfreeze_after_epochs 999999
   --progressive_unfreeze false
   # ---- objective: PRE-GPU AUDIT CORRECTION (see
   #      docs/PAPER_C_READOUT_V2_PREREGISTRATION.md CORRECTION block).

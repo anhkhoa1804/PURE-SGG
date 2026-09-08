@@ -319,6 +319,28 @@ def test_pilot_script_activates_readout_v2_on_the_fixed_c1_contract():
     assert cfg.reset_epoch is True
 
 
+def test_pilot_script_saves_clip_weights_without_making_clip_trainable():
+    """Post-pilot-run finding: freeze_clip=true also gates whether CLIP
+    weights are written into the checkpoint at all (train.py:2572-2573).
+    The first pilot run set freeze_clip=true and silently produced a
+    checkpoint with no "clip" key -- reloading it in a fresh process would
+    fall back to un-finetuned pretrained CLIP. freeze_clip=false alone is
+    NOT sufficient either: the per-epoch toggle at train.py:1880 would then
+    re-enable requires_grad on every CLIP parameter every epoch, undoing
+    the readout_v2 freeze. The fix decouples the two via
+    clip_unfreeze_after_epochs, which train.py:1874 checks BEFORE the
+    freeze_clip toggle and forces CLIP frozen regardless."""
+    argv = _dry_run_argv("scripts/train/run_readout_v2.sh", {"PILOT": "1"})
+    cfg = _resolve_cfg(argv)
+    assert cfg.freeze_clip is False, "must be false so ckpt['clip'] is saved (train.py:2572)"
+    assert int(cfg.clip_unfreeze_after_epochs) > int(cfg.epochs), (
+        "must exceed the run's own epoch count so clip_warmup_frozen is True "
+        "for every epoch this run will execute (train.py:1874), keeping CLIP "
+        "frozen despite freeze_clip=false"
+    )
+    assert cfg.progressive_unfreeze is False, "must stay false or it bypasses the warmup check entirely (train.py:1877)"
+
+
 def test_pilot_script_refuses_full_budget_without_PILOT_flag():
     proc = subprocess.run(
         ["bash", "scripts/train/run_readout_v2.sh"],
@@ -359,6 +381,12 @@ def test_readout_v2_pilot_config_differs_from_c1_baseline_only_in_declared_ways(
         "resume_from", "run_name", "out_dir", "save_path", "save_metrics_json",
         "epochs", "samples_per_epoch", "batch_size", "accum_steps", "lr",
         "warmup_steps", "gradient_checkpointing", "freeze_clip",
+        # C1 baseline actually trains CLIP (freeze_clip=false, no warmup cap);
+        # the pilot needs freeze_clip=false ONLY so the checkpoint save
+        # condition fires (train.py:2572), and uses this warmup mechanism to
+        # keep CLIP genuinely frozen throughout -- see
+        # test_pilot_script_saves_clip_weights_without_making_clip_trainable.
+        "clip_unfreeze_after_epochs",
         "eval_batches", "log_every",
     }
     checked = 0
