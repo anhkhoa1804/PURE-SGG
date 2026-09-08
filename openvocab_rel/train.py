@@ -2494,9 +2494,25 @@ def main(argv: Optional[List[str]] = None) -> None:
                 _timing_sync(device, timing_enabled)
                 optim_time = time.perf_counter() - optim_start
                 curr_lr_head = _lr_at_step(update_step)
-                optim.param_groups[0]["lr"] = curr_lr_head          
+                optim.param_groups[0]["lr"] = curr_lr_head
                 if len(optim.param_groups) > 1:
                     optim.param_groups[1]["lr"] = curr_lr_head * 0.1
+                if bool(getattr(cfg, "readout_v2_enabled", False)) and len(optim.param_groups) > 2:
+                    # Paper C -- Readout v2. This block only ever touches
+                    # param_groups[0]/[1] (model/CLIP); the predicate_prototypes
+                    # group added by the readout_v2_enabled setup block
+                    # (param_groups[2]) is otherwise never revisited after the
+                    # one-time pre-loop `pg["lr"] = min_lr` reset, so without
+                    # this line it trains at min_lr (~1e-7) for the entire run
+                    # regardless of readout_v2_lr -- confirmed by a pilot run
+                    # whose saved optimizer state showed group 2 stuck at
+                    # exactly 1e-07 after 20 real steps, with predicate row
+                    # norms unmoved to ~1e-6. Deliberately NOT annealed with
+                    # the backbone's cosine schedule (a fixed LR is simpler and
+                    # more defensible for a small, freshly-added 39,168-element
+                    # tensor than reusing a schedule tuned for full-network
+                    # fine-tuning).
+                    optim.param_groups[2]["lr"] = float(getattr(cfg, "readout_v2_lr", curr_lr_head))
                 update_step += 1
             epoch_loss += float(loss_total.item())
             epoch_l_spoa += float(l_spoa_alignment.item())

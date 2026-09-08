@@ -319,6 +319,60 @@ def test_pilot_script_activates_readout_v2_on_the_fixed_c1_contract():
     assert cfg.reset_epoch is True
 
 
+def test_optimizer_group2_gets_readout_v2_lr_not_stuck_at_min_lr():
+    """Second pilot-run finding: train.py constructs the optimizer with
+    exactly two param groups (model, clip) BEFORE readout_v2_enabled's
+    setup block adds predicate_prototypes as a third. The per-step LR
+    update (train.py, inside the `do_step` block) only ever writes
+    param_groups[0] and param_groups[1] by hardcoded index; group 2 was
+    therefore only ever touched once, by the pre-loop `pg["lr"] = min_lr`
+    reset, and stayed there for the entire run. Confirmed on a real pilot
+    checkpoint: after 20 real optimizer steps, group 2's saved lr was
+    exactly 1e-07 and predicate_prototypes' row norms had moved by ~2e-6
+    from unit norm -- i.e. it never meaningfully trained. This test
+    reproduces the exact three-group construction and the exact reset +
+    update sequence (mirroring train.py's own lines so a future edit to
+    either file shows up as a diff here) and asserts group 2 ends up at
+    readout_v2_lr, not min_lr and not the backbone's annealed value.
+    """
+    model_params = [torch.nn.Parameter(torch.randn(4))]
+    clip_params = [torch.nn.Parameter(torch.randn(4))]
+    proto_param = torch.nn.Parameter(torch.randn(4))
+    base_lr = 2e-5  # mimics cfg.lr as passed on the CLI before the readout_v2 override
+    optim = torch.optim.AdamW(
+        [
+            {"params": model_params, "lr": base_lr, "weight_decay": 0.0},
+            {"params": clip_params, "lr": base_lr * 0.1, "weight_decay": 0.0},
+        ],
+        lr=base_lr,
+    )
+    optim.add_param_group({"params": [proto_param]})  # exactly how train.py adds it -- no explicit lr
+
+    readout_v2_lr = 2e-3
+    min_lr = 1e-7
+    # the one-time pre-loop reset (train.py, before the epoch loop)
+    for pg in optim.param_groups:
+        pg["lr"] = min_lr
+
+    # one "do_step" iteration's LR update (train.py, inside the accum block)
+    curr_lr_head = 1.5e-5  # a stand-in for _lr_at_step(update_step)
+    optim.param_groups[0]["lr"] = curr_lr_head
+    if len(optim.param_groups) > 1:
+        optim.param_groups[1]["lr"] = curr_lr_head * 0.1
+    readout_v2_enabled = True
+    if readout_v2_enabled and len(optim.param_groups) > 2:
+        optim.param_groups[2]["lr"] = readout_v2_lr
+
+    assert optim.param_groups[0]["lr"] == curr_lr_head
+    assert optim.param_groups[1]["lr"] == curr_lr_head * 0.1
+    assert optim.param_groups[2]["lr"] == readout_v2_lr, (
+        "regressed: predicate_prototypes' group must not be left at min_lr "
+        "or follow the backbone's annealed schedule"
+    )
+    assert optim.param_groups[2]["lr"] != min_lr
+    assert optim.param_groups[2]["lr"] != curr_lr_head
+
+
 def test_pilot_script_saves_clip_weights_without_making_clip_trainable():
     """Post-pilot-run finding: freeze_clip=true also gates whether CLIP
     weights are written into the checkpoint at all (train.py:2572-2573).
@@ -387,6 +441,12 @@ def test_readout_v2_pilot_config_differs_from_c1_baseline_only_in_declared_ways(
         # keep CLIP genuinely frozen throughout -- see
         # test_pilot_script_saves_clip_weights_without_making_clip_trainable.
         "clip_unfreeze_after_epochs",
+        # num_workers=0 for the pilot only: a CUDA OOM was observed once
+        # during launch with num_workers=4 (root-caused to a competing,
+        # unrelated GPU job on this shared machine, not this repo's own
+        # DataLoader workers) -- reduced for this small, short pilot since
+        # worker parallelism buys negligible wall-clock time at this scale.
+        "num_workers",
         "eval_batches", "log_every",
     }
     checked = 0

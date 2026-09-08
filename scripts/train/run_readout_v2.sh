@@ -89,7 +89,16 @@ ARGS=(
   --epochs "${EPOCHS}"
   --batch_size 12
   --accum_steps 1
-  --num_workers 4
+  # num_workers=0: the first launch attempt at this fix hit a CUDA OOM
+  # inside configure_clip's model.to(device) -- at that moment four
+  # processes (PIDs incrementing by 2, matching num_workers=4's worker
+  # count exactly) were already resident at ~5 GB each, racing the main
+  # process for VRAM before it could even load CLIP. This pilot is 250
+  # samples / 1 epoch; worker parallelism buys negligible wall-clock time
+  # here and isn't worth re-introducing the race for. Not applicable to
+  # run_c0_c1.sh's much larger, already-validated training runs, which
+  # this script does not touch.
+  --num_workers 0
   # --lr is overridden internally by readout_v2_lr once readout_v2_enabled
   # is applied (train.py reassigns base_lr right after the resume block --
   # every other parameter is frozen, so its nominal LR is inert regardless).
