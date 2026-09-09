@@ -11,7 +11,7 @@ import math
 import os
 import io
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Set, Tuple
 
 import torch
 from datasets import load_dataset
@@ -69,7 +69,7 @@ def _prepare_rel_payload(
         )
         for s, o in rel_pair_names
     ]
-    
+
     rel_texts = [pred_prompt_roles(p, direction="s2o") for p in pred_strs]
     rel_role_swap_texts = [pred_prompt_roles(p, direction="o2s") for p in pred_strs]
 
@@ -147,7 +147,23 @@ def _build_relation_entries(
     use_all_pairs: bool,
     max_pairs: int,
     negative_pair_ratio: float = -1.0,
+    drop_out_of_vocab: bool = False,
 ) -> Tuple[List[Tuple[int, int, None, List[float]]], Dict[str, Any]]:
+    """`drop_out_of_vocab=False` (default) preserves the exact historical
+    behavior for every existing script: a predicate string absent from
+    `pred_to_idx` is remapped to `"relation"` inside `_prepare_rel_payload`
+    (line ~62) -- appropriate for a genuinely out-of-vocabulary/malformed
+    string, but WRONG for a deliberately held-out predicate, since it
+    still lets that relationship's underlying (subject, object, image)
+    example contribute a real gradient toward the "relation"/background
+    class -- a milder but real form of influence on training, not a clean
+    absence of supervision. `drop_out_of_vocab=True` (used only when
+    `predicate_disjoint_seen_predicates` is set, see
+    `docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md`) instead drops
+    the relationship ENTRY -- not the whole (subject, object) pair, which
+    may still carry other, seen-predicate relationships -- before it ever
+    reaches `positive_preds`/`_prepare_rel_payload`.
+    """
     num_objects = min(int(obj_boxes_t.shape[0]), len(obj_names))
     if num_objects <= 1:
         return [], _prepare_rel_payload([], [], pred_to_idx)
@@ -164,6 +180,8 @@ def _build_relation_entries(
         if subj_idx is None or obj_idx is None or subj_idx == obj_idx:
             continue
         pred_name = str(rel.get("predicate", "relation")).strip().lower() or "relation"
+        if drop_out_of_vocab and pred_name != "relation" and pred_name not in pred_to_idx:
+            continue
         g = geom_feats(obj_boxes_t[subj_idx].tolist(), obj_boxes_t[obj_idx].tolist())
         positive_entries.append((int(subj_idx), int(obj_idx), None, g))
         positive_preds.append(pred_name)
@@ -251,10 +269,10 @@ class VG150LoaderConfig:
     # Local data directory
     vg150_root: str = "datasets"
     source: str = "auto"
-    
+
     # Dataset split
     split: str = "train"  # or "val"/"test"
-    
+
     # Streaming and batch config
     streaming: bool = True
     hf_dataset_id: str = ""
@@ -264,7 +282,7 @@ class VG150LoaderConfig:
     persistent_workers: bool = True
     prefetch_factor: int = 2
     drop_last: bool = True
-    
+
     # Sampling
     seed: int = 0
     shuffle_buffer_size: int = 5000
@@ -274,13 +292,20 @@ class VG150LoaderConfig:
     rfs_t: float = 0.001
     use_all_pairs: bool = True
     negative_pair_ratio: float = 2.0
-    
+
     # VG150 specific (150 objects, 50 predicates)
     max_objects: int = 30
     max_pairs: int = 64
     predicate_sampler_enabled: bool = False
     predicate_sampler_power: float = 0.75
     predicate_sampler_max_weight: float = 20.0
+
+    # Predicate-disjoint hardening (docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md).
+    # Comma-separated Seen_train predicate list. Empty string (default) =
+    # fully disabled, zero behavior change -- every existing training run
+    # (C0, C1, Readout v2) leaves this at its default and is byte-for-byte
+    # unaffected by any of this section's code.
+    predicate_disjoint_seen_predicates: str = ""
 
 
 def _load_vg150_vocab(vg150_root: str) -> Tuple[Dict[str, int], Dict[str, int]]:
@@ -289,7 +314,7 @@ def _load_vg150_vocab(vg150_root: str) -> Tuple[Dict[str, int], Dict[str, int]]:
     clean_obj_path = os.path.join(vg150_root, "vocabulary", "objects.json")
     clean_pred_path = os.path.join(vg150_root, "vocabulary", "predicates.json")
     label_to_idx, pred_to_idx = {}, {}
-    
+
     if os.path.exists(dicts_path):
         with open(dicts_path, "r") as f:
             dicts_data = json.load(f)
@@ -348,13 +373,13 @@ def _load_vg150_vocab(vg150_root: str) -> Tuple[Dict[str, int], Dict[str, int]]:
     else:
         # Standard 50 predicates for VG150
         preds = [
-            'above', 'across', 'against', 'along', 'and', 'at', 'attached to', 'behind', 
-            'belonging to', 'between', 'carrying', 'covered in', 'covering', 'eating', 
-            'flying in', 'for', 'from', 'hanging from', 'has', 'holding', 'in', 
-            'in front of', 'laying on', 'looking at', 'lying on', 'made of', 'mounted on', 
-            'near', 'next to', 'of', 'on', 'on back of', 'over', 'painted on', 'parked on', 
-            'part of', 'playing', 'riding', 'sitting on', 'standing on', 'to', 'under', 
-            'using', 'walking in', 'walking on', 'watching', 'wearing', 'wears', 'with', 
+            'above', 'across', 'against', 'along', 'and', 'at', 'attached to', 'behind',
+            'belonging to', 'between', 'carrying', 'covered in', 'covering', 'eating',
+            'flying in', 'for', 'from', 'hanging from', 'has', 'holding', 'in',
+            'in front of', 'laying on', 'looking at', 'lying on', 'made of', 'mounted on',
+            'near', 'next to', 'of', 'on', 'on back of', 'over', 'painted on', 'parked on',
+            'part of', 'playing', 'riding', 'sitting on', 'standing on', 'to', 'under',
+            'using', 'walking in', 'walking on', 'watching', 'wearing', 'wears', 'with',
             'wrapped around'
         ]
         pred_to_idx = {p: i for i, p in enumerate(preds)}
@@ -469,7 +494,7 @@ class VG150LocalDataset(Dataset):
             sg = self.scene_graphs.get(img_id, {"objects": [], "relationships": []})
             objects = sg.get("objects", [])
             relationships = sg.get("relationships", [])
-            
+
             if len(objects) > 0 and len(relationships) > 0:
                 valid.append(img_idx)
                 if getattr(self.cfg, "use_rfs", False) and str(self.cfg.split).strip().lower() == "train":
@@ -487,23 +512,23 @@ class VG150LocalDataset(Dataset):
             t = float(getattr(self.cfg, "rfs_t", 0.001))
             rfs_valid: List[int] = []
             import random
-            
+
             for img_idx in valid:
                 img_id = self.images[img_idx].get("image_id")
                 sg = self.scene_graphs.get(img_id, {})
                 max_r = 1.0
-                
+
                 for rel in sg.get("relationships", []):
                     p = str(rel.get("predicate", "")).strip().lower()
                     if p != "":
                         f_c = pred_counts.get(p, 0) / float(total_rels)
                         r_c = math.sqrt(t / f_c) if f_c > 0 else 1.0
                         max_r = max(max_r, r_c)
-                
+
                 repeats = int(math.floor(max_r))
                 if random.random() < (max_r - repeats):
                     repeats += 1
-                
+
                 for _ in range(max(1, repeats)):
                     rfs_valid.append(img_idx)
             return rfs_valid[:max_images] if max_images > 0 else rfs_valid
@@ -615,6 +640,7 @@ class VG150LocalDataset(Dataset):
             use_all_pairs=bool(getattr(self.cfg, "use_all_pairs", False)),
             max_pairs=int(self.cfg.max_pairs),
             negative_pair_ratio=float(getattr(self.cfg, "negative_pair_ratio", -1.0)),
+            drop_out_of_vocab=bool(getattr(self.cfg, "predicate_disjoint_seen_predicates", "")),
         )
 
         if len(pairs) == 0:
@@ -822,6 +848,7 @@ class VG150JSONLDataset(Dataset):
             use_all_pairs=bool(getattr(self.cfg, "use_all_pairs", False)),
             max_pairs=int(self.cfg.max_pairs),
             negative_pair_ratio=float(getattr(self.cfg, "negative_pair_ratio", -1.0)),
+            drop_out_of_vocab=bool(getattr(self.cfg, "predicate_disjoint_seen_predicates", "")),
         )
 
         pixel_values = None
@@ -955,6 +982,7 @@ class VG150HFMapDataset(Dataset):
             use_all_pairs=bool(getattr(self.cfg, "use_all_pairs", False)),
             max_pairs=int(self.cfg.max_pairs),
             negative_pair_ratio=float(getattr(self.cfg, "negative_pair_ratio", -1.0)),
+            drop_out_of_vocab=bool(getattr(self.cfg, "predicate_disjoint_seen_predicates", "")),
         )
 
         pixel_values = None
@@ -999,7 +1027,7 @@ class VG150HFMapDataset(Dataset):
 
 class VG150DataLoader:
     """High-level VG150 data loader wrapper."""
-    
+
     def __init__(
         self,
         cfg: VG150LoaderConfig,
@@ -1031,6 +1059,20 @@ class VG150DataLoader:
         if "relation" not in self.pred_to_idx:
             self.pred_to_idx = dict(self.pred_to_idx)
             self.pred_to_idx["relation"] = len(self.pred_to_idx)
+
+        # Predicate-disjoint hardening: this loader builds its OWN pred_to_idx
+        # from _load_vg150_vocab, entirely independent of train.py's own
+        # global_pred_pool -- restricting global_pred_pool alone does NOT
+        # change what index (or whether any index at all) a held-out
+        # predicate's GT label resolves to here. Both must be restricted
+        # from the SAME seen set via the SAME restrict_predicate_pool
+        # function (docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md).
+        self._predicate_disjoint_seen = parse_seen_predicates(
+            getattr(cfg, "predicate_disjoint_seen_predicates", ""))
+        if self._predicate_disjoint_seen is not None:
+            full_order = [p for p, _ in sorted(self.pred_to_idx.items(), key=lambda kv: kv[1])]
+            restricted = restrict_predicate_pool(full_order, self._predicate_disjoint_seen)
+            self.pred_to_idx = {p: i for i, p in enumerate(restricted)}
 
         # Create dataset.
         # If a source is explicitly requested, never silently fall back to HF/local.
@@ -1111,10 +1153,10 @@ class VG150DataLoader:
             drop_last=bool(cfg.drop_last),
             collate_fn=_collate_identity,
         )
-    
+
     def __iter__(self):
         return iter(self.loader)
-    
+
     def __len__(self) -> int:
         if hasattr(self.loader, "__len__"):
             try:
@@ -1135,6 +1177,45 @@ def scan_vg150_predicate_vocab(vg150_root: str = "datasets") -> List[str]:
         if str(name).strip() != ""
     ]
     return preds if len(preds) > 0 else ["relation"]
+
+
+def parse_seen_predicates(spec: str) -> Optional[FrozenSet[str]]:
+    """Parse a comma-separated `--predicate_disjoint_seen_predicates` value
+    into a normalized (lowercased, stripped) frozenset, or `None` if the
+    spec is empty -- `None` means "predicate-disjoint mode is off," not
+    "the seen set is empty," and every caller of `restrict_predicate_pool`
+    must treat the two differently (an empty-but-non-None set would drop
+    every predicate)."""
+    s = str(spec).strip()
+    if s == "":
+        return None
+    return frozenset(p.strip().lower() for p in s.split(",") if p.strip() != "")
+
+
+def restrict_predicate_pool(full_pool: List[str], seen: Optional[FrozenSet[str]]) -> List[str]:
+    """The single choke-point restriction: given a canonically-ordered
+    predicate pool (as `scan_vg150_predicate_vocab` or `_load_vg150_vocab`
+    produces it), filter it down to `seen ∪ {"relation"}`, preserving the
+    original relative order.
+
+    `seen=None` is the identity transform (predicate-disjoint mode off,
+    zero behavior change) -- this is NOT the same as `seen=frozenset()`,
+    which would (correctly, if ever actually passed) restrict to no real
+    predicates at all.
+
+    Every consumer of a predicate pool in this codebase (`train.py`'s own
+    `global_pred_pool`, and `VG150DataLoader`'s internal `pred_to_idx`)
+    must call this SAME function with the SAME `seen` value to guarantee
+    they end up with identical index assignments -- computing the
+    restriction independently in two places, even with "the same" logic,
+    is exactly the kind of divergence risk this function exists to remove.
+    """
+    if seen is None:
+        return list(full_pool)
+    kept = [p for p in full_pool if p in seen or p == "relation"]
+    if "relation" not in kept:
+        kept.append("relation")
+    return kept
 
 
 class VG150HFIterable(IterableDataset):
@@ -1180,7 +1261,7 @@ class VG150HFIterable(IterableDataset):
         for ex in iterable:
             # Expected fields in HF repo: image (may be PIL/Image or dict), image_id, obj_boxes, objects, relationships
             image_raw = ex.get("image", None)
-            
+
             # --- ABSOLUTE SAFEGUARD FOR IMAGE DECODING ---
             pil_img = None
             try:
@@ -1195,7 +1276,7 @@ class VG150HFIterable(IterableDataset):
                             pil_img = Image.open(path).convert("RGB")
             except Exception:
                 pass # Silently fallback below
-                
+
             # Fallback if decoding failed, or image is missing/corrupted
             if pil_img is None:
                 pil_img = Image.new("RGB", (336, 336), color=(128, 128, 128))
@@ -1233,6 +1314,7 @@ class VG150HFIterable(IterableDataset):
                 pred_to_idx=self.pred_to_idx,
                 use_all_pairs=bool(getattr(self.cfg, "use_all_pairs", False)),
                 max_pairs=int(self.cfg.max_pairs),
+                drop_out_of_vocab=bool(getattr(self.cfg, "predicate_disjoint_seen_predicates", "")),
             )
             pixel_values = None
             obj_boxes_224 = None

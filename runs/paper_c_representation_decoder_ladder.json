@@ -1,0 +1,1148 @@
+{
+  "tool": "representation_decoder_ladder",
+  "prereg": "docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
+  "dump_r0": "runs/eval_C1/pair_logits.pt",
+  "dump_r2": "runs/eval_readout_v2_R2_pilot_v3/pair_logits.pt",
+  "prior": "datasets_vg150_clean/frequency_prior_train.json",
+  "seed": 0,
+  "n_folds": 5,
+  "fold_salt": 0,
+  "cap": 64,
+  "gates": [
+    {
+      "gate": "G-A prior constant within (s,o) group",
+      "pass": true,
+      "detail": "max dev = 9.441e-05"
+    },
+    {
+      "gate": "G-B rel_feat present & finite",
+      "pass": true,
+      "detail": "shape=(132556, 768) finite=True"
+    },
+    {
+      "gate": "G-C rel_feat reconstructs stored text_logits",
+      "pass": true,
+      "detail": "max|recomputed - stored| = 1.435e-04 (fp16 tol 1e-2)"
+    },
+    {
+      "gate": "G-D rel_feat identical R0 vs R2 (frozen backbone)",
+      "pass": false,
+      "detail": "max|RF_R0 - RF_R2| = 1.689e-01"
+    },
+    {
+      "gate": "G-G all arms scored on identical cell count",
+      "pass": true,
+      "detail": "cell counts = [20016]"
+    },
+    {
+      "gate": "G-E prior control reads exactly 0.5",
+      "pass": true,
+      "detail": "0.50000000"
+    },
+    {
+      "gate": "G-F shuffled-label null within [0.47, 0.53]",
+      "pass": true,
+      "detail": "0.505459"
+    }
+  ],
+  "arms": {
+    "A1_frozen_baseline": {
+      "wprd_macro": 0.5749881522134409,
+      "wprd_weighted": 0.5370226991837204,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.519734212629896,
+      "params": 0,
+      "fitted": false,
+      "form": "stored text_logits channel, fixed_ensemble(0.0)"
+    },
+    "A4_cosine_recomputed": {
+      "wprd_macro": 0.5758335904938229,
+      "wprd_weighted": 0.5408005073005289,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.5218325339728217,
+      "params": 0,
+      "fitted": false,
+      "form": "normalize(rel_feat) @ normalize(pred_emb).T (identity gate, not a capacity probe)"
+    },
+    "A2_linear": {
+      "wprd_macro": 0.5801222429855913,
+      "wprd_weighted": 0.5392915397217751,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.5263289368505196,
+      "params": 38450,
+      "fitted": true,
+      "form": "Linear(768->51) closed-form ridge on standardized rel_feat + bias",
+      "l2": 0.0001,
+      "fit_seconds": 2.7
+    },
+    "A3_mlp": {
+      "wprd_macro": 0.5850344620423626,
+      "wprd_weighted": 0.545474714014716,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.5348221422861711,
+      "params": 629042,
+      "fitted": true,
+      "form": "Linear(768->768) -> GELU -> Linear(768->51)",
+      "epochs": 25,
+      "lr": 0.002,
+      "weight_decay": 0.0001,
+      "batch": 4096,
+      "seed": 0,
+      "fit_seconds": 180.0
+    },
+    "A5a_geometry_xfit": {
+      "wprd_macro": 0.5882505950044297,
+      "wprd_weighted": 0.5353709186019775,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.533023581135092,
+      "params": 1000,
+      "fitted": true,
+      "form": "19 box-geometry features + bias, cross-fitted LBFGS",
+      "fit_seconds": 15.4
+    },
+    "A5b_geometry_trainfit": {
+      "wprd_macro": 0.5960545222086052,
+      "wprd_weighted": 0.5419340293745689,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.5421662669864109,
+      "params": 1000,
+      "fitted": true,
+      "form": "same probe, fitted on train.jsonl (p37 R8 protocol)",
+      "fit_seconds": 114.0
+    },
+    "A6_fusion": {
+      "wprd_macro": 0.585529071451487,
+      "wprd_weighted": 0.5401160827201655,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.5324740207833732,
+      "params": 39400,
+      "fitted": true,
+      "form": "Linear(768+19+1 -> 51) ridge on concat[rel_feat, geometry]",
+      "l2": 0.0001,
+      "fit_seconds": 4.8
+    },
+    "N1_shuffled_label_null": {
+      "wprd_macro": 0.5054592380974867,
+      "wprd_weighted": 0.5021529733846861,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.43660071942446044,
+      "params": 38450,
+      "fitted": true,
+      "form": "A2 form fitted on permuted labels",
+      "fit_seconds": 5.1
+    },
+    "N2_prior_control": {
+      "wprd_macro": 0.5,
+      "wprd_weighted": 0.5,
+      "n_cells": 20016,
+      "frac_cells_above_half": 0.0,
+      "params": 0,
+      "fitted": false,
+      "form": "prior scored directly"
+    }
+  },
+  "contrasts": {
+    "A4_cosine_recomputed - A1_frozen_baseline": {
+      "delta": 0.0008454382803818933,
+      "ci95": [
+        -0.0012681474548176708,
+        0.0030524965588858075
+      ],
+      "p_delta_negative": 0.213,
+      "p_delta_positive": 0.787,
+      "ci_excludes_zero": false,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 15227,
+        "n_positive": 2405,
+        "n_negative": 2384,
+        "frac_changed": 0.2392585931254996,
+        "gross_positive": 485.5851353787266,
+        "gross_negative": -468.66284275860255,
+        "mean": 0.0008454382803818933,
+        "median": 0.0,
+        "std": 0.15743539693232478,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "guy||glasses::in|wears",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "hill||water::along|near",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "giraffe||right::in|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "pole||umbrella::has|near",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "grass||kite::behind|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "person||skis::carrying|wears",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "man||man::near|wearing",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "woman||blue::in|wears",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "door||garage::in front of|of",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "cord||ground::laying on|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "lamb||grass::in|standing on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "door||house::attached to|to",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "man||bike::sitting on|using",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "rope||boat::across|in",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "glass||sandwich::behind|next to",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          }
+        ],
+        "top1pct_share_of_net": -1.3000602515192072
+      }
+    },
+    "A2_linear - A1_frozen_baseline": {
+      "delta": 0.005134090772150388,
+      "ci95": [
+        0.00034705508861075125,
+        0.009992488076874717
+      ],
+      "p_delta_negative": 0.0165,
+      "p_delta_positive": 0.9835,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 9924,
+        "n_positive": 5059,
+        "n_negative": 5033,
+        "frac_changed": 0.5041966426858513,
+        "gross_positive": 2023.7110461235447,
+        "gross_negative": -1920.947085228183,
+        "mean": 0.005134090772150388,
+        "median": 0.0,
+        "std": 0.3615643147561677,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "people||bus::in front of|near",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "cat||head::next to|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "books||cat::behind|wrapped around",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "wheel||truck::in|mounted on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "wheel||truck::in front of|with",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "wheel||truck::mounted on|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "man||snow board::on|riding",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "girl||shoes::in|wears",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "bear||bear::in front of|under",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "bear||rocks::and|lying on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "man||skatepark::in|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "building||street::behind|under",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "building||street::in|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "people||bus::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "cat||books::next to|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.019462075834508458
+      }
+    },
+    "A3_mlp - A1_frozen_baseline": {
+      "delta": 0.01004630982892162,
+      "ci95": [
+        0.00379431387219718,
+        0.016190784715758827
+      ],
+      "p_delta_negative": 0.0,
+      "p_delta_positive": 1.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 8031,
+        "n_positive": 6195,
+        "n_negative": 5790,
+        "frac_changed": 0.5987709832134293,
+        "gross_positive": 2880.508231462519,
+        "gross_negative": -2679.4212939268236,
+        "mean": 0.01004630982892162,
+        "median": 0.0,
+        "std": 0.4394144698888126,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "paper||sign::on|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "towel||oven door::covering|hanging from",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "trim||wall::along|mounted on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "cabinet||toilet::behind|over",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "cabinet||toilet::above|over",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "cabinet||toilet::above|behind",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "nose||child::of|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "shadow||dog::in front of|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "shadow||dog::behind|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "busses||road::in|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "towel||oven door::hanging from|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "car||distance::in|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "flowers||window::hanging from|in",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "keys||key chain::in|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "laptop||table::in front of|sitting on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.16908109704522514
+      }
+    },
+    "A5a_geometry_xfit - A1_frozen_baseline": {
+      "delta": 0.013262442790988732,
+      "ci95": [
+        0.00697397437759757,
+        0.0195892150168692
+      ],
+      "p_delta_negative": 0.0,
+      "p_delta_positive": 1.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 7722,
+        "n_positive": 6378,
+        "n_negative": 5916,
+        "frac_changed": 0.6142086330935251,
+        "gross_positive": 3078.45966084845,
+        "gross_negative": -2812.998605944019,
+        "mean": 0.013262442790988732,
+        "median": 0.0,
+        "std": 0.4569833920379755,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "ground||grass::between|covered in",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "clock||building::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "clock||building::in front of|near",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "clock||building::in front of|of",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "blanket||man::over|wrapped around",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "blanket||man::covering|wrapped around",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "blanket||man::covering|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "blanket||man::covering|over",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "ground||grass::made of|next to",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "ground||grass::covered in|next to",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "ground||grass::covered in|made of",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "ground||grass::between|made of",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "ventilation||ceiling::in|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "rocks||river::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "sign||building::above|of",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.052738432780809176
+      }
+    },
+    "A5b_geometry_trainfit - A1_frozen_baseline": {
+      "delta": 0.021066369995164255,
+      "ci95": [
+        0.014757545883781297,
+        0.027226633448066345
+      ],
+      "p_delta_negative": 0.0,
+      "p_delta_positive": 1.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 7742,
+        "n_positive": 6495,
+        "n_negative": 5779,
+        "frac_changed": 0.6132094324540368,
+        "gross_positive": 3147.283422563255,
+        "gross_negative": -2725.6189607400474,
+        "mean": 0.021066369995164255,
+        "median": 0.0,
+        "std": 0.45595256135455126,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "woman||surfboard::laying on|lying on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "trees||grass::and|in",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "car||curb::at|next to",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "plate||bread::under|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "trees||grass::in|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "trees||grass::near|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "catcher||helmet::has|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "horse||horse::near|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "horse||horse::has|near",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "horse||horse::behind|in",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "trees||buildings::behind|between",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "woman||surfboard::lying on|standing on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "car||curb::at|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "man||shades::in|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "fender||motorcycle::of|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.07114661707625286
+      }
+    },
+    "A6_fusion - A1_frozen_baseline": {
+      "delta": 0.010540919238046132,
+      "ci95": [
+        0.005625463712233397,
+        0.01562581267855588
+      ],
+      "p_delta_negative": 0.0,
+      "p_delta_positive": 1.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 9640,
+        "n_positive": 5317,
+        "n_negative": 5059,
+        "frac_changed": 0.5183852917665868,
+        "gross_positive": 2170.460378080293,
+        "gross_negative": -1959.4733386115618,
+        "mean": 0.010540919238046132,
+        "median": 0.0,
+        "std": 0.371086567625898,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "logo||tank top::in front of|on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "light||street::above|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "light||street::for|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "light||street::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "logo||truck::in front of|painted on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "water||sand::at|next to",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "door||oven::in front of|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "door||oven::to|under",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "people||grass::in|next to",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "tent||grass::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "dog||fence::in|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "plate||vegetables::of|with",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "seat||toilet::attached to|for",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "seat||toilet::for|has",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "rocks||beach::at|near",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.03791702097031231
+      }
+    },
+    "N1_shuffled_label_null - A1_frozen_baseline": {
+      "delta": -0.06952891411595434,
+      "ci95": [
+        -0.076485283376776,
+        -0.06233868481323644
+      ],
+      "p_delta_negative": 1.0,
+      "p_delta_positive": 0.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 6217,
+        "n_positive": 5897,
+        "n_negative": 7902,
+        "frac_changed": 0.689398481215028,
+        "gross_positive": 2998.654929386872,
+        "gross_negative": -4390.345674331815,
+        "mean": -0.06952891411595434,
+        "median": 0.0,
+        "std": 0.519181771052455,
+        "max": 1.0,
+        "min": -1.0,
+        "top_movers": [
+          {
+            "key": "pipe||motorcycle::of|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "sign||window::attached to|over",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "branch||bear::above|behind",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "hose||wall::against|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "people||water::under|walking on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "sign||window::attached to|hanging from",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "sleeve||jersey::on|under",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "people||water::under|with",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "bird||sidewalk::on|standing on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "people||water::on|walking on",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "zipper||luggage::in front of|on",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          },
+          {
+            "key": "building||stairs::behind|has",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "building||stairs::behind|next to",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "sign||name::has|with",
+            "a": 1.0,
+            "b": 0.0,
+            "delta": -1.0
+          },
+          {
+            "key": "tree||lawn::above|in",
+            "a": 0.0,
+            "b": 1.0,
+            "delta": 1.0
+          }
+        ],
+        "top1pct_share_of_net": 0.028742017682658712
+      }
+    },
+    "N2_prior_control - A1_frozen_baseline": {
+      "delta": -0.074988152213441,
+      "ci95": [
+        -0.07982369257259618,
+        -0.0698463423489407
+      ],
+      "p_delta_negative": 1.0,
+      "p_delta_positive": 0.0,
+      "ci_excludes_zero": true,
+      "distribution": {
+        "n_cells": 20016,
+        "n_exactly_zero": 2685,
+        "n_positive": 6928,
+        "n_negative": 10403,
+        "frac_changed": 0.8658573141486811,
+        "gross_positive": 2447.885995313267,
+        "gross_negative": -3948.8488500175017,
+        "mean": -0.074988152213441,
+        "median": -0.05681818181818177,
+        "std": 0.36792022058911783,
+        "max": 0.5,
+        "min": -0.5,
+        "top_movers": [
+          {
+            "key": "post||grass::in|near",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "zebra||fence::behind|near",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "cat||laptop::under|walking on",
+            "a": 1.0,
+            "b": 0.5,
+            "delta": -0.5
+          },
+          {
+            "key": "houses||street::along|on",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "houses||street::across|on",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "houses||street::across|along",
+            "a": 1.0,
+            "b": 0.5,
+            "delta": -0.5
+          },
+          {
+            "key": "dog||harness::has|wearing",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "skis||man::under|with",
+            "a": 1.0,
+            "b": 0.5,
+            "delta": -0.5
+          },
+          {
+            "key": "skis||man::for|with",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "skis||man::for|under",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "zebra||fence::in|near",
+            "a": 1.0,
+            "b": 0.5,
+            "delta": -0.5
+          },
+          {
+            "key": "drawer||desk::of|under",
+            "a": 1.0,
+            "b": 0.5,
+            "delta": -0.5
+          },
+          {
+            "key": "drawer||desk::of|on",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "drawer||desk::in|under",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          },
+          {
+            "key": "grass||stones::between|near",
+            "a": 0.0,
+            "b": 0.5,
+            "delta": 0.5
+          }
+        ],
+        "top1pct_share_of_net": 0.005996151051834958
+      }
+    },
+    "A2_linear - A5b_geometry_trainfit": {
+      "delta": -0.01593227922301387,
+      "ci95": [
+        -0.022167896967795944,
+        -0.009895935330273
+      ],
+      "p_delta_negative": 1.0,
+      "p_delta_positive": 0.0,
+      "ci_excludes_zero": true
+    },
+    "A3_mlp - A5b_geometry_trainfit": {
+      "delta": -0.011020060166242638,
+      "ci95": [
+        -0.017309046205568564,
+        -0.0048797268299986055
+      ],
+      "p_delta_negative": 1.0,
+      "p_delta_positive": 0.0,
+      "ci_excludes_zero": true
+    },
+    "A6_fusion - A5b_geometry_trainfit": {
+      "delta": -0.010525450757118126,
+      "ci95": [
+        -0.016629507306081485,
+        -0.004704777138245486
+      ],
+      "p_delta_negative": 0.9995,
+      "p_delta_positive": 0.0005,
+      "ci_excludes_zero": true
+    },
+    "A1_frozen_baseline - A5b_geometry_trainfit": {
+      "delta": -0.021066369995164255,
+      "ci95": [
+        -0.027226633448066345,
+        -0.014757545883781304
+      ],
+      "p_delta_negative": 1.0,
+      "p_delta_positive": 0.0,
+      "ci_excludes_zero": true
+    }
+  },
+  "fold_sizes": [
+    26483,
+    26856,
+    27190,
+    26586,
+    25441
+  ],
+  "classification": {
+    "P_star_arm": "A3_mlp",
+    "P_star": 0.5850344620423626,
+    "A1_frozen_baseline": 0.5749881522134409,
+    "G_train_fitted_geometry": 0.5960545222086052,
+    "A6_fusion": 0.585529071451487,
+    "P_star_minus_A1": 0.01004630982892174,
+    "P_star_minus_G": -0.011020060166242573,
+    "fusion_minus_P_star": 0.0004946094091243802,
+    "fusion_minus_G": -0.010525450757118193,
+    "material_threshold": 0.02,
+    "vs_geometry": "GEOMETRY_EQUIVALENT",
+    "outcome_A_decoder_ceiling_near_A1": true,
+    "outcome_B_decoder_materially_exceeds_A1": false,
+    "outcome_C_fusion_materially_exceeds_both": false,
+    "outcome_D_geometry_strongest": true
+  },
+  "all_gates_pass": false,
+  "runtime_seconds": 425.4
+}

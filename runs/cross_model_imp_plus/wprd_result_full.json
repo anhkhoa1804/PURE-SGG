@@ -1,0 +1,18 @@
+{
+  "n_gt_rows": 183640,
+  "n_groups": 7127,
+  "n_singleton_groups": 2083,
+  "n_decidable_groups": 3958,
+  "prior_control": {
+    "wprd_macro": 0.5,
+    "wprd_weighted": 0.5,
+    "n_cells": 29257,
+    "n_comparisons": 3087992
+  },
+  "model": {
+    "wprd_macro": 0.6205392190332376,
+    "wprd_weighted": 0.5702916328798779,
+    "n_cells": 29257,
+    "n_comparisons": 3087992
+  }
+}

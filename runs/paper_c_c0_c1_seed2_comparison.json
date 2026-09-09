@@ -1,0 +1,209 @@
+{
+  "tool": "c0_c1_compare",
+  "prereg": "docs/PAPER_C_C0_C1_PREREGISTRATION.md",
+  "arms": {
+    "C0": "runs/eval_C0/result.json",
+    "C1_seed2": "runs/eval_C1_seed5678/result.json"
+  },
+  "wprd": {
+    "C0": 0.5667271196244782,
+    "C1_seed2": 0.572551887041989
+  },
+  "delta_wprd": 0.0058247674175108495,
+  "ci95": [
+    0.0013811487877207305,
+    0.010044535169540725
+  ],
+  "p_delta_negative": 0.0035,
+  "n_cells": 20016,
+  "secondary": {
+    "R@50": {
+      "C0": 0.6731042265892029,
+      "C1_seed2": 0.6737152338027954,
+      "delta": 0.0006110072135925293
+    },
+    "mR@50": {
+      "C0": 0.23768034534654386,
+      "C1_seed2": 0.2386334041263234,
+      "delta": 0.0009530587797795254
+    }
+  },
+  "calibration": {
+    "top1_equals_prior_argmax": {
+      "C0": 0.9203506708145142,
+      "C1_seed2": 0.917800784111023,
+      "delta": -0.002549886703491211
+    },
+    "model_term_std": {
+      "C0": 0.993690013885498,
+      "C1_seed2": 0.9936521649360657
+    }
+  },
+  "mechanism": {
+    "n_constant_geometry_channels": {
+      "C0": 6,
+      "C1_seed2": 0
+    },
+    "fusion_gate": {
+      "C0": {
+        "n_elements": 5615930880,
+        "mean": 0.5014164111693286,
+        "std": 0.005671659485618671,
+        "min": 0.47265625,
+        "max": 0.53125,
+        "q25": 0.498046875,
+        "median": 0.5,
+        "q75": 0.50390625,
+        "per_pair_mean_std": 0.0001789606612874195,
+        "per_pair_mean_min": 0.5004552006721497,
+        "per_pair_mean_max": 0.5020853877067566,
+        "frac_in_0.45_0.55": 1.0
+      },
+      "C1_seed2": {
+        "n_elements": 5615930880,
+        "mean": 0.500751581145818,
+        "std": 0.006006976270891971,
+        "min": 0.47265625,
+        "max": 0.53125,
+        "q25": 0.49609375,
+        "median": 0.5,
+        "q75": 0.50390625,
+        "per_pair_mean_std": 0.00014411246229428798,
+        "per_pair_mean_min": 0.5000228881835938,
+        "per_pair_mean_max": 0.5014495849609375,
+        "frac_in_0.45_0.55": 1.0
+      }
+    },
+    "geom_channels": {
+      "C0": {
+        "dx": {
+          "std": 0.20734119415283203,
+          "n_distinct": 11247,
+          "min": -0.9999990463256836,
+          "max": 0.9999990463256836
+        },
+        "dy": {
+          "std": 0.18661801517009735,
+          "n_distinct": 10443,
+          "min": -0.9999990463256836,
+          "max": 0.9874871373176575
+        },
+        "rw": {
+          "std": 3.410672352183175e-13,
+          "n_distinct": 1,
+          "min": -9.536747711536009e-07,
+          "max": -9.536747711536009e-07
+        },
+        "rh": {
+          "std": 3.410672352183175e-13,
+          "n_distinct": 1,
+          "min": -9.536747711536009e-07,
+          "max": -9.536747711536009e-07
+        },
+        "ar1": {
+          "std": 3.410672352183175e-13,
+          "n_distinct": 1,
+          "min": -9.536747711536009e-07,
+          "max": -9.536747711536009e-07
+        },
+        "ar2": {
+          "std": 3.410672352183175e-13,
+          "n_distinct": 1,
+          "min": -9.536747711536009e-07,
+          "max": -9.536747711536009e-07
+        },
+        "a1": {
+          "std": 0.0,
+          "n_distinct": 1,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "a2": {
+          "std": 0.0,
+          "n_distinct": 1,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "C1_seed2": {
+        "dx": {
+          "std": 2.79520583152771,
+          "n_distinct": 17572,
+          "min": -10.0,
+          "max": 10.0
+        },
+        "dy": {
+          "std": 2.012376546859741,
+          "n_distinct": 18145,
+          "min": -10.0,
+          "max": 10.0
+        },
+        "rw": {
+          "std": 1.6374057531356812,
+          "n_distinct": 17661,
+          "min": -5.0,
+          "max": 5.0
+        },
+        "rh": {
+          "std": 1.5018280744552612,
+          "n_distinct": 17577,
+          "min": -5.0,
+          "max": 5.0
+        },
+        "ar1": {
+          "std": 1.271567940711975,
+          "n_distinct": 13001,
+          "min": -5.0,
+          "max": 5.0
+        },
+        "ar2": {
+          "std": 1.108464241027832,
+          "n_distinct": 12532,
+          "min": -5.0,
+          "max": 5.0
+        },
+        "a1": {
+          "std": 2.180128574371338,
+          "n_distinct": 16381,
+          "min": 0.0,
+          "max": 11.634222030639648
+        },
+        "a2": {
+          "std": 2.1192331314086914,
+          "n_distinct": 15083,
+          "min": 0.0,
+          "max": 11.634222030639648
+        }
+      }
+    }
+  },
+  "gates": [
+    {
+      "gate": "D1 both arms scored the same population",
+      "pass": true,
+      "detail": "{'images': 10401, 'pairs': 132556, 'gt_rows': 132556, 'cells': 20016} vs {'images': 10401, 'pairs': 132556, 'gt_rows': 132556, 'cells': 20016}"
+    },
+    {
+      "gate": "D2 cells are paired (identical count)",
+      "pass": true,
+      "detail": "20016 vs 20016"
+    },
+    {
+      "gate": "D3 prior control reads exactly 0.5000 in both arms",
+      "pass": true,
+      "detail": "0.500000 / 0.500000"
+    },
+    {
+      "gate": "D4 each arm ran under its own registered contract",
+      "pass": true,
+      "detail": "{'geom_input_pixel_space': False, 'geom_fourier_scale': 1.0} vs {'geom_input_pixel_space': True, 'geom_fourier_scale': 0.01}"
+    }
+  ],
+  "verdict": {
+    "primary": "WEAK-POSITIVE",
+    "ci_excludes_zero": true,
+    "calibration_only_effect": false,
+    "meets_registered_success_threshold": false,
+    "gates_all_pass": true
+  }
+}

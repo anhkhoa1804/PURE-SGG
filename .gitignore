@@ -21,7 +21,15 @@ ENV/
 # which `git add` warns about (though it doesn't actually block adding an
 # already-tracked file, this was still a real latent footgun for anyone
 # adding a *new* file under that subpackage in the future).
-/runs/
+# Runs use a split policy: tensor/checkpoint/cache/log payloads stay external,
+# while small text provenance and result records are intentionally visible to
+# Git for explicit review.  Visibility does not mean they are auto-committed.
+/runs/**
+!/runs/**/
+!/runs/**/*.json
+!/runs/**/*.jsonl
+!/runs/**/*.md
+!/runs/**/*.txt
 /checkpoints/
 /suite_reports/
 /synthetic_out/
@@ -41,8 +49,25 @@ ENV/
 *.ckpt
 *.h5
 *.parquet
+*.safetensors
+*.npy
+*.npz
+*.arrow
 *.zip
 *.pdf
+
+# Download/model caches and local experiment-service state
+/.cache/
+/caches/
+/.huggingface/
+/huggingface/
+/wandb/
+/mlruns/
+/downloads/
+
+# Explicit scratch roots
+/tmp/
+/temp/
 
 # OS and editor metadata
 .DS_Store

@@ -384,6 +384,11 @@ class TrainConfig:
     asymmetric_pair_fusion_include_reverse_diff: bool = True
     asymmetric_pair_fusion_hidden_mult: float = 2.0
     predicate_metadata_path: str = "configs/predicate_metadata_vg150.json"
+    # Predicate-disjoint hardening (docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md).
+    # Comma-separated Seen_train predicate list. Empty (default) = fully
+    # disabled -- global_pred_pool construction and both VG150LoaderConfig
+    # instances (train + eval) are byte-for-byte unaffected.
+    predicate_disjoint_seen_predicates: str = ""
     geom_fourier_dim: int = 256
     # --- p73 (C1a/C1b) geometry-pathway interventions. Both default to the
     # historical behaviour, so C0 is bit-exact with these fields present.

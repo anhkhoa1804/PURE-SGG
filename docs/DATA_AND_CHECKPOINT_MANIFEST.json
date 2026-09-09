@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-09-09T00:00:00Z",
+  "captured_at_git_commit": "7ebba4726c16124c35af15bff3c7826830fe208e",
+  "purpose": "Current-VM external artifact identity for migration; this does not replace or amend historical manifests.",
+  "roots": {
+    "data": "RESEARCH_NO1_DATA_ROOT (default: <repo>/datasets_vg150_clean)",
+    "checkpoints": "RESEARCH_NO1_CHECKPOINT_ROOT (default: <repo>/checkpoints)",
+    "runs": "RESEARCH_NO1_RUN_ROOT (default: <repo>/runs)"
+  },
+  "hash_method": "SHA-256 streamed in 8 MiB chunks; image_collection uses SHA256 of sorted sha256sum records for each relative file path.",
+  "historical_manifest_warning": "Current train.jsonl, validation.jsonl, and predicates.json differ from data/manifests/historical_checkpoint_v1.yaml. Preserve both records; do not substitute current hashes into the historical freeze.",
+  "artifacts": [
+    {
+      "logical_name": "C0_seed1234_checkpoint",
+      "root": "checkpoints",
+      "relative_path": "C0_seed1234.pt",
+      "size_bytes": 5293177801,
+      "sha256": "2264ced4b5180c151798e395ed52696777b158c7d204342fad1e698139557d2c",
+      "mtime_utc": "2026-09-07T07:27:26.344992792Z",
+      "originating_experiment": "Paper C C0 seed1234",
+      "source_commit": "db6aff4ea874f49b8c4871fd49f1124b4c49d9e2",
+      "notes": "Canonical C0 checkpoint; KEEP_EXTERNAL; never modify in place."
+    },
+    {
+      "logical_name": "C1_seed1234_R0_checkpoint",
+      "root": "checkpoints",
+      "relative_path": "C1_seed1234.pt",
+      "size_bytes": 5293177801,
+      "sha256": "79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854",
+      "mtime_utc": "2026-09-07T14:40:17.554318758Z",
+      "originating_experiment": "Paper C C1 seed1234 / R0 endpoint",
+      "source_commit": "2c35bba26baced2b63e5afc41b4693e349e9889f",
+      "notes": "Canonical C1/R0 checkpoint; KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "C1_seed5678_checkpoint",
+      "root": "checkpoints",
+      "relative_path": "C1_seed5678.pt",
+      "size_bytes": 5293177801,
+      "sha256": "91b2f4d5c4db0d412f007bab2cc3a90feed3b71f7a869222d72864bcb4b1203b",
+      "mtime_utc": "2026-09-08T04:19:09.497507888Z",
+      "originating_experiment": "Paper C C1 seed5678",
+      "source_commit": "647cec1c3a5444a71fb1a5dbd7aaf94816a8bbee",
+      "notes": "Canonical C1 replication checkpoint; KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "R2_readout_v2_checkpoint",
+      "root": "checkpoints",
+      "relative_path": "readout_v2_pilot_seed1234_v3.pt",
+      "size_bytes": 2125129396,
+      "sha256": "020c6e1069861276639c387beba22e3cd12ecd70654632cc95e16a9ba6ca539a",
+      "mtime_utc": "2026-09-09T01:37:29.890424543Z",
+      "originating_experiment": "Paper C R2 Readout v2 clean pilot",
+      "source_commit": "d4fe6876ae5d4c230dcec6ae04ed7e4ec5d65f9a",
+      "notes": "Canonical R2 endpoint checkpoint; KEEP_EXTERNAL; G-D remains unresolved."
+    },
+    {
+      "logical_name": "historical_demo_checkpoint",
+      "root": "checkpoints",
+      "relative_path": "demo_best/pure_best_adapt_light_mR50.pt",
+      "size_bytes": 931057422,
+      "sha256": "8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442",
+      "mtime_utc": "2026-08-24T03:29:39.746858355Z",
+      "originating_experiment": "Recovered historical PURE checkpoint",
+      "source_commit": "bounded [5ed4e429,215fd6d0); point estimate is not fact",
+      "notes": "Irreplaceable historical evidence; canonical details remain in historical_checkpoint_v1.yaml."
+    },
+    {
+      "logical_name": "historical_frequency_prior",
+      "root": "checkpoints",
+      "relative_path": "demo_best/frequency_prior.json",
+      "size_bytes": 101944045,
+      "sha256": "144d9f928ed9cc213acbe081b1a8791488a92ddab0ed885da7fd6bb6058c6e6a",
+      "mtime_utc": "2026-08-24T02:53:17.174431602Z",
+      "originating_experiment": "Recovered historical PURE checkpoint evaluation",
+      "source_commit": "UNKNOWN",
+      "notes": "Unique historical calibration artifact; KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "historical_demo_config",
+      "root": "checkpoints",
+      "relative_path": "demo_best/demo_config.env",
+      "size_bytes": 355,
+      "sha256": "c73180698b5b5f6d3a58e5e6b78a39fcb8a81b6250478145d0538a5a107226a6",
+      "mtime_utc": "2026-08-24T04:49:26.383281498Z",
+      "originating_experiment": "Recovered historical PURE checkpoint evaluation",
+      "source_commit": "UNKNOWN",
+      "notes": "Small but irreplaceable historical protocol evidence; KEEP_EXTERNAL under existing freeze."
+    },
+    {
+      "logical_name": "vg150_current_train",
+      "root": "data",
+      "relative_path": "train.jsonl",
+      "size_bytes": 230804337,
+      "sha256": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+      "mtime_utc": "2026-08-30T04:30:50.266710245Z",
+      "originating_experiment": "Current cleaned VG150 corpus",
+      "source_commit": "UNKNOWN",
+      "notes": "83,249 rows; differs from historical_checkpoint_v1 dataset_train hash."
+    },
+    {
+      "logical_name": "vg150_current_validation",
+      "root": "data",
+      "relative_path": "validation.jsonl",
+      "size_bytes": 28940211,
+      "sha256": "74d99779631674a235cb3dc1093cfbdafe7533ad7af038544a0a68cffa8d5343",
+      "mtime_utc": "2026-08-30T04:30:53.877793830Z",
+      "originating_experiment": "Current cleaned VG150 corpus; C0/C1/R0/R2 evaluation population",
+      "source_commit": "UNKNOWN",
+      "notes": "10,401 rows; differs from historical_checkpoint_v1 dataset_validation hash."
+    },
+    {
+      "logical_name": "vg150_current_test",
+      "root": "data",
+      "relative_path": "test.jsonl",
+      "size_bytes": 28992163,
+      "sha256": "d0722e56e308f4def82bfe25cb8caa9003d231c8aff332de26ac0494ca4509e5",
+      "mtime_utc": "2026-08-30T04:31:10.134170111Z",
+      "originating_experiment": "Current cleaned VG150 corpus",
+      "source_commit": "UNKNOWN",
+      "notes": "10,403 rows."
+    },
+    {
+      "logical_name": "vg150_train_frequency_prior",
+      "root": "data",
+      "relative_path": "frequency_prior_train.json",
+      "size_bytes": 279803793,
+      "sha256": "54c8c9109f640be063703bceab414c126cf65b7a011714792574f83edb6be4be",
+      "mtime_utc": "2026-08-30T16:35:32.566969002Z",
+      "originating_experiment": "Train-derived current VG150 prior",
+      "source_commit": "UNKNOWN",
+      "notes": "KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "vg150_train_frequency_prior_tau01",
+      "root": "data",
+      "relative_path": "frequency_prior_train_tau0.1.json",
+      "size_bytes": 275989755,
+      "sha256": "50277801f9238f01398031cbcf5d24cd235a5b1430f5bfc19c6ff8eeeb0c15f8",
+      "mtime_utc": "2026-08-30T17:24:24.142983669Z",
+      "originating_experiment": "Train-derived current VG150 tau=0.1 prior",
+      "source_commit": "UNKNOWN",
+      "notes": "KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "vg150_predicate_vocabulary_current",
+      "root": "data",
+      "relative_path": "vocabulary/predicates.json",
+      "size_bytes": 1071,
+      "sha256": "76b75952829a503ab733700f49d7e902715543508a6cce383450cc4785ab0577",
+      "mtime_utc": "2026-08-30T04:30:13.823866715Z",
+      "originating_experiment": "Current cleaned VG150 corpus",
+      "source_commit": "UNKNOWN",
+      "notes": "Differs from historical_checkpoint_v1 predicate vocabulary file hash; semantic/order comparison must be explicit."
+    },
+    {
+      "logical_name": "vg150_object_vocabulary_current",
+      "root": "data",
+      "relative_path": "vocabulary/objects.json",
+      "size_bytes": 3056,
+      "sha256": "9f536376981e758767eab051028568d0ecab0972a7330dc616801878aa359a1b",
+      "mtime_utc": "2026-08-30T04:04:24.992027763Z",
+      "originating_experiment": "Current cleaned VG150 corpus",
+      "source_commit": "UNKNOWN",
+      "notes": "Matches historical_checkpoint_v1 object vocabulary hash."
+    },
+    {
+      "logical_name": "vg150_image_collection",
+      "root": "data",
+      "relative_path": "images",
+      "size_bytes": 15327482053,
+      "sha256": "870299ecb0045ad040a6ea4708ce656c1cbaaeb48cf39a6de3b5f271dba84d47",
+      "mtime_utc": "UNKNOWN_COLLECTION",
+      "originating_experiment": "Extracted Visual Genome image corpus",
+      "source_commit": "NOT_APPLICABLE",
+      "verification": "collection_metadata_only",
+      "notes": "108,249 files. Current repo path is a symlink to ../../VG150_dataset_extract/images. Digest is SHA256(sorted per-file sha256sum output), not a raw directory-byte hash; verifier skips this collection pending a dedicated tree verifier."
+    },
+    {
+      "logical_name": "R0_pair_dump",
+      "root": "runs",
+      "relative_path": "eval_C1/pair_logits.pt",
+      "size_bytes": 353725891,
+      "sha256": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+      "mtime_utc": "2026-09-07T17:31:52.292141271Z",
+      "originating_experiment": "Paper C R0/C1 endpoint",
+      "source_commit": "see docs/PAPER_C_PROVENANCE_AUDIT.md",
+      "notes": "Canonical R0 population and rel_feat dump; KEEP_EXTERNAL."
+    },
+    {
+      "logical_name": "R2_pair_dump",
+      "root": "runs",
+      "relative_path": "eval_readout_v2_R2_pilot_v3/pair_logits.pt",
+      "size_bytes": 383509319,
+      "sha256": "d69078f882cc49807a9f596eba4c418fc7cb49f77bb836dd76ae113af913ca9f",
+      "mtime_utc": "2026-09-09T04:58:40.252124742Z",
+      "originating_experiment": "Paper C R2 endpoint",
+      "source_commit": "d4fe6876ea5d4c230dcec6ae04ed7e4ec5d65f9a",
+      "notes": "Canonical R2 population and rel_feat dump; KEEP_EXTERNAL; G-D discrepancy source."
+    },
+    {
+      "logical_name": "GD_forensic",
+      "root": "runs",
+      "relative_path": "paper_c_gd_forensic.json",
+      "size_bytes": 3754,
+      "sha256": "b04077cce106a99ab53e57ad516c7bff854712c159a532efe4659843a39624b0",
+      "mtime_utc": "2026-09-09T08:48:49.106532951Z",
+      "originating_experiment": "Paper C G-D forensic audit",
+      "source_commit": "working-tree forensic tooling; see audit",
+      "notes": "Historical artifact; do not overwrite."
+    },
+    {
+      "logical_name": "GD_checkpoint_forensic",
+      "root": "runs",
+      "relative_path": "paper_c_gd_checkpoint_forensic.json",
+      "size_bytes": 454,
+      "sha256": "0d58d7ff1f0f8502b4632d47152df3d07864fdbafd781398001bf28e21a8a972",
+      "mtime_utc": "2026-09-09T08:49:15.116308048Z",
+      "originating_experiment": "Paper C G-D checkpoint comparison",
+      "source_commit": "working-tree forensic tooling; see audit",
+      "notes": "Historical artifact; do not overwrite."
+    },
+    {
+      "logical_name": "GD_final_batch_CPU_reconstruction",
+      "root": "runs",
+      "relative_path": "paper_c_gd_final_batch_reproduction.json",
+      "size_bytes": 21278,
+      "sha256": "448b27d19a8500af62693fc6ed57a6317a939f06e2367d7a897ab319ce0ac6fc",
+      "mtime_utc": "2026-09-09T09:07:57.465905577Z",
+      "originating_experiment": "Paper C G-D final-batch reconstruction; CUDA matrix not run",
+      "source_commit": "working-tree forensic tooling; see audit",
+      "notes": "Historical artifact; current status GD-UNRESOLVED; do not overwrite."
+    },
+    {
+      "logical_name": "representation_decoder_ladder_result",
+      "root": "runs",
+      "relative_path": "paper_c_representation_decoder_ladder.json",
+      "size_bytes": 29605,
+      "sha256": "7c215c64850c9bf00a086bd008343edfa626fd3b4a54389e9a2fb08384fe7910",
+      "mtime_utc": "2026-09-09T08:16:58.994172932Z",
+      "originating_experiment": "Paper C representation decoder ladder",
+      "source_commit": "working-tree preregistered ladder; see artifact/docs",
+      "notes": "Historical result with failed G-D gate; do not overwrite or regenerate."
+    }
+  ],
+  "raw_source_archive_not_under_portable_roots": {
+    "path_on_this_vm": "/home/leanhkhoa150204/VG150_dataset.zip",
+    "size_bytes": 15270776140,
+    "sha256": "4d0fc551613390405b4a8abf6c767a548af4f5eb8207dea46868c121963a69e8",
+    "mtime_utc": "2026-05-03T16:19:06Z",
+    "recommended_disposition": "ARCHIVE_EXTERNAL",
+    "notes": "Raw source archive; portability requires mapping it in the external data catalog, not assuming this absolute path."
+  }
+}

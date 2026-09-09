@@ -1,0 +1,22 @@
+{
+  "checkpoint_a": "checkpoints/C1_seed1234.pt",
+  "checkpoint_b": "checkpoints/readout_v2_pilot_seed1234_v3.pt",
+  "sections": {
+    "model": {
+      "keys_a": 251,
+      "keys_b": 252,
+      "only_a": [],
+      "only_b": [
+        "predicate_prototypes"
+      ],
+      "different_common_tensors": []
+    },
+    "clip": {
+      "keys_a": 590,
+      "keys_b": 590,
+      "only_a": [],
+      "only_b": [],
+      "different_common_tensors": []
+    }
+  }
+}

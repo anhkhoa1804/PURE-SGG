@@ -1,0 +1,628 @@
+{
+  "schema": "paper_c_gd_final_batch_reproduction_v1",
+  "created_utc": "2026-09-09T09:07:57.434815+00:00",
+  "scope": {
+    "full_evaluation_run": false,
+    "decoder_ladder_run": false,
+    "training_run": false,
+    "historical_artifacts_modified": false,
+    "source_artifacts_modified": false
+  },
+  "preflight": {
+    "nvidia_smi": {
+      "returncode": 9,
+      "output": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.\n\n"
+    },
+    "torch_runtime": {
+      "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]",
+      "platform": "Linux-6.8.0-1066-gcp-x86_64-with-glibc2.35",
+      "torch": "2.9.1+cu129",
+      "torch_cuda_version": "12.9",
+      "cuda_available": false,
+      "cuda_device_count": 0,
+      "cuda_devices": [],
+      "deterministic_algorithms": false,
+      "cudnn_deterministic": false,
+      "cudnn_benchmark": false,
+      "allow_tf32_matmul": false,
+      "allow_tf32_cudnn": true,
+      "float32_matmul_precision": "highest"
+    },
+    "processor": "loaded_local_only"
+  },
+  "historical_eval_settings": {
+    "configs": {
+      "R0": {
+        "device": "cuda",
+        "batch_size": 12,
+        "num_workers": 4,
+        "clip_input_res": 336,
+        "amp": true,
+        "amp_dtype": "bf16",
+        "gpu_preset": "l4_24gb",
+        "cudnn_benchmark": true,
+        "channels_last": true,
+        "eval_split_name": "validation",
+        "vg150_source": "local-jsonl",
+        "vg150_root": "datasets_vg150_clean",
+        "eval_batches": 0,
+        "eval_sgg_dump_rel_feat": true
+      },
+      "R2": {
+        "device": "cuda",
+        "batch_size": 12,
+        "num_workers": 4,
+        "clip_input_res": 336,
+        "amp": true,
+        "amp_dtype": "bf16",
+        "gpu_preset": "l4_24gb",
+        "cudnn_benchmark": true,
+        "channels_last": true,
+        "eval_split_name": "validation",
+        "vg150_source": "local-jsonl",
+        "vg150_root": "datasets_vg150_clean",
+        "eval_batches": 0,
+        "eval_sgg_dump_rel_feat": true
+      }
+    },
+    "selected_settings_equal": true
+  },
+  "historical_dumps": {
+    "r0": "/home/leanhkhoa150204/Research-No.1/runs/eval_C1/pair_logits.pt",
+    "r2": "/home/leanhkhoa150204/Research-No.1/runs/eval_readout_v2_R2_pilot_v3/pair_logits.pt",
+    "comparison": {
+      "dump_a": "/home/leanhkhoa150204/Research-No.1/runs/eval_C1/pair_logits.pt",
+      "dump_b": "/home/leanhkhoa150204/Research-No.1/runs/eval_readout_v2_R2_pilot_v3/pair_logits.pt",
+      "population_identity": {
+        "status": "EXACT_MATCH",
+        "details": {
+          "dump_a": "/home/leanhkhoa150204/Research-No.1/runs/eval_C1/pair_logits.pt",
+          "dump_b": "/home/leanhkhoa150204/Research-No.1/runs/eval_readout_v2_R2_pilot_v3/pair_logits.pt",
+          "missing_fields_a": [],
+          "missing_fields_b": [],
+          "n_images_a": 10401,
+          "n_images_b": 10401,
+          "image_identity_match": true,
+          "pair_identity_match": true,
+          "label_match": true,
+          "images_with_pair_population_mismatch": [],
+          "images_with_label_mismatch": [],
+          "gt_label_match": true,
+          "images_with_gt_mismatch": [],
+          "n_cells_a": 20016,
+          "n_cells_b": 20016,
+          "cell_identity_match": true,
+          "image_order_match": true,
+          "pair_row_order_match": true,
+          "images_with_row_order_mismatch": []
+        },
+        "reason": "every field checked (images, pairs, labels, GT predicates, WPRD cells) matches by both content and raw row position"
+      },
+      "fields": {
+        "rel_feat": {
+          "entries": 10401,
+          "changed_entries": 9,
+          "max_abs": 0.1689453125,
+          "mean_abs": 4.842427586466732e-06
+        },
+        "text_logits": {
+          "entries": 10401,
+          "changed_entries": 9,
+          "max_abs": 0.006364583969116211,
+          "mean_abs": 1.7576068186660369e-07
+        },
+        "model_logits": {
+          "entries": 10401,
+          "changed_entries": 9,
+          "max_abs": 0.22926735877990723,
+          "mean_abs": 3.306855858066518e-06
+        },
+        "cls_logits": {
+          "entries": 10401,
+          "changed_entries": 9,
+          "max_abs": 0.15189743041992188,
+          "mean_abs": 3.762004804114616e-06
+        },
+        "prior_rows": {
+          "entries": 10401,
+          "changed_entries": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0
+        }
+      },
+      "changed_images": [
+        {
+          "index": 10392,
+          "image_id": "2385790",
+          "n_rows": 1,
+          "max_abs": 0.033203125,
+          "mean_abs": 0.008251338265836239,
+          "changed_rows": 1,
+          "batch_index": 866
+        },
+        {
+          "index": 10393,
+          "image_id": "2353744",
+          "n_rows": 2,
+          "max_abs": 0.033203125,
+          "mean_abs": 0.007620478048920631,
+          "changed_rows": 2,
+          "batch_index": 866
+        },
+        {
+          "index": 10394,
+          "image_id": "2390749",
+          "n_rows": 7,
+          "max_abs": 0.098876953125,
+          "mean_abs": 0.012502128258347511,
+          "changed_rows": 7,
+          "batch_index": 866
+        },
+        {
+          "index": 10395,
+          "image_id": "2343247",
+          "n_rows": 12,
+          "max_abs": 0.1259765625,
+          "mean_abs": 0.011616132222115993,
+          "changed_rows": 12,
+          "batch_index": 866
+        },
+        {
+          "index": 10396,
+          "image_id": "2405812",
+          "n_rows": 9,
+          "max_abs": 0.1689453125,
+          "mean_abs": 0.012996996752917767,
+          "changed_rows": 9,
+          "batch_index": 866
+        },
+        {
+          "index": 10397,
+          "image_id": "2390381",
+          "n_rows": 6,
+          "max_abs": 0.11602783203125,
+          "mean_abs": 0.01278851367533207,
+          "changed_rows": 6,
+          "batch_index": 866
+        },
+        {
+          "index": 10398,
+          "image_id": "2335326",
+          "n_rows": 10,
+          "max_abs": 0.09619140625,
+          "mean_abs": 0.008477558381855488,
+          "changed_rows": 10,
+          "batch_index": 866
+        },
+        {
+          "index": 10399,
+          "image_id": "2406736",
+          "n_rows": 11,
+          "max_abs": 0.0498046875,
+          "mean_abs": 0.006966363172978163,
+          "changed_rows": 11,
+          "batch_index": 866
+        },
+        {
+          "index": 10400,
+          "image_id": "2361448",
+          "n_rows": 7,
+          "max_abs": 0.03564453125,
+          "mean_abs": 0.005197487771511078,
+          "changed_rows": 7,
+          "batch_index": 866
+        }
+      ],
+      "summary": {
+        "n_images": 10401,
+        "n_changed_images": 9,
+        "all_changes_in_final_batch": true
+      }
+    },
+    "known_localization": {
+      "changed_images": 9,
+      "changed_pair_rows": 65,
+      "final_image_indices": [
+        10392,
+        10400
+      ],
+      "historical_max_abs_rel_feat": 0.1689453125
+    }
+  },
+  "final_batch_inputs": {
+    "source_dataset": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/validation.jsonl",
+    "dataset_length": 10401,
+    "loader_contract": {
+      "source": "local-jsonl",
+      "split": "validation",
+      "batch_size": 12,
+      "max_objects": 32,
+      "max_pairs": 64,
+      "use_all_pairs": true,
+      "negative_pair_ratio": -1.0,
+      "clip_input_res": 336
+    },
+    "final_indices": [
+      10392,
+      10393,
+      10394,
+      10395,
+      10396,
+      10397,
+      10398,
+      10399,
+      10400
+    ],
+    "n_images": 9,
+    "n_pair_rows": 65,
+    "annotation_identity_exact": true,
+    "rows": [
+      {
+        "index": 10392,
+        "image_id": "2385790",
+        "n_candidate_pairs": 56,
+        "n_positive_pair_rows": 1,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "ccb850630363b3a9bbc9807c4314ede9672c994206c2bf46ecd6fe3eb529bef2",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2385790.jpg",
+        "image_file_sha256": "8303e350e980b4236cdceefc4526711a8af7d51b6ce865afcdb9c37e5ad829f8"
+      },
+      {
+        "index": 10393,
+        "image_id": "2353744",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 2,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "031908d890d4cb9e6df9c0ef153c8f6ac52cce02ea466c4deeff4effb7524475",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2353744.jpg",
+        "image_file_sha256": "b2931b98497fd2329c91803efbf58512693e29d2e838418336b3d993ed2142b3"
+      },
+      {
+        "index": 10394,
+        "image_id": "2390749",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 7,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "da831916d48db4df265135018a5ffaaef2223e7dd281de842915e5174f269847",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2390749.jpg",
+        "image_file_sha256": "e437ee4ac36d4c1325459a0198c76ecc2ae6501e105c18038a0a0347d9e4ddfb"
+      },
+      {
+        "index": 10395,
+        "image_id": "2343247",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 12,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "3201049fbb2a8304c61935ebf3ade7a4531c4989ae590eb6084943a0554d11d9",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2343247.jpg",
+        "image_file_sha256": "080f39b0a42da905aee26e606b988e53aa392d66c60723dff085c0b0c3ebc062"
+      },
+      {
+        "index": 10396,
+        "image_id": "2405812",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 9,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "51506c0cd845c4de05720aeae88cdabbaa6bf79582393bde41dfa81de481b31a",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2405812.jpg",
+        "image_file_sha256": "9d0abc94904af5bcc1af74144e228b9f484f5ac1c66e22cbee7e082b6b35f00a"
+      },
+      {
+        "index": 10397,
+        "image_id": "2390381",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 6,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "f4c386f7fcb3ca8f10d85e329948939914681f2448792e207727be1255bc8dca",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2390381.jpg",
+        "image_file_sha256": "44aea2c0f85f626e99d9bb2d58b630657ff0f20a0500dbeda65af4c2cdc70a4d"
+      },
+      {
+        "index": 10398,
+        "image_id": "2335326",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 10,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "be4c2c3664c1c5772fe25399a2ec97134c9d0eac0d618f3679f148936150e870",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2335326.jpg",
+        "image_file_sha256": "30c66d71d958d391ca631936c6cc62349843d95610ab0bf8b30b3d08d4068519"
+      },
+      {
+        "index": 10399,
+        "image_id": "2406736",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 11,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "7788d5707802baa41c558fd6dc0dcde72030618fd99d4333c20284c4151f61f6",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2406736.jpg",
+        "image_file_sha256": "dbea402e95e2de511c4922989ee3bd6bfe0768b6eb9ba7fd926550815d840fb2"
+      },
+      {
+        "index": 10400,
+        "image_id": "2361448",
+        "n_candidate_pairs": 64,
+        "n_positive_pair_rows": 7,
+        "annotation_identity": {
+          "image_id": true,
+          "positive_pairs": true,
+          "object_labels": true,
+          "object_boxes": true,
+          "gt_subject_indices": true,
+          "gt_object_indices": true,
+          "gt_predicates": true,
+          "gt_subject_labels": true,
+          "gt_object_labels": true,
+          "all_annotation_fields": true
+        },
+        "pixel": {
+          "sha256": "f2f20c3cd558653ed56f455aae49f5522b0b4ca9613817c41549d72a987eb98f",
+          "dtype": "torch.float32",
+          "shape": [
+            3,
+            336,
+            336
+          ]
+        },
+        "image_file_found": true,
+        "image_path": "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2361448.jpg",
+        "image_file_sha256": "fa2443fd95b475f031c140bda16ed518015280e5859769f18175b5b63cd59353"
+      }
+    ],
+    "image_files_found": [
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2335326.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2343247.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2353744.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K/2361448.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2385790.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2390381.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2390749.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2405812.jpg",
+      "/home/leanhkhoa150204/Research-No.1/datasets_vg150_clean/images/VG_100K_2/2406736.jpg"
+    ],
+    "pixel_reconstruction": {
+      "processor_loaded": true,
+      "current_loader_output": "reconstructed",
+      "fallback_image_used_for_all_rows": false,
+      "batch_tensor_hash_sha256": "aa1f43b33f4564794b69d8bfc9f087ea8d4585d8f474288e34a0800cc2b7be5e",
+      "tensor_dtype": "torch.float32",
+      "tensor_shape_per_image": [
+        3,
+        336,
+        336
+      ],
+      "historical_pixel_identity": "UNPROVEN_FROM_DUMPS",
+      "current_source_reconstruction": "EXACT_CURRENT_LOADER_PATH",
+      "reason": "all nine source image files are present and the local CLIP processor plus loader path were reproduced; historical dumps do not serialize pixel_values, so byte identity with the historical process is still not directly certified"
+    }
+  },
+  "controlled_reproduction_matrix": {
+    "batch_size": 12,
+    "same_final_batch_only": true,
+    "cuda_conditions": [
+      {
+        "condition": "C1_R0_R0",
+        "checkpoint": "C1_seed1234.pt",
+        "evaluator_construction": "original R0 evaluator",
+        "prototype_adaptation_bypassed": false,
+        "status": "NOT_RUN",
+        "reason": "CUDA unavailable on this VM; nvidia-smi could not communicate with the NVIDIA driver",
+        "rel_feat": null
+      },
+      {
+        "condition": "C2_R2_R2_bypass",
+        "checkpoint": "readout_v2_pilot_seed1234_v3.pt",
+        "evaluator_construction": "R2 evaluator construction",
+        "prototype_adaptation_bypassed": true,
+        "status": "NOT_RUN",
+        "reason": "CUDA unavailable on this VM; nvidia-smi could not communicate with the NVIDIA driver",
+        "rel_feat": null
+      },
+      {
+        "condition": "C3_R0_R2_construction",
+        "checkpoint": "C1_seed1234.pt",
+        "evaluator_construction": "R2 evaluator construction",
+        "prototype_adaptation_bypassed": true,
+        "status": "NOT_RUN",
+        "reason": "CUDA unavailable on this VM; nvidia-smi could not communicate with the NVIDIA driver",
+        "rel_feat": null
+      },
+      {
+        "condition": "C4_R2_R0_construction",
+        "checkpoint": "readout_v2_pilot_seed1234_v3.pt",
+        "evaluator_construction": "original R0 evaluator",
+        "prototype_adaptation_bypassed": false,
+        "status": "NOT_RUN",
+        "reason": "CUDA unavailable on this VM; nvidia-smi could not communicate with the NVIDIA driver",
+        "rel_feat": null
+      }
+    ],
+    "diagnostic_fields_for_unrun_conditions": [
+      "device",
+      "dtype",
+      "autocast_dtype",
+      "TF32",
+      "deterministic_algorithms",
+      "cudnn_deterministic",
+      "cudnn_benchmark",
+      "batch_shape",
+      "module_train_eval_flags",
+      "parameter_hashes",
+      "buffer_hashes",
+      "RNG_state",
+      "rel_feat_hash",
+      "max_mean_abs_difference"
+    ],
+    "cpu_existing_isolation_test": {
+      "test": "tests/test_readout_v2.py::test_forward_from_featmap_unaffected_by_readout_v2",
+      "status": "PASS_RECORDED_FROM_PRIOR_AUDIT",
+      "scope": "CPU/module-level featmap path only; not a reproduction of the historical CUDA final batch"
+    }
+  },
+  "assessment": {
+    "status": "GD-UNRESOLVED",
+    "root_cause_proven": false,
+    "why_not_inert": "the required controlled final-batch GPU comparison was not executable, and historical rel_feat changes reach 0.1689453125 for 65 rows",
+    "r2_endpoint_null": "remains numerically valid as the registered R2 endpoint result, but its pure-same-rel_feat intervention interpretation remains conditional on resolving G-D",
+    "decoder_ladder": "conditional_only_pending_GD; no ladder rerun authorized or performed"
+  }
+}

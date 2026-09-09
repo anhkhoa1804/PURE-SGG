@@ -828,6 +828,7 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--eval_sgg_role_swap_margin", type=float, default=getattr(TrainConfig, "eval_sgg_role_swap_margin", 0.0))
     p.add_argument("--eval_sgg_routing_diag_enabled", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "eval_sgg_routing_diag_enabled", True))
     p.add_argument("--predicate_metadata_path", type=str, default=getattr(TrainConfig, "predicate_metadata_path", ""))
+    p.add_argument("--predicate_disjoint_seen_predicates", type=str, default=getattr(TrainConfig, "predicate_disjoint_seen_predicates", ""))
     p.add_argument("--eval_sgg_use_no_interaction_prior", type=_str2bool, nargs="?", const=True, default=TrainConfig.eval_sgg_use_no_interaction_prior)
     p.add_argument("--eval_sgg_no_interaction_text", type=str, default=TrainConfig.eval_sgg_no_interaction_text)
     p.add_argument("--eval_sgg_grounding_dino_enabled", type=_str2bool, nargs="?", const=True, default=TrainConfig.eval_sgg_grounding_dino_enabled)
@@ -1308,7 +1309,13 @@ def main(argv: Optional[List[str]] = None) -> None:
         encode_predicate_vocab,
     )
     from .datasets import scan_vg150_predicate_vocab
-    from .datasets.vg150_loader import VG150DataLoader, VG150LoaderConfig, _load_vg150_vocab
+    from .datasets.vg150_loader import (
+        VG150DataLoader,
+        VG150LoaderConfig,
+        _load_vg150_vocab,
+        parse_seen_predicates,
+        restrict_predicate_pool,
+    )
     from .ddp_utils import ddp_all_gather_tensor, ddp_init, ddp_is_enabled, is_main, seed_all, unwrap_ddp
     from .evals import (
         eval_sgg_standard,
@@ -1470,6 +1477,7 @@ def main(argv: Optional[List[str]] = None) -> None:
             predicate_sampler_enabled=bool(getattr(cfg, "predicate_sampler_enabled", False)),
             predicate_sampler_power=float(getattr(cfg, "predicate_sampler_power", 0.75)),
             predicate_sampler_max_weight=float(getattr(cfg, "predicate_sampler_max_weight", 20.0)),
+            predicate_disjoint_seen_predicates=str(getattr(cfg, "predicate_disjoint_seen_predicates", "")),
         )
         joint_loader = VG150DataLoader(cfg=vg150_cfg, split="train", shuffle=True, processor=processor, clip_input_res=int(cfg.clip_input_res))
         if is_main():
@@ -1503,6 +1511,19 @@ def main(argv: Optional[List[str]] = None) -> None:
             rfs_t=float(cfg.rfs_t),
             use_all_pairs=bool(cfg.use_all_pairs),
             negative_pair_ratio=-1.0,
+            # Restricted identically to vg150_cfg (train), not left unrestricted:
+            # this loader feeds train.py's own in-training --eval_every monitoring
+            # pass, which is scored against the SAME (restricted) pred_emb_s2o/
+            # global_pred_pool this run builds -- leaving it unrestricted would
+            # produce GT predicate indices from a DIFFERENT (full) vocabulary than
+            # the one pred_emb_s2o's columns correspond to. The dedicated,
+            # TRUE predicate-disjoint endpoint evaluator (a separate tool,
+            # analogous to tools/readout_v2_evaluate.py) must independently
+            # re-encode the FULL Seen+Unseen vocabulary from the checkpoint's own
+            # frozen CLIP text encoder -- it must NOT reuse this restricted
+            # in-training val loader. See
+            # docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md.
+            predicate_disjoint_seen_predicates=str(getattr(cfg, "predicate_disjoint_seen_predicates", "")),
         )
         val_vg_loader = VG150DataLoader(cfg=vg150_val_cfg, split=eval_split, shuffle=False, processor=processor, clip_input_res=int(cfg.clip_input_res))
         if is_main():
@@ -1514,6 +1535,21 @@ def main(argv: Optional[List[str]] = None) -> None:
         
         # Scan VG150 predicate vocabulary (50 predicates)
         global_pred_pool = scan_vg150_predicate_vocab(vg150_root=str(cfg.vg150_root))
+        # Predicate-disjoint hardening -- restrict IMMEDIATELY, before
+        # pred_freq/pred_freq_scan (below) or anything else derives from
+        # global_pred_pool, not after: pred_freq's own dict comprehension
+        # iterates `global_pred_pool` a few lines down, so restricting any
+        # later would leave held-out predicate NAMES as keys in pred_freq
+        # (with a synthetic frequency of 1, since the dataset-level drop
+        # already makes pred_freq_scan never observe them) -- harmless in
+        # isolation, but pred_ce_weights/pred_buckets/pred_group_matrix are
+        # all built from `len(global_pred_pool)`-shaped tensors afterward,
+        # and a late restriction would leave THOSE at the wrong width.
+        # See docs/PAPER_C_PREDICATE_DISJOINT_LEAKAGE_HARDENING.md's
+        # dependency-graph table for the full consumer trace.
+        _predicate_disjoint_seen = parse_seen_predicates(
+            getattr(cfg, "predicate_disjoint_seen_predicates", ""))
+        global_pred_pool = restrict_predicate_pool(global_pred_pool, _predicate_disjoint_seen)
         pred_freq_scan = _iter_predicates_from_dataset_for_weights(getattr(joint_loader.loader, "dataset", None))
     else:
         raise NotImplementedError(

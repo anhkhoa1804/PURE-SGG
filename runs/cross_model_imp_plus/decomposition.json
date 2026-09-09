@@ -1,0 +1,305 @@
+{
+  "tool": "decompose_imp_plus",
+  "pairs": "/home/leanhkhoa150204/external_models/runs/wprd_pairs_full.pt",
+  "geometry": "/home/leanhkhoa150204/external_models/runs/geometry_pairs_full.pt",
+  "n_rows": 183640,
+  "n_groups": 7127,
+  "n_singleton_groups": 2083,
+  "n_decidable_groups": 3958,
+  "n_decidable_rows": 176323,
+  "arms": {
+    "model (IMP+ rel_fc/motifs head)": {
+      "wprd_macro": 0.6205392190332376,
+      "wprd_weighted": 0.5702916328798779,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    },
+    "prior_control (empirical within-group frequency, must be exactly 0.5)": {
+      "wprd_macro": 0.5,
+      "wprd_weighted": 0.5,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    },
+    "pair_matched_null (model score permuted WITHIN group, image destroyed)": {
+      "wprd_macro": 0.4997409343161569,
+      "wprd_weighted": 0.498699964248612,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    },
+    "random_null (iid gaussian, must be ~0.5)": {
+      "wprd_macro": 0.5029070387520685,
+      "wprd_weighted": 0.5024109518418441,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    },
+    "geometry_crossfit (19 box numbers, cross-fitted, no train split available)": {
+      "wprd_macro": 0.6228526245531405,
+      "wprd_weighted": 0.5596649861787206,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    },
+    "geometry_crossfit_SHUFFLED_labels (must be ~0.5)": {
+      "wprd_macro": 0.5069430775683639,
+      "wprd_weighted": 0.496545165920119,
+      "n_cells": 29257,
+      "n_comparisons": 3087992
+    }
+  },
+  "variance_split": {
+    "between_group_share": 0.7101514099380764,
+    "within_group_share": 0.2898485900619236,
+    "invariance_gate_pass": true,
+    "wprd_raw": 0.6205392190332376,
+    "wprd_within_group_centered": 0.6205392190332376
+  },
+  "layout_residual_split": {
+    "oof_r2_of_geometry_on_within_group_model": 0.04436941147007656,
+    "wprd_within_group_total": 0.6205392190332376,
+    "wprd_layout_predictable_part": 0.5959223866782433,
+    "wprd_residual_nonlayout_part": 0.5640799354131704
+  },
+  "bucket_of": {
+    "0": "head",
+    "1": "tail",
+    "2": "tail",
+    "3": "tail",
+    "4": "body",
+    "5": "body",
+    "6": "body",
+    "7": "head",
+    "8": "body",
+    "9": "body",
+    "10": "body",
+    "11": "body",
+    "12": "body",
+    "13": "body",
+    "14": "tail",
+    "15": "body",
+    "16": "tail",
+    "17": "tail",
+    "18": "body",
+    "19": "head",
+    "20": "head",
+    "21": "head",
+    "22": "body",
+    "23": "body",
+    "24": "body",
+    "25": "tail",
+    "26": "tail",
+    "27": "tail",
+    "28": "head",
+    "29": "head",
+    "30": "head",
+    "31": "body",
+    "32": "body",
+    "33": "tail",
+    "34": "body",
+    "35": "tail",
+    "36": "tail",
+    "37": "head",
+    "38": "tail",
+    "39": "head",
+    "40": "head",
+    "41": "tail",
+    "42": "head",
+    "43": "body",
+    "44": "tail",
+    "45": "body",
+    "46": "body",
+    "47": "head",
+    "48": "head",
+    "49": "head"
+  },
+  "head_body_tail": {
+    "model": {
+      "body-head": {
+        "wprd_macro": 0.6210244170846115,
+        "wprd_weighted": 0.5858421627723072,
+        "n_cells": 9102,
+        "n_comparisons": 609514,
+        "ci95": [
+          0.6134338606241442,
+          0.6284442878683675
+        ]
+      },
+      "body-body": {
+        "wprd_macro": 0.5934743520100892,
+        "wprd_weighted": 0.5855146829386679,
+        "n_cells": 1226,
+        "n_comparisons": 28843,
+        "ci95": [
+          0.5685779494490337,
+          0.6127842839244798
+        ]
+      },
+      "head-head": {
+        "wprd_macro": 0.6305097529723087,
+        "wprd_weighted": 0.5669001115358929,
+        "n_cells": 15526,
+        "n_comparisons": 2310467,
+        "ci95": [
+          0.6250506561754187,
+          0.6353991566554577
+        ]
+      },
+      "head-tail": {
+        "wprd_macro": 0.5845980607376354,
+        "wprd_weighted": 0.5511705403467331,
+        "n_cells": 2365,
+        "n_comparisons": 118535,
+        "ci95": [
+          0.5734779085743924,
+          0.5973881833375276
+        ]
+      },
+      "body-tail": {
+        "wprd_macro": 0.5831729488861829,
+        "wprd_weighted": 0.5731970710635832,
+        "n_cells": 891,
+        "n_comparisons": 18983,
+        "ci95": [
+          0.559516923918403,
+          0.6073433427291867
+        ]
+      },
+      "tail-tail": {
+        "wprd_macro": 0.5678652764405985,
+        "wprd_weighted": 0.649090909090909,
+        "n_cells": 147,
+        "n_comparisons": 1650,
+        "ci95": [
+          0.4950522558505058,
+          0.6304307595362278
+        ]
+      }
+    },
+    "geometry_crossfit": {
+      "body-head": {
+        "wprd_macro": 0.6282141188858474,
+        "wprd_weighted": 0.573266569758857,
+        "n_cells": 9102,
+        "n_comparisons": 609514,
+        "ci95": [
+          0.6217274755662735,
+          0.6345527082324222
+        ]
+      },
+      "body-body": {
+        "wprd_macro": 0.617963378115972,
+        "wprd_weighted": 0.609229275734147,
+        "n_cells": 1226,
+        "n_comparisons": 28843,
+        "ci95": [
+          0.5964336687437232,
+          0.6390541980826454
+        ]
+      },
+      "head-head": {
+        "wprd_macro": 0.6282493780242241,
+        "wprd_weighted": 0.5571704767910557,
+        "n_cells": 15526,
+        "n_comparisons": 2310467,
+        "ci95": [
+          0.6234928349494679,
+          0.6329403519633188
+        ]
+      },
+      "head-tail": {
+        "wprd_macro": 0.586775228105467,
+        "wprd_weighted": 0.5287636563040452,
+        "n_cells": 2365,
+        "n_comparisons": 118535,
+        "ci95": [
+          0.571779609282111,
+          0.6033391115791888
+        ]
+      },
+      "body-tail": {
+        "wprd_macro": 0.5936874266520769,
+        "wprd_weighted": 0.5382710846546911,
+        "n_cells": 891,
+        "n_comparisons": 18983,
+        "ci95": [
+          0.5688244433350486,
+          0.6182725963243079
+        ]
+      },
+      "tail-tail": {
+        "wprd_macro": 0.5188603405546572,
+        "wprd_weighted": 0.6278787878787879,
+        "n_cells": 147,
+        "n_comparisons": 1650,
+        "ci95": [
+          0.44977415704946677,
+          0.5848595644082624
+        ]
+      }
+    },
+    "random_null": {
+      "body-head": {
+        "wprd_macro": 0.5037395098058794,
+        "wprd_weighted": 0.5011911129194736,
+        "n_cells": 9102,
+        "n_comparisons": 609514,
+        "ci95": [
+          0.4962768500902294,
+          0.5098588966152154
+        ]
+      },
+      "body-body": {
+        "wprd_macro": 0.5191601708422506,
+        "wprd_weighted": 0.500260028429775,
+        "n_cells": 1226,
+        "n_comparisons": 28843,
+        "ci95": [
+          0.4964946254948249,
+          0.5413514258835749
+        ]
+      },
+      "head-head": {
+        "wprd_macro": 0.5006532783217861,
+        "wprd_weighted": 0.5026810597164989,
+        "n_cells": 15526,
+        "n_comparisons": 2310467,
+        "ci95": [
+          0.4952388917088491,
+          0.5053201642007372
+        ]
+      },
+      "head-tail": {
+        "wprd_macro": 0.5114115461443521,
+        "wprd_weighted": 0.5039524191167166,
+        "n_cells": 2365,
+        "n_comparisons": 118535,
+        "ci95": [
+          0.4986587218278932,
+          0.5266935925703276
+        ]
+      },
+      "body-tail": {
+        "wprd_macro": 0.4853654661906025,
+        "wprd_weighted": 0.49907812253068534,
+        "n_cells": 891,
+        "n_comparisons": 18983,
+        "ci95": [
+          0.46038157300434174,
+          0.5067075795242949
+        ]
+      },
+      "tail-tail": {
+        "wprd_macro": 0.5233476791311927,
+        "wprd_weighted": 0.54,
+        "n_cells": 147,
+        "n_comparisons": 1650,
+        "ci95": [
+          0.4680095470236978,
+          0.580381868997401
+        ]
+      }
+    }
+  },
+  "prior_override": {
+    "available": false,
+    "reason": "this checkpoint has use_bias=False, test_bias=False, and no freq_bias.* keys in its state_dict (confirmed at extraction time, docs/CROSS_MODEL_IMP_PLUS_RESULT.md); its score is the motifs/message-passing head alone, not a blend with any learned or frequency prior, so there is no prior term for the model to conflict with or override -- runs/p63's prior-override diagnostic has no analogue here."
+  }
+}

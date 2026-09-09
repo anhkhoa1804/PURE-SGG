@@ -34,7 +34,8 @@ from typing import Any, Dict, List, Optional
 
 import torch
 
-REPO_ROOT = Path("/home/leanhkhoa150204/Research-No.1")
+# Resolve from this tracked tool rather than from the VM-specific checkout.
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _load(name: str, subdir: str = "tools"):
