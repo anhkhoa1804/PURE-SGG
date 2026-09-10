@@ -333,6 +333,14 @@ class TrainConfig:
     readout_v2_enabled: bool = False
     readout_v2_lambda_anchor: float = 0.5
     readout_v2_lr: float = 2e-3
+    # Treatment-fidelity correction, strategy S1 -- registered in
+    # docs/PAPER_C_R2_TREATMENT_FIDELITY_AMENDMENT_2026-09-10.md section F.2.
+    # "reinit_E" is the pre-amendment behaviour and stays the default, so every
+    # existing experiment (C0/C1, the readout v2 pilot itself) is unaffected.
+    # Only "checkpoint" restores a trained predicate_prototypes tensor, and only
+    # under the fail-closed provenance assertions of that document's section F.3.
+    readout_v2_prototype_source: str = "reinit_E"
+    readout_v2_expected_p_sha256: str = ""
     open_vocab_predicate_primary: bool = False
     open_vocab_classifier_aux_weight: float = 0.5
     lambda_text_predicate_ce: float = 0.0

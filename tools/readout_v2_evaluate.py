@@ -40,6 +40,11 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from openvocab_rel.models.relational_model import ProgressiveRelationalDecoder  # noqa: E402
+from openvocab_rel.readout_v2_provenance import (  # noqa: E402
+    PROTOTYPE_SOURCES as RV2_PROTOTYPE_SOURCES,
+    PROTOTYPE_SOURCE_CHECKPOINT as RV2_SOURCE_CHECKPOINT,
+    REGISTERED_CHECKPOINT_P_SHA256,
+)
 from openvocab_rel import geometry as geometry_mod  # noqa: E402
 import openvocab_rel.models.relational_model as rel_mod  # noqa: E402
 
@@ -98,6 +103,17 @@ def main() -> int:
     ap.add_argument("--readout_v2_enabled", type=str, default="true",
                      choices=["true", "false"],
                      help="false = flag-off regression check, still evaluates the C1 contract")
+    ap.add_argument("--prototype_source", type=str, default="reinit_E",
+                    choices=list(RV2_PROTOTYPE_SOURCES),
+                    help="reinit_E = pre-amendment P:=E behaviour (default). "
+                         "checkpoint = R2c, restores the checkpoint's trained "
+                         "predicate_prototypes under the fail-closed provenance "
+                         "assertions of docs/PAPER_C_R2_TREATMENT_FIDELITY_"
+                         "AMENDMENT_2026-09-10.md section F.3.")
+    ap.add_argument("--expected_p_sha256", type=str, default=None,
+                    help="Registered checkpoint-P hash to assert in checkpoint "
+                         "mode. Defaults to the amendment's registered value; "
+                         "pass an explicit value only for a different checkpoint.")
     ap.add_argument("--eval_batches", type=int, default=0)   # 0 = full split
     ap.add_argument("--batch_size", type=int, default=12)
     ap.add_argument("--cap", type=int, default=64)
@@ -105,6 +121,10 @@ def main() -> int:
     ap.add_argument("--prior", default="datasets_vg150_clean/frequency_prior_train.json")
     args = ap.parse_args()
 
+    if args.prototype_source == RV2_SOURCE_CHECKPOINT:
+        expected_p_sha = args.expected_p_sha256 or REGISTERED_CHECKPOINT_P_SHA256
+    else:
+        expected_p_sha = args.expected_p_sha256 or ""
     out_dir = Path(args.out_dir or f"runs/eval_readout_v2_{args.label}")
     out_dir.mkdir(parents=True, exist_ok=True)
     dump = out_dir / "pair_logits.pt"
@@ -144,6 +164,8 @@ def main() -> int:
         "--geom_input_pixel_space", "true",
         "--geom_fourier_scale", "0.01",
         "--readout_v2_enabled", "true" if v2_on else "false",
+        "--readout_v2_prototype_source", args.prototype_source,
+        "--readout_v2_expected_p_sha256", expected_p_sha,
         "--run_name", f"eval_readout_v2_{args.label}", "--out_dir", str(out_dir),
         "--save_metrics_json", str(out_dir / "metrics.jsonl"),
     ]
@@ -179,6 +201,21 @@ def main() -> int:
 
     B = MechV2(str(dump), args.prior, "raw50")
     Gs = WPD.Groups(B)
+
+    # Amendment section F.3.3: adaptive_logits == text_logits is a REQUIRED
+    # RECORDED DIAGNOSTIC, never an invalidation condition. Treatment fidelity
+    # is decided from parameter provenance (recorded by train.py into
+    # readout_v2_provenance.json), not from what the endpoint happens to equal.
+    # A correctly instantiated trained P could still produce an observationally
+    # null endpoint; that is a valid scientific null, not a provenance failure.
+    adaptive_equals_text: Optional[bool] = None
+    if B.has_adaptive:
+        # B.meta is the already-loaded dump -- do not re-read it from disk.
+        _a = B.meta.get("adaptive_logits")
+        _t = B.meta.get("text_logits")
+        if isinstance(_a, list) and isinstance(_t, list) and len(_a) == len(_t):
+            adaptive_equals_text = all(
+                torch.equal(x.float(), y.float()) for x, y in zip(_a, _t))
 
     if not B.has_adaptive:
         print("\n*** no adaptive_logits channel in the dump -- readout_v2 was not "
@@ -226,7 +263,12 @@ def main() -> int:
         "prereg": "docs/PAPER_C_READOUT_V2_PREREGISTRATION.md",
         "arm": args.label, "ckpt": args.ckpt,
         "readout_v2_enabled": v2_on,
+        "prototype_source": args.prototype_source,
+        "expected_p_sha256": expected_p_sha or None,
+        "provenance_record": str(out_dir / "readout_v2_provenance.json"),
         "has_adaptive_channel": bool(B.has_adaptive),
+        # Diagnostic only -- see amendment section F.3.3. Never a pass/fail gate.
+        "adaptive_equals_text": adaptive_equals_text,
         "contract": {"geom_input_pixel_space": True, "geom_fourier_scale": 0.01},
         "observed_in_live_model": _FLAGS,
         "population": {"images": B.n_images, "pairs": int(B.prior.shape[0]),
@@ -248,6 +290,9 @@ def main() -> int:
     print("\n" + "=" * 96)
     print(f"  READOUT V2   {args.label}   readout_v2_enabled={v2_on}   "
           f"has_adaptive_channel={B.has_adaptive}")
+    print(f"  prototype_source={args.prototype_source}   "
+          f"adaptive_equals_text={adaptive_equals_text}   "
+          f"(diagnostic only -- provenance, not this flag, decides validity)")
     print("=" * 96)
     print(f"  population {B.n_images:,} images / {B.prior.shape[0]:,} pairs / "
           f"{r['n_cells']:,} cells")

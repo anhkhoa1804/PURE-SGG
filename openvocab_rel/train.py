@@ -14,6 +14,20 @@ import torch.distributed as dist
 import torch.nn.functional as F
 
 from .clip_utils import clip_text_features
+from .readout_v2_provenance import (
+    PROTOTYPE_SOURCES as READOUT_V2_PROTOTYPE_SOURCES,
+    PROTOTYPE_SOURCE_CHECKPOINT as READOUT_V2_SOURCE_CHECKPOINT,
+    PROTOTYPE_SOURCE_LABEL_REINIT_E as READOUT_V2_LABEL_REINIT_E,
+    ReadoutV2ProvenanceError,
+    assert_no_unexpected_skips,
+    audit_skipped_keys,
+    extract_checkpoint_prototypes,
+    file_sha256,
+    p_vs_e_summary,
+    restore_checkpoint_prototypes,
+    tensor_hash,
+    write_provenance_record,
+)
 from .prior_residual import apply_visual_ablation, compose_prior_residual, residual_diagnostics
 import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
@@ -696,6 +710,11 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--readout_v2_enabled", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "readout_v2_enabled", False))
     p.add_argument("--readout_v2_lambda_anchor", type=float, default=getattr(TrainConfig, "readout_v2_lambda_anchor", 0.5))
     p.add_argument("--readout_v2_lr", type=float, default=getattr(TrainConfig, "readout_v2_lr", 2e-3))
+    p.add_argument("--readout_v2_prototype_source", type=str,
+                   choices=list(READOUT_V2_PROTOTYPE_SOURCES),
+                   default=getattr(TrainConfig, "readout_v2_prototype_source", "reinit_E"))
+    p.add_argument("--readout_v2_expected_p_sha256", type=str,
+                   default=getattr(TrainConfig, "readout_v2_expected_p_sha256", ""))
     p.add_argument("--open_vocab_predicate_primary", type=_str2bool, nargs="?", const=True, default=getattr(TrainConfig, "open_vocab_predicate_primary", False))
     p.add_argument("--open_vocab_classifier_aux_weight", type=float, default=getattr(TrainConfig, "open_vocab_classifier_aux_weight", 0.5))
     p.add_argument("--lambda_text_predicate_ce", type=float, default=getattr(TrainConfig, "lambda_text_predicate_ce", 0.0))
@@ -1679,6 +1698,14 @@ def main(argv: Optional[List[str]] = None) -> None:
     rel_queue = RingQueue(int(cfg.emb_dim), int(cfg.rel_queue_size), device=device)
     os.makedirs(str(cfg.out_dir), exist_ok=True)
     resume_path = str(getattr(cfg, "resume_from", "")).strip() or str(getattr(cfg, "save_path", ""))
+    # Readout v2 treatment fidelity (S1): the resume block below is a local
+    # scope, but the readout_v2 setup that follows it needs the checkpoint's
+    # own tensors and its skipped-key list. Capture them here rather than
+    # reordering the resume path, which every other experiment shares.
+    _rv2_resume_model_state: Optional[Dict[str, torch.Tensor]] = None
+    _rv2_resume_skipped: List[str] = []
+    _rv2_resume_loaded_count: int = 0
+    _rv2_resume_path: str = ""
     if bool(getattr(cfg, "resume", False)) and not os.path.exists(resume_path):
         raise FileNotFoundError(f"--resume true but checkpoint was not found: {resume_path}")
     if bool(getattr(cfg, "resume", False)) and os.path.exists(resume_path):
@@ -1695,6 +1722,10 @@ def main(argv: Optional[List[str]] = None) -> None:
         mdl.load_state_dict(compatible_state, strict=False)
         if skipped_state:
             print(f"[System] Skipped {len(skipped_state)} incompatible model tensors while resuming.", flush=True)
+        _rv2_resume_model_state = model_state
+        _rv2_resume_skipped = list(skipped_state)
+        _rv2_resume_loaded_count = len(compatible_state)
+        _rv2_resume_path = resume_path
         if "clip" in ckpt:
             unwrap_ddp(clip_model).load_state_dict(ckpt["clip"], strict=False)
             print("[System] Loaded fine-tuned CLIP weights.")
@@ -1725,7 +1756,63 @@ def main(argv: Optional[List[str]] = None) -> None:
             _p.requires_grad_(False)
         for _name, _p in mdl.named_parameters():
             _p.requires_grad_(False)
+        # --- Readout v2 treatment fidelity, strategy S1 -------------------
+        # docs/PAPER_C_R2_TREATMENT_FIDELITY_AMENDMENT_2026-09-10.md sections
+        # F.2/F.3/G. The resume filter above necessarily skips
+        # predicate_prototypes (the attribute does not exist yet), which under
+        # S1 is EXPECTED, not a fault -- the defect it corrects was the absent
+        # restoration, not the skip. Default "reinit_E" keeps the historical
+        # P := E behaviour byte-for-byte; only "checkpoint" restores.
+        _rv2_source = str(getattr(cfg, "readout_v2_prototype_source", "reinit_E"))
+        if _rv2_source not in READOUT_V2_PROTOTYPE_SOURCES:
+            raise ReadoutV2ProvenanceError(
+                f"--readout_v2_prototype_source must be one of "
+                f"{list(READOUT_V2_PROTOTYPE_SOURCES)}, got {_rv2_source!r}."
+            )
+        _rv2_skip_audit = audit_skipped_keys(_rv2_resume_skipped)
+        _rv2_prov: Dict[str, Any] = {
+            "amendment": "docs/PAPER_C_R2_TREATMENT_FIDELITY_AMENDMENT_2026-09-10.md",
+            "prereg": "docs/PAPER_C_READOUT_V2_PREREGISTRATION.md",
+            "checkpoint_path": _rv2_resume_path,
+            "readout_v2_prototype_source_flag": _rv2_source,
+            "loaded_keys_count": _rv2_resume_loaded_count,
+            "E_hash": tensor_hash(readout_v2_e),
+            "flags": {
+                "readout_v2_enabled": True,
+                "readout_v2_lambda_anchor": float(getattr(cfg, "readout_v2_lambda_anchor", 0.5)),
+                "readout_v2_lr": float(getattr(cfg, "readout_v2_lr", 2e-3)),
+                "explicit_spoa_enabled": bool(getattr(cfg, "explicit_spoa_enabled", False)),
+                "text_conditioned_projection_enabled": bool(
+                    getattr(cfg, "text_conditioned_projection_enabled", False)),
+                "geom_input_pixel_space": bool(getattr(cfg, "geom_input_pixel_space", False)),
+                "geom_fourier_scale": float(getattr(cfg, "geom_fourier_scale", float("nan"))),
+                "eval_only": bool(getattr(cfg, "eval_only", False)),
+                "epochs": int(getattr(cfg, "epochs", -1)),
+            },
+        }
+        _rv2_prov.update(_rv2_skip_audit)
+
         mdl.init_readout_v2(readout_v2_e)
+        if _rv2_source == READOUT_V2_SOURCE_CHECKPOINT:
+            # Fail closed: an unexpected skipped key means the backbone did not
+            # fully load, which no registered experiment tolerates.
+            assert_no_unexpected_skips(_rv2_skip_audit)
+            _rv2_expected_sha = str(getattr(cfg, "readout_v2_expected_p_sha256", "")).strip() or None
+            _rv2_ckpt_p, _rv2_ckpt_hash = extract_checkpoint_prototypes(
+                _rv2_resume_model_state, expected_sha256=_rv2_expected_sha)
+            _rv2_prov["expected_p_sha256"] = _rv2_expected_sha
+            _rv2_prov["checkpoint_sha256"] = (
+                file_sha256(_rv2_resume_path) if _rv2_resume_path else None)
+            _rv2_prov.update(restore_checkpoint_prototypes(
+                mdl, _rv2_ckpt_p, checkpoint_hash=_rv2_ckpt_hash, anchor_E=readout_v2_e))
+        else:
+            _rv2_prov["prototype_source"] = READOUT_V2_LABEL_REINIT_E
+            _rv2_prov["checkpoint_P_hash"] = None
+            _rv2_prov["installed_P_hash"] = tensor_hash(mdl.predicate_prototypes)
+            _rv2_prov["installed_P_matches_checkpoint"] = None
+            _rv2_prov["installed_P_equals_E"] = True
+            _rv2_prov["P_vs_E"] = p_vs_e_summary(mdl.predicate_prototypes, readout_v2_e)
+
         mdl.predicate_prototypes.requires_grad_(True)
         optim.add_param_group({"params": [mdl.predicate_prototypes]})
         # Every other parameter is now frozen (requires_grad=False), so the
@@ -1735,14 +1822,52 @@ def main(argv: Optional[List[str]] = None) -> None:
         # predicate_prototypes its own effective LR without a second
         # schedule or a separate param-group LR override.
         base_lr = float(getattr(cfg, "readout_v2_lr", base_lr))
+        _rv2_trainable = sorted(
+            _n for _n, _p in mdl.named_parameters() if _p.requires_grad
+        ) + sorted(
+            f"clip.{_n}" for _n, _p in unwrap_ddp(clip_model).named_parameters()
+            if _p.requires_grad
+        )
+        _rv2_prov["trainable_tensor_names"] = _rv2_trainable
+        _rv2_prov["readout_v2_lr"] = float(base_lr)
+        if _rv2_source == READOUT_V2_SOURCE_CHECKPOINT and _rv2_trainable != ["predicate_prototypes"]:
+            # Amendment section F.3.2 condition 10 -- fail closed, but ONLY on the
+            # new R2c path. The pre-amendment reinit_E path only printed a count,
+            # and must keep behaving exactly that way for every existing run.
+            raise ReadoutV2ProvenanceError(
+                "Readout v2 requires exactly one trainable tensor "
+                f"{{'predicate_prototypes'}}, got {_rv2_trainable}."
+            )
         if is_main():
-            n_trainable = sum(1 for _p in mdl.parameters() if _p.requires_grad) + sum(
-                1 for _p in unwrap_ddp(clip_model).parameters() if _p.requires_grad
+            _rv2_out = str(getattr(cfg, "out_dir", "")).strip()
+            if _rv2_out and os.path.isdir(_rv2_out):
+                # out_dir was already created at the top of main(); this only
+                # adds the section G provenance record beside the run's own
+                # metrics. It writes nothing else and reads no historical file.
+                write_provenance_record(
+                    os.path.join(_rv2_out, "readout_v2_provenance.json"), _rv2_prov)
+            # The pre-amendment message said "init=E" unconditionally, which was
+            # correct for a training launch and wrong for an evaluation resuming
+            # a trained checkpoint. State the actual provenance instead, and name
+            # the skipped keys rather than counting them.
+            print(
+                f"[ReadoutV2] enabled: P=predicate_prototypes "
+                f"{tuple(mdl.predicate_prototypes.shape)} "
+                f"prototype_source={_rv2_prov['prototype_source']} "
+                f"installed_P={_rv2_prov['installed_P_hash']['sha256'][:16]} "
+                f"P_equals_E={_rv2_prov.get('installed_P_equals_E')} "
+                f"lambda_anchor={float(getattr(cfg, 'readout_v2_lambda_anchor', 0.5))} "
+                f"lr={base_lr:.2e} trainable_tensors={len(_rv2_trainable)} (must be exactly 1)",
+                flush=True,
             )
             print(
-                f"[ReadoutV2] enabled: P=predicate_prototypes {tuple(mdl.predicate_prototypes.shape)} "
-                f"init=E (copy, not alias) lambda_anchor={float(getattr(cfg, 'readout_v2_lambda_anchor', 0.5))} "
-                f"lr={base_lr:.2e} trainable_tensors={n_trainable} (must be exactly 1)",
+                f"[ReadoutV2] resume skipped_keys_by_name="
+                f"{_rv2_prov['skipped_keys_by_name']} "
+                f"expected={_rv2_prov['skipped_keys_expected']} "
+                f"unexpected={_rv2_prov['skipped_keys_unexpected']} "
+                f"(the predicate_prototypes skip is EXPECTED under strategy S1; "
+                f"it is restored explicitly and hash-verified when "
+                f"--readout_v2_prototype_source checkpoint)",
                 flush=True,
             )
     if is_main():
