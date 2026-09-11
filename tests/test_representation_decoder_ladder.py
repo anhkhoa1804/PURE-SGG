@@ -33,6 +33,9 @@ import torch.nn.functional as F
 from tools.representation_decoder_ladder import (
     cell_distribution,
     cell_keys_for,
+    decoder_class_mapping,
+    decoder_contract,
+    foreground_scores,
     folds_of,
     make_mlp,
     paired_delta,
@@ -45,8 +48,8 @@ PREDS_CYCLE = ["near", "wears", "on", "has", "in", "next to"]
 
 
 def _vg150_vocab():
-    raw = json.loads(Path("datasets_vg150_clean/vocabulary/predicates.json").read_text())["idx_to_predicate"]
-    return [raw[str(i)] for i in range(1, len(raw) + 1)]
+    from tools.prepare_vg150_subset import STANDARD_VG150_PREDICATES
+    return sorted(STANDARD_VG150_PREDICATES)
 
 
 def _norm_rows(x):
@@ -62,7 +65,7 @@ def _build_dump(path: Path, seed: int, n_img: int = 40, n_obj: int = 4,
     construction rather than by luck -- exactly the relationship the real
     dumps satisfy."""
     pv = _vg150_vocab()
-    vocab = [p.strip().lower() for p in pv] + ["background"]
+    vocab = [p.strip().lower() for p in pv] + ["relation"]
     P = len(vocab)
     g = torch.Generator().manual_seed(seed)
     pred_emb = torch.randn(P, emb_dim, generator=g)
@@ -160,6 +163,31 @@ def test_mlp_is_exactly_the_preregistered_architecture():
     assert isinstance(net[2], torch.nn.Linear) and net[2].in_features == 768 and net[2].out_features == 51
     assert len(net) == 3, "two Linear layers and one activation -- not p37's 3-layer MLP"
     assert sum(p.numel() for p in net.parameters()) == 629_811
+
+
+def test_decoder_contract_and_foreground_mapping_are_exact():
+    from tools.prepare_vg150_subset import STANDARD_VG150_PREDICATES
+    vocab = sorted(STANDARD_VG150_PREDICATES) + ["relation"]
+    contract = decoder_contract(vocab, [50])
+    assert contract["total_decoder_width"] == 51
+    assert contract["background_index"] == 50
+    assert contract["foreground_indices"] == list(range(50))
+
+    # raw50 class ids are deliberately allowed to be a permutation of raw
+    # decoder columns; the inverse map is what prevents silent label drift.
+    col_to_class = torch.tensor([1, 0] + list(range(2, 50)))
+    mapping = decoder_class_mapping(col_to_class, list(range(50)))
+    assert mapping[:2].tolist() == [1, 0]
+    assert int(mapping.max()) == 49
+    assert 50 not in mapping.tolist()
+    scores = torch.arange(102, dtype=torch.float32).reshape(2, 51)
+    assert foreground_scores(scores).shape == (2, 50)
+    assert torch.equal(foreground_scores(scores), scores[:, :50])
+
+
+def test_foreground_scores_rejects_wrong_width():
+    with pytest.raises(ValueError, match="total or 50 foreground"):
+        foreground_scores(torch.zeros(3, 49))
 
 
 # ------------------------------------------------------- 2. cross-fitting is honest
@@ -262,8 +290,10 @@ def test_cell_keys_align_with_wprd_values(synth):
 # ------------------------------------------------------- 7. end to end
 def test_run_ladder_end_to_end(synth):
     out_path = synth["dir"] / "ladder.json"
+    provenance_path = synth["dir"] / "ladder_provenance.json"
     res = run_ladder(str(synth["dump"]), str(synth["dump2"]), str(synth["prior"]),
-                     str(synth["train"]), str(out_path), mlp_epochs=1)
+                     str(synth["train"]), str(out_path), mlp_epochs=1,
+                     provenance_path=str(provenance_path))
 
     # every registered arm present
     for arm in ("A1_frozen_baseline", "A2_linear", "A3_mlp", "A4_cosine_recomputed",
@@ -292,6 +322,16 @@ def test_run_ladder_end_to_end(synth):
     assert res["classification"]["vs_geometry"] in (
         "BEYOND_GEOMETRY", "GEOMETRY_EQUIVALENT", "BELOW_GEOMETRY")
     assert Path(out_path).exists()
+    assert provenance_path.exists()
+    provenance = json.loads(provenance_path.read_text())
+    assert provenance["status"] == "completed"
+    assert provenance["amendment"].endswith("PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md")
+    assert provenance["git_head"]
+    assert "cpu_environment" in provenance
+    for arm in ("A2_linear", "A3_mlp", "A4_cosine_recomputed", "A5a_geometry_xfit",
+                "A5b_geometry_trainfit", "A6_fusion", "N1_shuffled_label_null"):
+        assert res["arms"][arm]["output_width"] == 51
+        assert res["arms"][arm]["wprd_width"] == 50
 
     # contrasts vs both references exist and carry a distribution summary
     assert "A2_linear - A1_frozen_baseline" in res["contrasts"]
@@ -302,9 +342,19 @@ def test_run_ladder_end_to_end(synth):
 def test_run_ladder_does_not_write_outside_its_out_path(synth):
     """The ladder must never touch historical artifacts."""
     out_path = synth["dir"] / "ladder2.json"
+    provenance_path = synth["dir"] / "ladder2_provenance.json"
     before = {p: p.stat().st_mtime for p in [synth["dump"], synth["dump2"],
                                               synth["prior"], synth["train"]]}
     run_ladder(str(synth["dump"]), str(synth["dump2"]), str(synth["prior"]),
-               str(synth["train"]), str(out_path), mlp_epochs=1)
+               str(synth["train"]), str(out_path), mlp_epochs=1,
+               provenance_path=str(provenance_path))
     for p, mt in before.items():
         assert p.stat().st_mtime == mt, f"{p} was modified"
+
+
+def test_historical_result_path_is_rejected(synth):
+    historical = Path("runs/paper_c_representation_decoder_ladder.json").resolve()
+    with pytest.raises(ValueError, match="immutable historical result"):
+        run_ladder(str(synth["dump"]), str(synth["dump2"]), str(synth["prior"]),
+                   str(synth["train"]), str(historical), mlp_epochs=1,
+                   provenance_path=str(synth["dir"] / "blocked_provenance.json"))
