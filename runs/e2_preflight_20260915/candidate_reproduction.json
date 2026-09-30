@@ -1,0 +1,25 @@
+{
+  "fields_checked": [
+    "candidate_id",
+    "image_a",
+    "image_b",
+    "subject_label",
+    "object_label",
+    "relation_a",
+    "relation_b",
+    "subject_index_a",
+    "object_index_a",
+    "subject_index_b",
+    "object_index_b",
+    "subject_box_a",
+    "object_box_a",
+    "subject_box_b",
+    "object_box_b",
+    "geometry_a",
+    "geometry_b"
+  ],
+  "frozen_count": 45,
+  "reproduced_count": 45,
+  "same_order_and_fields": true,
+  "status": "PASS"
+}

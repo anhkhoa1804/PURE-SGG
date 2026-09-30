@@ -1,0 +1,27 @@
+{
+  "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+  "counts": {
+    "annotator_1": {
+      "block_solvability": 0,
+      "image_truth": 0
+    },
+    "annotator_2": {
+      "block_solvability": 0,
+      "image_truth": 0
+    },
+    "annotator_3": {
+      "block_solvability": 0,
+      "image_truth": 0
+    }
+  },
+  "created_utc": "2026-09-11T17:53:36.179489+00:00",
+  "errors": [],
+  "expected_candidate_count": 45,
+  "status": "ANNOTATION_PENDING",
+  "task_version": "paper-c-e2-development-v1",
+  "warnings": [
+    "missing annotation file: runs/e2_development_20260912/annotations/annotator_1.jsonl",
+    "missing annotation file: runs/e2_development_20260912/annotations/annotator_2.jsonl",
+    "missing annotation file: runs/e2_development_20260912/annotations/annotator_3.jsonl"
+  ]
+}

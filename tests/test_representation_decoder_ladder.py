@@ -23,6 +23,7 @@ What is pinned:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -152,7 +153,15 @@ def synth(tmp_path_factory):
                     for j, (a, b) in enumerate([(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)])]
             fh.write(json.dumps({"obj_boxes": boxes.tolist(), "relationships": rels}) + "\n")
 
-    return {"dump": dump, "dump2": dump2, "prior": prior, "train": train, "dir": td}
+    predicates = td / "predicates.json"
+    predicates.write_text(json.dumps({
+        "idx_to_predicate": {
+            str(i + 1): name for i, name in enumerate(d["pred_vocab"][:-1])
+        },
+    }))
+
+    return {"dump": dump, "dump2": dump2, "prior": prior, "train": train,
+            "predicates": predicates, "dir": td}
 
 
 # ------------------------------------------------------- 1. architecture is the registered one
@@ -293,7 +302,8 @@ def test_run_ladder_end_to_end(synth):
     provenance_path = synth["dir"] / "ladder_provenance.json"
     res = run_ladder(str(synth["dump"]), str(synth["dump2"]), str(synth["prior"]),
                      str(synth["train"]), str(out_path), mlp_epochs=1,
-                     provenance_path=str(provenance_path))
+                     provenance_path=str(provenance_path),
+                     predicates=str(synth["predicates"]))
 
     # every registered arm present
     for arm in ("A1_frozen_baseline", "A2_linear", "A3_mlp", "A4_cosine_recomputed",
@@ -326,8 +336,23 @@ def test_run_ladder_end_to_end(synth):
     provenance = json.loads(provenance_path.read_text())
     assert provenance["status"] == "completed"
     assert provenance["amendment"].endswith("PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md")
+    assert provenance["predicate_identity_amendment"].endswith(
+        "PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md"
+    )
     assert provenance["git_head"]
     assert "cpu_environment" in provenance
+    assert set(provenance["input_artifacts"]) == {
+        "dump_r0", "dump_r2", "prior", "train_jsonl", "predicates"
+    }
+    for name, path in {
+        "dump_r0": synth["dump"], "dump_r2": synth["dump2"],
+        "prior": synth["prior"], "train_jsonl": synth["train"],
+        "predicates": synth["predicates"],
+    }.items():
+        record = provenance["input_artifacts"][name]
+        assert record["path"] == str(path.resolve())
+        assert record["size_bytes"] == path.stat().st_size
+        assert record["sha256"] == hashlib.sha256(path.read_bytes()).hexdigest()
     for arm in ("A2_linear", "A3_mlp", "A4_cosine_recomputed", "A5a_geometry_xfit",
                 "A5b_geometry_trainfit", "A6_fusion", "N1_shuffled_label_null"):
         assert res["arms"][arm]["output_width"] == 51
@@ -347,7 +372,8 @@ def test_run_ladder_does_not_write_outside_its_out_path(synth):
                                               synth["prior"], synth["train"]]}
     run_ladder(str(synth["dump"]), str(synth["dump2"]), str(synth["prior"]),
                str(synth["train"]), str(out_path), mlp_epochs=1,
-               provenance_path=str(provenance_path))
+               provenance_path=str(provenance_path),
+               predicates=str(synth["predicates"]))
     for p, mt in before.items():
         assert p.stat().st_mtime == mt, f"{p} was modified"
 

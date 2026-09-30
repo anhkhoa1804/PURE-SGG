@@ -1,0 +1,49 @@
+{
+  "human_input_status": "PENDING",
+  "implementation": "tools/e2_validate_annotations.compatibility_errors and tools/e2_adjudicate.py",
+  "rules": [
+    {
+      "condition": "pair_truth=relation_a_only",
+      "required": [
+        "truth_a=valid",
+        "truth_b=invalid",
+        "subject_visible=yes",
+        "object_visible=yes"
+      ]
+    },
+    {
+      "condition": "pair_truth=relation_b_only",
+      "required": [
+        "truth_a=invalid",
+        "truth_b=valid",
+        "subject_visible=yes",
+        "object_visible=yes"
+      ]
+    },
+    {
+      "condition": "pair_truth=both_valid",
+      "primary": "forbidden"
+    },
+    {
+      "condition": "pair_truth=neither_visible",
+      "primary": "forbidden"
+    },
+    {
+      "condition": "pair_truth=uncertain",
+      "primary": "forbidden"
+    },
+    {
+      "condition": "subject/object visibility != yes",
+      "primary_single_relation": "forbidden"
+    },
+    {
+      "condition": "accepted image A",
+      "required": "direction_a=correct"
+    },
+    {
+      "condition": "accepted image B",
+      "required": "direction_b=correct"
+    }
+  ],
+  "status": "PASS"
+}

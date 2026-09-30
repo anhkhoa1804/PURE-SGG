@@ -1,0 +1,75 @@
+{
+  "annotation_app": {
+    "output_directory": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/annotations",
+    "sessions": {
+      "annotator_1": "http://127.0.0.1:8765/",
+      "annotator_2": "http://127.0.0.1:8766/",
+      "annotator_3": "http://127.0.0.1:8767/"
+    },
+    "status": "running"
+  },
+  "annotation_validation": {
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/annotation_validation.json",
+    "sha256": "f35afcffba41b70f7f06cb35d559d0062bfe2c92bbc549a4206fc1bacb0571ef",
+    "size": 831,
+    "status": "ANNOTATION_PENDING"
+  },
+  "command_scope": "metadata-only candidate construction",
+  "created_utc": "2026-09-11T17:33:30.541198+00:00",
+  "cuda_available": false,
+  "cuda_used": false,
+  "current_state": {
+    "candidate_matches_frozen": true,
+    "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "decode_error_count": 0,
+    "development_random_overlap": 0,
+    "historical_images_claim": "missing",
+    "image_manifest_sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+    "missing_selected_images": 0,
+    "model_blind_candidate_generation": true,
+    "selected_image_count": 170,
+    "selected_images_present": true
+  },
+  "dump": {
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_C1/pair_logits.pt",
+    "sha256": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+    "size": 353725891
+  },
+  "frozen_candidate_manifest": {
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/FROZEN_CANDIDATE_MANIFEST.json",
+    "sha256": "d4fd069e5b83c5c32184a418ca7386e02a39c8b96801414ecdc7e6d78d9fc4eb",
+    "size": 1819
+  },
+  "git": {
+    "branch": "research/pure-complete-readout-v2",
+    "head": "a457bd8acdfb91789b11688f63f3d1074c0b6cd4",
+    "status_short": "M tests/test_representation_decoder_ladder.py\n M tools/representation_decoder_ladder.py\n?? docs/PAPER_C_E2_POPULATION_REDESIGN_AMENDMENT_2026-09-12.md\n?? docs/PAPER_C_EXPERIMENT_2_PREREGISTRATION.md\n?? docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md\n?? runs/e2_development_20260912/\n?? runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/\n?? runs/representation_decoder_ladder_20260911/\n?? tests/test_e2_population_feasibility.py\n?? tests/test_e2_prepare_annotation_packet.py\n?? tests/test_e2_restore_development_images.py\n?? tools/e2_population_feasibility.py\n?? tools/e2_prepare_annotation_packet.py\n?? tools/e2_restore_development_images.py"
+  },
+  "historical_state": {
+    "images": "missing",
+    "output_manifest": {
+      "excludes": [
+        "provenance.json",
+        "manifest_sha256.txt"
+      ],
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/manifest_sha256.txt",
+      "sha256": "e34ab2df02df4fe7da933b5ffdb53c840b451c14abc5308b35cefe399ab484d2",
+      "size": 23265
+    }
+  },
+  "human_annotation": "not yet performed",
+  "images": "historical candidate-construction state: missing; current selected subset is recorded in current_state",
+  "output_manifest": {
+    "excludes": [
+      "provenance.json",
+      "manifest_sha256.txt"
+    ],
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/manifest_sha256.txt",
+    "sha256": "e34ab2df02df4fe7da933b5ffdb53c840b451c14abc5308b35cefe399ab484d2",
+    "size": 23265
+  },
+  "platform": "Linux-6.8.0-1066-gcp-x86_64-with-glibc2.35",
+  "python": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+  "torch": "2.14.0+cpu",
+  "updated_utc": "2026-09-11T17:42:41.947470+00:00"
+}

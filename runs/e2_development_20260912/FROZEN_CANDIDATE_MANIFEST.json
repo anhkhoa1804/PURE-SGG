@@ -1,0 +1,66 @@
+{
+  "candidate_file": {
+    "candidate_order_sha256": "aac94e821dd3a9c9770a5f89e62a18b2553cf66a71d189b5a86eecaf6aa0334e",
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/development_candidates.jsonl",
+    "sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "size_bytes": 64279
+  },
+  "created_utc": "2026-09-11T17:35:05.389744+00:00",
+  "development": {
+    "candidate_count": 45,
+    "image_count": 90,
+    "relation_pair_counts": {
+      "carrying||riding": 8,
+      "holding||looking at": 8,
+      "holding||playing": 8,
+      "holding||riding": 8,
+      "holding||using": 8,
+      "riding||using": 5
+    },
+    "relation_pair_whitelist": [
+      [
+        "holding",
+        "looking at"
+      ],
+      [
+        "holding",
+        "using"
+      ],
+      [
+        "holding",
+        "riding"
+      ],
+      [
+        "holding",
+        "playing"
+      ],
+      [
+        "carrying",
+        "riding"
+      ],
+      [
+        "riding",
+        "using"
+      ]
+    ],
+    "selection_seed": 20260912
+  },
+  "git_branch": "research/pure-complete-readout-v2",
+  "git_head": "a457bd8acdfb91789b11688f63f3d1074c0b6cd4",
+  "image_manifest": {
+    "count": 170,
+    "missing": 0,
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912/images/image_manifest.json",
+    "sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+    "size_bytes": 68936
+  },
+  "model_scores_used_in_selection": false,
+  "packet_version": "paper-c-e2-development-v1",
+  "random_cohort": {
+    "candidate_count": 40,
+    "image_count": 80,
+    "selection_seed": 20260913,
+    "sha256": "3869aa1ed8f3c7bd7896645fef98cc5276d089f2002f69f2dbe0010c5259a090"
+  },
+  "status": "frozen_model_blind_candidate_population"
+}

@@ -1,0 +1,47 @@
+{
+  "artifacts": [
+    {
+      "expected_before": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+      "path": "runs/eval_C1/pair_logits.pt",
+      "sha256_after": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+      "unchanged": true
+    },
+    {
+      "expected_before": "6a0722bacc5f89de3cdb58858a43480f1631246590a9b82bcb1d3e3f2bcb6076",
+      "path": "runs/eval_readout_v2_R2_matched_20260909T154739Z/pair_logits.pt",
+      "sha256_after": "6a0722bacc5f89de3cdb58858a43480f1631246590a9b82bcb1d3e3f2bcb6076",
+      "unchanged": true
+    },
+    {
+      "expected_before": "79c6a209ca7912875d2910637a9633f42591cdd086e6a639485604b1e7d01a86",
+      "path": "runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/console.log",
+      "sha256_after": "79c6a209ca7912875d2910637a9633f42591cdd086e6a639485604b1e7d01a86",
+      "unchanged": true
+    },
+    {
+      "expected_before": "e400d70b50cca77dd4b2c6d834cb5d44a4c33f828c82b16b8caf11d33954a1da",
+      "path": "runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/provenance.json",
+      "sha256_after": "e400d70b50cca77dd4b2c6d834cb5d44a4c33f828c82b16b8caf11d33954a1da",
+      "unchanged": true
+    },
+    {
+      "expected_before": "846e8f1dac516a0b3b43dee8a2209bc1cb9709f418225f2bd47adf267146cccf",
+      "path": "runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json",
+      "sha256_after": "846e8f1dac516a0b3b43dee8a2209bc1cb9709f418225f2bd47adf267146cccf",
+      "unchanged": true
+    },
+    {
+      "expected_before": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+      "path": "runs/e2_development_20260912/development_candidates.jsonl",
+      "sha256_after": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+      "unchanged": true
+    },
+    {
+      "expected_before": "d4fd069e5b83c5c32184a418ca7386e02a39c8b96801414ecdc7e6d78d9fc4eb",
+      "path": "runs/e2_development_20260912/FROZEN_CANDIDATE_MANIFEST.json",
+      "sha256_after": "d4fd069e5b83c5c32184a418ca7386e02a39c8b96801414ecdc7e6d78d9fc4eb",
+      "unchanged": true
+    }
+  ],
+  "status": "PASS"
+}

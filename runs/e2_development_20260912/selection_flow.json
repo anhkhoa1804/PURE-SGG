@@ -1,0 +1,64 @@
+{
+  "candidate_generation": "cached pair metadata only; no model scores",
+  "development_image_count": 90,
+  "image_source": "missing_from_cached_pair_dump",
+  "quota_per_relation_pair": 8,
+  "random_cohort_seed": 20260913,
+  "random_image_count": 80,
+  "relation_pair_whitelist": [
+    [
+      "holding",
+      "looking at"
+    ],
+    [
+      "holding",
+      "using"
+    ],
+    [
+      "holding",
+      "riding"
+    ],
+    [
+      "holding",
+      "playing"
+    ],
+    [
+      "carrying",
+      "riding"
+    ],
+    [
+      "riding",
+      "using"
+    ]
+  ],
+  "seed": 20260912,
+  "selected_development_counts": {
+    "carrying||riding": 8,
+    "holding||looking at": 8,
+    "holding||playing": 8,
+    "holding||riding": 8,
+    "holding||using": 8,
+    "riding||using": 5
+  },
+  "selected_random_counts": {
+    "carrying||riding": 8,
+    "holding||looking at": 8,
+    "holding||playing": 8,
+    "holding||riding": 8,
+    "holding||using": 8
+  },
+  "status": "candidate_packet_only",
+  "summary": {
+    "n_images": 10401,
+    "n_relation_rows": 132556,
+    "predicate_vocab_source": "cached_pair_dump_predicate_strings",
+    "raw_counts": {
+      "carrying||riding": 331,
+      "holding||looking at": 507,
+      "holding||playing": 321,
+      "holding||riding": 702,
+      "holding||using": 555,
+      "riding||using": 85
+    }
+  }
+}

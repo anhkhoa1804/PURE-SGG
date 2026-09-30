@@ -1,0 +1,1889 @@
+{
+  "count": 170,
+  "downloaded": 170,
+  "missing": 0,
+  "present_before_run": 0,
+  "records": [
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/210.jpg"
+        }
+      ],
+      "image_id": "210",
+      "path": "runs/e2_development_20260912/images/210.jpg",
+      "sha256": "d1d97518a8bb7919decb72c64e63a01a345482419987a409d023a2d6496ca8db",
+      "size": 32840,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/210.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/1283.jpg"
+        }
+      ],
+      "image_id": "1283",
+      "path": "runs/e2_development_20260912/images/1283.jpg",
+      "sha256": "f090dfda7935a0cb3dad81d4199b9fa3c2ddc9a698da135a69bf57013e6b5417",
+      "size": 33158,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/1283.jpg"
+    },
+    {
+      "image_id": "713733",
+      "path": "runs/e2_development_20260912/images/713733.jpg",
+      "sha256": "266dddb424a3e83b0b07f43af5404df5502c67909d4438dbc448ff0b762800d2",
+      "size": 407254,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/713733.jpg"
+    },
+    {
+      "image_id": "1592175",
+      "path": "runs/e2_development_20260912/images/1592175.jpg",
+      "sha256": "ba1874c303f6bd5a36e09c59a656c8c787f3ce19add30b3a842718769a63998d",
+      "size": 398246,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/1592175.jpg"
+    },
+    {
+      "image_id": "1593012",
+      "path": "runs/e2_development_20260912/images/1593012.jpg",
+      "sha256": "5dea15be4903902c4e81b24968574015627a4bb0cce196daae5bd1a8eeee9ea8",
+      "size": 360789,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/1593012.jpg"
+    },
+    {
+      "image_id": "2315760",
+      "path": "runs/e2_development_20260912/images/2315760.jpg",
+      "sha256": "5c5bcc19f5267b62e8309686bcc6221af3ef866821015f74d8601847d3ea60e1",
+      "size": 95743,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2315760.jpg"
+    },
+    {
+      "image_id": "2315908",
+      "path": "runs/e2_development_20260912/images/2315908.jpg",
+      "sha256": "c18fbf34c74fed67b51c6b7d6d1ac20ff6570ab32e206fdef470533f743457bb",
+      "size": 174867,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2315908.jpg"
+    },
+    {
+      "image_id": "2316804",
+      "path": "runs/e2_development_20260912/images/2316804.jpg",
+      "sha256": "3215c3247ef7e8bb1039a6eb0a9948c36005846a38763ef484b677ad5bed5107",
+      "size": 239620,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2316804.jpg"
+    },
+    {
+      "image_id": "2317580",
+      "path": "runs/e2_development_20260912/images/2317580.jpg",
+      "sha256": "4285aa06beac04d78a0b30fc351a7268cb43cebb9affb334d876039d34a36f32",
+      "size": 100789,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2317580.jpg"
+    },
+    {
+      "image_id": "2318264",
+      "path": "runs/e2_development_20260912/images/2318264.jpg",
+      "sha256": "8a73fcc3066ed7ded67a3eab4b6712953fbf11a2a55ccdefab031cd4c010cbcd",
+      "size": 96140,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2318264.jpg"
+    },
+    {
+      "image_id": "2319554",
+      "path": "runs/e2_development_20260912/images/2319554.jpg",
+      "sha256": "b248b874e0ac43eae46e185645fababe13e1a6d29e01bb2a268b5d1f96beda55",
+      "size": 151607,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2319554.jpg"
+    },
+    {
+      "image_id": "2319989",
+      "path": "runs/e2_development_20260912/images/2319989.jpg",
+      "sha256": "9ff4a5199ee6182bab0a159fe116273172d15494930ec6c9e8dac0dbbe3cd260",
+      "size": 178687,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2319989.jpg"
+    },
+    {
+      "image_id": "2321635",
+      "path": "runs/e2_development_20260912/images/2321635.jpg",
+      "sha256": "268400ab3e8023e3ef0a1e509dc4a07d7b4ff9de1b15c85459c15310238a50ae",
+      "size": 152895,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2321635.jpg"
+    },
+    {
+      "image_id": "2323055",
+      "path": "runs/e2_development_20260912/images/2323055.jpg",
+      "sha256": "2cfaf133171cfd8c8ca4335342db22702c57a3da756afc129018467651789053",
+      "size": 131133,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2323055.jpg"
+    },
+    {
+      "image_id": "2323992",
+      "path": "runs/e2_development_20260912/images/2323992.jpg",
+      "sha256": "0564d840524d016244adf4d8d4ae149b5737143f1c7220239963a0d9e10f5810",
+      "size": 187267,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2323992.jpg"
+    },
+    {
+      "image_id": "2324025",
+      "path": "runs/e2_development_20260912/images/2324025.jpg",
+      "sha256": "9de21605f835c6191b5007bd4682bf8a50edd8c28b6fb4d38d8db53efa7d6812",
+      "size": 94609,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2324025.jpg"
+    },
+    {
+      "image_id": "2324822",
+      "path": "runs/e2_development_20260912/images/2324822.jpg",
+      "sha256": "626848301ab0e3201f47567e12b243762371057a81fb3b48c69202e29910cd48",
+      "size": 92759,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2324822.jpg"
+    },
+    {
+      "image_id": "2327116",
+      "path": "runs/e2_development_20260912/images/2327116.jpg",
+      "sha256": "93f7b3d93365e8a5e363f33216975e7436009cff477dabe6f0a2190945a795f6",
+      "size": 85292,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2327116.jpg"
+    },
+    {
+      "image_id": "2328438",
+      "path": "runs/e2_development_20260912/images/2328438.jpg",
+      "sha256": "c63afdfafacdf826aa37427623cd4eebf3097eb62cedb12fb1def2dd03757534",
+      "size": 209985,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2328438.jpg"
+    },
+    {
+      "image_id": "2331438",
+      "path": "runs/e2_development_20260912/images/2331438.jpg",
+      "sha256": "9f244a4a70e94930dda8f4e83dc204ff2e619acde25215026eb1fda897bf2ff5",
+      "size": 170690,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2331438.jpg"
+    },
+    {
+      "image_id": "2331914",
+      "path": "runs/e2_development_20260912/images/2331914.jpg",
+      "sha256": "d4b2e98e6be775cfd7b17b306ffa3ad8616825726e3a2d10b40d18ff19f9fbbd",
+      "size": 101033,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2331914.jpg"
+    },
+    {
+      "image_id": "2331973",
+      "path": "runs/e2_development_20260912/images/2331973.jpg",
+      "sha256": "bef95dca68404195897e47dfe40097c8c5a782f0c11d3304216eeccaa90fce0d",
+      "size": 156737,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2331973.jpg"
+    },
+    {
+      "image_id": "2332038",
+      "path": "runs/e2_development_20260912/images/2332038.jpg",
+      "sha256": "15ee1ccc7b38a67100ec7519a6373965c547667599a4675a3739a10dad5f8b41",
+      "size": 125881,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2332038.jpg"
+    },
+    {
+      "image_id": "2332265",
+      "path": "runs/e2_development_20260912/images/2332265.jpg",
+      "sha256": "07bbe8135eb966a393412e805794565b47adbcd08a409220e86e180cb73d457b",
+      "size": 174984,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2332265.jpg"
+    },
+    {
+      "image_id": "2334261",
+      "path": "runs/e2_development_20260912/images/2334261.jpg",
+      "sha256": "eb4f982c97d2552ceb4a4eab4eb581d2de1482f3cc2503b286a20fadb9ecf873",
+      "size": 171164,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2334261.jpg"
+    },
+    {
+      "image_id": "2335617",
+      "path": "runs/e2_development_20260912/images/2335617.jpg",
+      "sha256": "51d49e926ccf7f914b0b1534fc978f2d221f27fd612139912e4ae569e563bc78",
+      "size": 156124,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2335617.jpg"
+    },
+    {
+      "image_id": "2337251",
+      "path": "runs/e2_development_20260912/images/2337251.jpg",
+      "sha256": "37f1b4885a71f49151cb0f60e8ee740963432690b3b20905063eadc36b97f6c9",
+      "size": 105478,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2337251.jpg"
+    },
+    {
+      "image_id": "2340800",
+      "path": "runs/e2_development_20260912/images/2340800.jpg",
+      "sha256": "58012b32841f93cb9a452c4214ae9e80b289128267e7c9712d389b84b165d792",
+      "size": 112573,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2340800.jpg"
+    },
+    {
+      "image_id": "2341682",
+      "path": "runs/e2_development_20260912/images/2341682.jpg",
+      "sha256": "6cd95ba7b44c799cdf7c13ec3f7338f2d67611d7def6a0f520728582e4773407",
+      "size": 80090,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2341682.jpg"
+    },
+    {
+      "image_id": "2341959",
+      "path": "runs/e2_development_20260912/images/2341959.jpg",
+      "sha256": "b95597fa982c5eef261f876070796d2ef14a8133d578850a4fd632cd6250dd02",
+      "size": 108278,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2341959.jpg"
+    },
+    {
+      "image_id": "2342300",
+      "path": "runs/e2_development_20260912/images/2342300.jpg",
+      "sha256": "27a1d8c66b037b7554d592c3034d236bad40cee5347c1c67050a68c95b4bc5d4",
+      "size": 81646,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2342300.jpg"
+    },
+    {
+      "image_id": "2342409",
+      "path": "runs/e2_development_20260912/images/2342409.jpg",
+      "sha256": "85293bee328c42d2a04ff7665507d98e2b30eda742bd84e42471f6e63608a8f4",
+      "size": 87089,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2342409.jpg"
+    },
+    {
+      "image_id": "2342729",
+      "path": "runs/e2_development_20260912/images/2342729.jpg",
+      "sha256": "38ad74b1e2221b19c9de1a1d376131b1bd44cacd86e2365c598e6eb11c320b2e",
+      "size": 111338,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2342729.jpg"
+    },
+    {
+      "image_id": "2342778",
+      "path": "runs/e2_development_20260912/images/2342778.jpg",
+      "sha256": "c79e9f73565a0dc1e56da479c5f58c4e8dc518ffce6da1e0f10392cad5c21b6d",
+      "size": 80159,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2342778.jpg"
+    },
+    {
+      "image_id": "2343081",
+      "path": "runs/e2_development_20260912/images/2343081.jpg",
+      "sha256": "47286ab77c186871caac70c2eb572ff23e3a58f35e5e0c9d0da80d0fa17c7655",
+      "size": 116102,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2343081.jpg"
+    },
+    {
+      "image_id": "2343661",
+      "path": "runs/e2_development_20260912/images/2343661.jpg",
+      "sha256": "12d0c52945cb478444393bf82cd4adf0edba5b4eb06f74dde0efbfcc9449aae3",
+      "size": 101530,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2343661.jpg"
+    },
+    {
+      "image_id": "2344109",
+      "path": "runs/e2_development_20260912/images/2344109.jpg",
+      "sha256": "513a7693f7af9c2f75676eb45cba2a4ac892a5e72170b19a9f1e77ad37340848",
+      "size": 75341,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2344109.jpg"
+    },
+    {
+      "image_id": "2344177",
+      "path": "runs/e2_development_20260912/images/2344177.jpg",
+      "sha256": "a4512345ab5d55c0ad0f27678d33acd32f2cab6deeb6135fe558a0ad99cd4787",
+      "size": 131387,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2344177.jpg"
+    },
+    {
+      "image_id": "2346187",
+      "path": "runs/e2_development_20260912/images/2346187.jpg",
+      "sha256": "23cf9ed10a100a95b2a0f401b91d7ae3e332ed75bbd6c060741ac440496e2a9e",
+      "size": 55475,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2346187.jpg"
+    },
+    {
+      "image_id": "2346682",
+      "path": "runs/e2_development_20260912/images/2346682.jpg",
+      "sha256": "15e5381635575194e4356207c7310e6dbb0905e42e8d7bb2c71e2d55d5b3a77a",
+      "size": 67673,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2346682.jpg"
+    },
+    {
+      "image_id": "2346926",
+      "path": "runs/e2_development_20260912/images/2346926.jpg",
+      "sha256": "d332e417f22a492c5e688a07a32253dcdc2c9c9f7b2cd91bf68ed10783ee80e8",
+      "size": 168936,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2346926.jpg"
+    },
+    {
+      "image_id": "2348844",
+      "path": "runs/e2_development_20260912/images/2348844.jpg",
+      "sha256": "ea4dfb5c7599e2f91cdc503ea130a7dcc477a5767336d16cccfe383ddef4209a",
+      "size": 125967,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2348844.jpg"
+    },
+    {
+      "image_id": "2349082",
+      "path": "runs/e2_development_20260912/images/2349082.jpg",
+      "sha256": "024753da5eda90ac05a380dc15e11364a47e4533d225cda3ba03e278b7c001b1",
+      "size": 120528,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2349082.jpg"
+    },
+    {
+      "image_id": "2349133",
+      "path": "runs/e2_development_20260912/images/2349133.jpg",
+      "sha256": "f54d16c9de88d89f7f53c30e7410c3fb22e3eb4a9598448fa8138f3898ea6093",
+      "size": 125103,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2349133.jpg"
+    },
+    {
+      "image_id": "2350022",
+      "path": "runs/e2_development_20260912/images/2350022.jpg",
+      "sha256": "167934dc0306800d1f5fee0fd56573ba78e8b045d034be784db4261c0dea368d",
+      "size": 117682,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2350022.jpg"
+    },
+    {
+      "image_id": "2350753",
+      "path": "runs/e2_development_20260912/images/2350753.jpg",
+      "sha256": "701296ee6e13f190a1acf93229e0939fe6c8bae00b64ae379dce5de492ff720a",
+      "size": 96411,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2350753.jpg"
+    },
+    {
+      "image_id": "2351982",
+      "path": "runs/e2_development_20260912/images/2351982.jpg",
+      "sha256": "ccf204330bc98aa721fba94fa6a6a4bcd9e89b8e03d3ac0b82f191dec5425fbf",
+      "size": 95091,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2351982.jpg"
+    },
+    {
+      "image_id": "2352146",
+      "path": "runs/e2_development_20260912/images/2352146.jpg",
+      "sha256": "301ab8a207e966a773034d95e2f0c3914ee566f39bf76a51d054abc68dde6acb",
+      "size": 94193,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2352146.jpg"
+    },
+    {
+      "image_id": "2352771",
+      "path": "runs/e2_development_20260912/images/2352771.jpg",
+      "sha256": "7cce5e48ddd14fff7b0082b96d3316fbb8ae02fc640d56461d87e37e9611db10",
+      "size": 88561,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2352771.jpg"
+    },
+    {
+      "image_id": "2354331",
+      "path": "runs/e2_development_20260912/images/2354331.jpg",
+      "sha256": "ad754578bac311f49069a493c622f73c8d8d4af285363b81e20c0e53fde6d41b",
+      "size": 141282,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2354331.jpg"
+    },
+    {
+      "image_id": "2354929",
+      "path": "runs/e2_development_20260912/images/2354929.jpg",
+      "sha256": "48da77d8a738dbf01786829e84966418a24931b35fd8e33f951ef99628ae2af6",
+      "size": 131064,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2354929.jpg"
+    },
+    {
+      "image_id": "2355162",
+      "path": "runs/e2_development_20260912/images/2355162.jpg",
+      "sha256": "83cb08acb2d71da0dfefecbfc054da65426561fa96cfb8f0e56374a4be6e98af",
+      "size": 126264,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2355162.jpg"
+    },
+    {
+      "image_id": "2355190",
+      "path": "runs/e2_development_20260912/images/2355190.jpg",
+      "sha256": "3950f7a7da8a2d4ca29e96c8dddcfaf304b2e815dcb322990107e482870fe733",
+      "size": 184785,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2355190.jpg"
+    },
+    {
+      "image_id": "2355984",
+      "path": "runs/e2_development_20260912/images/2355984.jpg",
+      "sha256": "3b8fc5d993a86105c1c0b94917f248fdb4c5c6f716672c342f83d5430a2cacd4",
+      "size": 193364,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2355984.jpg"
+    },
+    {
+      "image_id": "2356191",
+      "path": "runs/e2_development_20260912/images/2356191.jpg",
+      "sha256": "918d9e54e401621d4f664c9ce6fbd9b1a8efc01b501f86d6c4bbd51b739b0ee6",
+      "size": 119694,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2356191.jpg"
+    },
+    {
+      "image_id": "2356411",
+      "path": "runs/e2_development_20260912/images/2356411.jpg",
+      "sha256": "260393005b36ec60cb9b4acf61c16da7232ee4ccf3aada1417ad2594930e691e",
+      "size": 137787,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2356411.jpg"
+    },
+    {
+      "image_id": "2356552",
+      "path": "runs/e2_development_20260912/images/2356552.jpg",
+      "sha256": "d90a7f7a9463dcb1cd1f2a182cd5e7ea2eae15db93896f2c699103622609dff0",
+      "size": 128884,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2356552.jpg"
+    },
+    {
+      "image_id": "2357085",
+      "path": "runs/e2_development_20260912/images/2357085.jpg",
+      "sha256": "b260ad3ae52105db2d34343be88b66a7078a68071d9b5df3415b1142820d5a5b",
+      "size": 77999,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2357085.jpg"
+    },
+    {
+      "image_id": "2357309",
+      "path": "runs/e2_development_20260912/images/2357309.jpg",
+      "sha256": "e161bdfdf99c97bc9b4fb1eedff8f085b759b686ff01bb37abc660e0e133982d",
+      "size": 79954,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2357309.jpg"
+    },
+    {
+      "image_id": "2357753",
+      "path": "runs/e2_development_20260912/images/2357753.jpg",
+      "sha256": "c7e99dd28882aedb3870117acf3c34c4487df9386e339dd2a718712231d1bbc8",
+      "size": 160708,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2357753.jpg"
+    },
+    {
+      "image_id": "2358187",
+      "path": "runs/e2_development_20260912/images/2358187.jpg",
+      "sha256": "cc87246d135b106a274a2728e6a6bb6ae19406374238be8d751773537cee5386",
+      "size": 184275,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2358187.jpg"
+    },
+    {
+      "image_id": "2359444",
+      "path": "runs/e2_development_20260912/images/2359444.jpg",
+      "sha256": "fa2244a244e68976675f7557349c6675accc6bcb65708659f58b8eec25bf5ec4",
+      "size": 137102,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2359444.jpg"
+    },
+    {
+      "image_id": "2359957",
+      "path": "runs/e2_development_20260912/images/2359957.jpg",
+      "sha256": "22bfe077541154e13afca8558d09987b8dd264be3884285e43b78d9d42b3d54b",
+      "size": 117910,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2359957.jpg"
+    },
+    {
+      "image_id": "2360446",
+      "path": "runs/e2_development_20260912/images/2360446.jpg",
+      "sha256": "0ffb4c0390c1d4067de72b09dcc3170b85a3537287265d01887d5ece8fe5be6e",
+      "size": 116723,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2360446.jpg"
+    },
+    {
+      "image_id": "2363750",
+      "path": "runs/e2_development_20260912/images/2363750.jpg",
+      "sha256": "e8533d72e9358822fd50f3472421e87cec9125b552ae1b65d047a052fe52a2e6",
+      "size": 148876,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2363750.jpg"
+    },
+    {
+      "image_id": "2364098",
+      "path": "runs/e2_development_20260912/images/2364098.jpg",
+      "sha256": "2eadb2ab58ab01ae84eba636b60f5252af7da843d9676054ce79724256b7cd3b",
+      "size": 101609,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2364098.jpg"
+    },
+    {
+      "image_id": "2364137",
+      "path": "runs/e2_development_20260912/images/2364137.jpg",
+      "sha256": "a7ded7c44dd5634c6628546c3e7073be7f62745dbaf68b04ec36523338ea2490",
+      "size": 142452,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2364137.jpg"
+    },
+    {
+      "image_id": "2364153",
+      "path": "runs/e2_development_20260912/images/2364153.jpg",
+      "sha256": "d635bf1d4c6344fbdecb19bee428a2fb311e7657ac591cc61badcf4c4904e5d2",
+      "size": 146951,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2364153.jpg"
+    },
+    {
+      "image_id": "2364569",
+      "path": "runs/e2_development_20260912/images/2364569.jpg",
+      "sha256": "c13e0307dcd1468de3b28113ca74562f5d6a3323b76f87765bbfcbd1bd1e75c1",
+      "size": 114490,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2364569.jpg"
+    },
+    {
+      "image_id": "2364730",
+      "path": "runs/e2_development_20260912/images/2364730.jpg",
+      "sha256": "1fb6cbca9ca8186187828c6c07d257f5aa7d22f5282c40fe0f831dcb228ded61",
+      "size": 211155,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2364730.jpg"
+    },
+    {
+      "image_id": "2365388",
+      "path": "runs/e2_development_20260912/images/2365388.jpg",
+      "sha256": "16089a875c7d9b83d21e994f4e848e49bdb28633ed5a70b4f8fea3bf449898dc",
+      "size": 116354,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2365388.jpg"
+    },
+    {
+      "image_id": "2365923",
+      "path": "runs/e2_development_20260912/images/2365923.jpg",
+      "sha256": "c13fc61fe41cf49f5b5ae162d51776bf6f7a5ebf9dd179c9709351e89b171c59",
+      "size": 189980,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2365923.jpg"
+    },
+    {
+      "image_id": "2367179",
+      "path": "runs/e2_development_20260912/images/2367179.jpg",
+      "sha256": "05edb3ef0af583d1e7b4f7f0abff324d053cf5575d7a71f44aac820f3934a781",
+      "size": 112771,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2367179.jpg"
+    },
+    {
+      "image_id": "2368521",
+      "path": "runs/e2_development_20260912/images/2368521.jpg",
+      "sha256": "c8881d8b30aefc60bfc099b212054ded83446136b287227f9eb847198e6b0653",
+      "size": 109329,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2368521.jpg"
+    },
+    {
+      "image_id": "2369025",
+      "path": "runs/e2_development_20260912/images/2369025.jpg",
+      "sha256": "e4249e270c8e7a15984cdd201df7a904482ef25f4d7ed43be20907a72cd1a89f",
+      "size": 56679,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2369025.jpg"
+    },
+    {
+      "image_id": "2370552",
+      "path": "runs/e2_development_20260912/images/2370552.jpg",
+      "sha256": "da51960f17dd35dd28b3b9251777a9216c3741624a9acdca3d4f16ba69ae98ab",
+      "size": 133785,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2370552.jpg"
+    },
+    {
+      "image_id": "2372084",
+      "path": "runs/e2_development_20260912/images/2372084.jpg",
+      "sha256": "5ff8e550d00adfa64ce4d5e0df30dc11c657e11fc6bd029f8c7836514a857c14",
+      "size": 104572,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2372084.jpg"
+    },
+    {
+      "image_id": "2373993",
+      "path": "runs/e2_development_20260912/images/2373993.jpg",
+      "sha256": "c8024c429bd4ac875b3d56461704410b1d8718bac6443dc6eddbc4e9968d120d",
+      "size": 87780,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2373993.jpg"
+    },
+    {
+      "image_id": "2374220",
+      "path": "runs/e2_development_20260912/images/2374220.jpg",
+      "sha256": "53abc5f57fac198a279ae1e1c35f08aaf51f987d4c531c1aa49da9822f29b781",
+      "size": 119187,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2374220.jpg"
+    },
+    {
+      "image_id": "2374383",
+      "path": "runs/e2_development_20260912/images/2374383.jpg",
+      "sha256": "e544022b4a20ea647a660fed8fe47b19d2461d223595a7c8b9d36dbbb5ad52d3",
+      "size": 192058,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2374383.jpg"
+    },
+    {
+      "image_id": "2374561",
+      "path": "runs/e2_development_20260912/images/2374561.jpg",
+      "sha256": "d1dde452d841d734d329b45115c029e6918e3a1abd4c9011c4147290bb21cfcc",
+      "size": 97924,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2374561.jpg"
+    },
+    {
+      "image_id": "2375237",
+      "path": "runs/e2_development_20260912/images/2375237.jpg",
+      "sha256": "09daa43e5e8607b730f438146c7589a8efc703742364d90c85468beb0fe9439a",
+      "size": 215607,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2375237.jpg"
+    },
+    {
+      "image_id": "2375514",
+      "path": "runs/e2_development_20260912/images/2375514.jpg",
+      "sha256": "bc84cff1e06978e9304437414c8f79410bce6d503085b42e9724ed6bf0e8712d",
+      "size": 90209,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2375514.jpg"
+    },
+    {
+      "image_id": "2375605",
+      "path": "runs/e2_development_20260912/images/2375605.jpg",
+      "sha256": "c1d9a12381ee06c2289c368e2949668f39b27da41591a7d3bbd5fb1dfad2ffe7",
+      "size": 193416,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2375605.jpg"
+    },
+    {
+      "image_id": "2375903",
+      "path": "runs/e2_development_20260912/images/2375903.jpg",
+      "sha256": "57a38b331354adad2571e0d59370271b4c38d1849b7aac9f1ab55b871cec97dc",
+      "size": 105929,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2375903.jpg"
+    },
+    {
+      "image_id": "2376989",
+      "path": "runs/e2_development_20260912/images/2376989.jpg",
+      "sha256": "bd8afb87afc52197f1e4d609d93262f53ef2fad8c8b5bb34c4c46ee141fad8f0",
+      "size": 139561,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K/2376989.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2377939.jpg"
+        }
+      ],
+      "image_id": "2377939",
+      "path": "runs/e2_development_20260912/images/2377939.jpg",
+      "sha256": "312de3f17336e6af7ada7737d15db3cbd125f8ff4802f1b9452fe209c3e4bb5e",
+      "size": 165959,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2377939.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2378412.jpg"
+        }
+      ],
+      "image_id": "2378412",
+      "path": "runs/e2_development_20260912/images/2378412.jpg",
+      "sha256": "964d60a84ad1f899cd3e1b2b27d2f830c2b2cf5a3f79636ff202bb7e97f68be2",
+      "size": 157730,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2378412.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2380009.jpg"
+        }
+      ],
+      "image_id": "2380009",
+      "path": "runs/e2_development_20260912/images/2380009.jpg",
+      "sha256": "6437c85f92e325b233fd2a153fb0b94100b481c717f0d3aa53613caa8d6511b5",
+      "size": 90737,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2380009.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2380283.jpg"
+        }
+      ],
+      "image_id": "2380283",
+      "path": "runs/e2_development_20260912/images/2380283.jpg",
+      "sha256": "978053459938fa54f8ce4fa8d34aec4bee5d543c7b77acad78dc0a079838fd4f",
+      "size": 178456,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2380283.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2381838.jpg"
+        }
+      ],
+      "image_id": "2381838",
+      "path": "runs/e2_development_20260912/images/2381838.jpg",
+      "sha256": "dd6af96ff5f618219070a4b48e4cd6ba5fc44b8b06636d506dae48aad31ee289",
+      "size": 77380,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2381838.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2382150.jpg"
+        }
+      ],
+      "image_id": "2382150",
+      "path": "runs/e2_development_20260912/images/2382150.jpg",
+      "sha256": "90de66243b5e7a4035218f78852d09a3b55579ece34e2bf27f1632c63114c8dc",
+      "size": 87980,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2382150.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2382597.jpg"
+        }
+      ],
+      "image_id": "2382597",
+      "path": "runs/e2_development_20260912/images/2382597.jpg",
+      "sha256": "e8c3f5c0f2a9628b632a0028f7d30e6d542224bdb86e27ad1be90ee2305f9c6a",
+      "size": 79669,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2382597.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2383450.jpg"
+        }
+      ],
+      "image_id": "2383450",
+      "path": "runs/e2_development_20260912/images/2383450.jpg",
+      "sha256": "0dab4f532bb39ad8f6afa105c4160d876efc49046b9dff1a55af9d7ea8744909",
+      "size": 108837,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2383450.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2383582.jpg"
+        }
+      ],
+      "image_id": "2383582",
+      "path": "runs/e2_development_20260912/images/2383582.jpg",
+      "sha256": "6f484652556a29d5cd3a918289a06b8af3e809c49a852c1d4fa5369ec7ab840f",
+      "size": 149182,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2383582.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2384904.jpg"
+        }
+      ],
+      "image_id": "2384904",
+      "path": "runs/e2_development_20260912/images/2384904.jpg",
+      "sha256": "3fff5facf0e2e04eddadb28be74863b4fecb9d2a6865cf566673693e2782bb49",
+      "size": 146591,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2384904.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2385157.jpg"
+        }
+      ],
+      "image_id": "2385157",
+      "path": "runs/e2_development_20260912/images/2385157.jpg",
+      "sha256": "afde41abcbe2ff9a43217f6b7b74701840c2243b00dba527177e7f7daa64c48f",
+      "size": 90043,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2385157.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2386347.jpg"
+        }
+      ],
+      "image_id": "2386347",
+      "path": "runs/e2_development_20260912/images/2386347.jpg",
+      "sha256": "038dfb1313f9564f028d57954609310fecaf1a178accac8b04c4597e4aa36946",
+      "size": 140682,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2386347.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2386458.jpg"
+        }
+      ],
+      "image_id": "2386458",
+      "path": "runs/e2_development_20260912/images/2386458.jpg",
+      "sha256": "e5905dc9ce78a7062c9d9607e9d839b909cb217c0cf5be97d353dd10176a10f7",
+      "size": 123494,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2386458.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2386667.jpg"
+        }
+      ],
+      "image_id": "2386667",
+      "path": "runs/e2_development_20260912/images/2386667.jpg",
+      "sha256": "9e92cd5d37fbe2103c137fbffcbb20a8515d1173ed4936f44e166691282d1493",
+      "size": 66400,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2386667.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2387477.jpg"
+        }
+      ],
+      "image_id": "2387477",
+      "path": "runs/e2_development_20260912/images/2387477.jpg",
+      "sha256": "bc20923720e68da6b24853a10ab19a0290a6beb732ada64590a500f16e529319",
+      "size": 102322,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2387477.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2387591.jpg"
+        }
+      ],
+      "image_id": "2387591",
+      "path": "runs/e2_development_20260912/images/2387591.jpg",
+      "sha256": "ae77e1d14dd66980206a9be40b54758d7ede0cdd0333022231bcc6f740114f9d",
+      "size": 176978,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2387591.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2387812.jpg"
+        }
+      ],
+      "image_id": "2387812",
+      "path": "runs/e2_development_20260912/images/2387812.jpg",
+      "sha256": "56eddccae3e65f8e4bc487a007164229509570824d243ca495e2d45506449831",
+      "size": 143166,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2387812.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2390149.jpg"
+        }
+      ],
+      "image_id": "2390149",
+      "path": "runs/e2_development_20260912/images/2390149.jpg",
+      "sha256": "fc9273bd15e0add6fcc93e0b00be7e7f22598288101b06c7e0f65dc05b6569c0",
+      "size": 51037,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2390149.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2391283.jpg"
+        }
+      ],
+      "image_id": "2391283",
+      "path": "runs/e2_development_20260912/images/2391283.jpg",
+      "sha256": "3a9c49bffde03abb0c12f72c320746bb638bb4c29d2ddd6393eba1d7485477c0",
+      "size": 162112,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2391283.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2391777.jpg"
+        }
+      ],
+      "image_id": "2391777",
+      "path": "runs/e2_development_20260912/images/2391777.jpg",
+      "sha256": "7bb38cdd7bd4996c1835aa7faf7e7178ca5d5cab7b3c0b8a4d5f4076a215dc54",
+      "size": 149665,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2391777.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2393435.jpg"
+        }
+      ],
+      "image_id": "2393435",
+      "path": "runs/e2_development_20260912/images/2393435.jpg",
+      "sha256": "64244c72bf0fae31d016b4ff5c0806c81718b8df8b6acc5b84ddd5c5330a524e",
+      "size": 94155,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2393435.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2393485.jpg"
+        }
+      ],
+      "image_id": "2393485",
+      "path": "runs/e2_development_20260912/images/2393485.jpg",
+      "sha256": "e98ab80ce50badff5d6b6d9ff4a70167d7b013c265e0bfca9121d89be2801529",
+      "size": 131007,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2393485.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2393508.jpg"
+        }
+      ],
+      "image_id": "2393508",
+      "path": "runs/e2_development_20260912/images/2393508.jpg",
+      "sha256": "a67d3fbb512ee2e140cc1273becc0e4aee9f7afee4ba4af70bda994629e14a42",
+      "size": 88952,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2393508.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2393672.jpg"
+        }
+      ],
+      "image_id": "2393672",
+      "path": "runs/e2_development_20260912/images/2393672.jpg",
+      "sha256": "f1cfb083a6dfa411106471e387d3099fdc846166eb6972d858a289ec802cb59d",
+      "size": 162361,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2393672.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2394072.jpg"
+        }
+      ],
+      "image_id": "2394072",
+      "path": "runs/e2_development_20260912/images/2394072.jpg",
+      "sha256": "b21ea4afda9f21ad79f5547b2cc940ea2bfa6db4cece85dfa98549a650109766",
+      "size": 223082,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2394072.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2394974.jpg"
+        }
+      ],
+      "image_id": "2394974",
+      "path": "runs/e2_development_20260912/images/2394974.jpg",
+      "sha256": "aa75f16dc1b0a77bac643924bebd22ff37d58b863e505e8cf1ab7760bfc7539e",
+      "size": 124800,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2394974.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2395634.jpg"
+        }
+      ],
+      "image_id": "2395634",
+      "path": "runs/e2_development_20260912/images/2395634.jpg",
+      "sha256": "beb35a6022e49c57b2ae2dc7fc29322fa3c4e61a24e0158e4031ac886e1608a8",
+      "size": 122981,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2395634.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2396045.jpg"
+        }
+      ],
+      "image_id": "2396045",
+      "path": "runs/e2_development_20260912/images/2396045.jpg",
+      "sha256": "08a744f3d90cfafad5e417a9aae6f3cf7eb0209a3a66b14929f4843611338cc5",
+      "size": 69421,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2396045.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2397971.jpg"
+        }
+      ],
+      "image_id": "2397971",
+      "path": "runs/e2_development_20260912/images/2397971.jpg",
+      "sha256": "412d20b8f22c3dfab4092d57bf618a8feb36c5bb2363c78735719f42fa70b8f2",
+      "size": 105963,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2397971.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2398055.jpg"
+        }
+      ],
+      "image_id": "2398055",
+      "path": "runs/e2_development_20260912/images/2398055.jpg",
+      "sha256": "5f5265063ba94732cdc20d677e4661fdc617bc4fc679ce18ea2e3acd3e481ce5",
+      "size": 110696,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2398055.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2398489.jpg"
+        }
+      ],
+      "image_id": "2398489",
+      "path": "runs/e2_development_20260912/images/2398489.jpg",
+      "sha256": "04322953306e69928049e77247498155d1705ef50b13af7fbc0fde917e4a2ad9",
+      "size": 129697,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2398489.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2398549.jpg"
+        }
+      ],
+      "image_id": "2398549",
+      "path": "runs/e2_development_20260912/images/2398549.jpg",
+      "sha256": "36dff6b0422f37dd1ae1fb65aacbea1f61545849ce0b229232313bb74d60a692",
+      "size": 124339,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2398549.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2398820.jpg"
+        }
+      ],
+      "image_id": "2398820",
+      "path": "runs/e2_development_20260912/images/2398820.jpg",
+      "sha256": "d645d8d54b634b518c7cc72fde25728da128d243fc9117afdc9faa916936ecff",
+      "size": 187955,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2398820.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399093.jpg"
+        }
+      ],
+      "image_id": "2399093",
+      "path": "runs/e2_development_20260912/images/2399093.jpg",
+      "sha256": "7e1bde74b1343ecc9e409975daab9cc0c0e45461ffe3088a41cb5f9bdda17702",
+      "size": 119254,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399093.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399148.jpg"
+        }
+      ],
+      "image_id": "2399148",
+      "path": "runs/e2_development_20260912/images/2399148.jpg",
+      "sha256": "549071a152555b114794a4ed930a5a0e8b5f6530816aea3e103f5ea77c6969a2",
+      "size": 107563,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399148.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399694.jpg"
+        }
+      ],
+      "image_id": "2399694",
+      "path": "runs/e2_development_20260912/images/2399694.jpg",
+      "sha256": "31f0ed6b5ad1a96416e00974adda8e0e3a645885da5e029b43ec83796dc64c68",
+      "size": 109024,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399694.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399720.jpg"
+        }
+      ],
+      "image_id": "2399720",
+      "path": "runs/e2_development_20260912/images/2399720.jpg",
+      "sha256": "c72ec9e34be121a4974beefafdfc4310214e6c9aeccec25cd0ed8b4ac973f581",
+      "size": 108577,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399720.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399752.jpg"
+        }
+      ],
+      "image_id": "2399752",
+      "path": "runs/e2_development_20260912/images/2399752.jpg",
+      "sha256": "df4d408247fadca1f16cb2b10868c5a3c61e7824edb8066ae8125144d4e32304",
+      "size": 172061,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399752.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2399917.jpg"
+        }
+      ],
+      "image_id": "2399917",
+      "path": "runs/e2_development_20260912/images/2399917.jpg",
+      "sha256": "be2226309780d1ed9864b310a7ff1c0f33586b658882e183233d241a6d62ae9b",
+      "size": 112039,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2399917.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2400410.jpg"
+        }
+      ],
+      "image_id": "2400410",
+      "path": "runs/e2_development_20260912/images/2400410.jpg",
+      "sha256": "746fed49a98cda021027ceed02d06b101ff3872aa7c2d776649a664e0bf2c22b",
+      "size": 125663,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2400410.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2400627.jpg"
+        }
+      ],
+      "image_id": "2400627",
+      "path": "runs/e2_development_20260912/images/2400627.jpg",
+      "sha256": "dc0233d767c3e1d731136d4312cec0eba4b7d6e6bc4c7c84cc4c73f7531c3ca4",
+      "size": 136906,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2400627.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2400796.jpg"
+        }
+      ],
+      "image_id": "2400796",
+      "path": "runs/e2_development_20260912/images/2400796.jpg",
+      "sha256": "de9554845ce6e25a202a79881a430124f579156285bc5bf04cc5046dee2c883c",
+      "size": 51589,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2400796.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2400910.jpg"
+        }
+      ],
+      "image_id": "2400910",
+      "path": "runs/e2_development_20260912/images/2400910.jpg",
+      "sha256": "73a9aae78c383156a792ba5ee9acbcaabc551b759ded6caf87d99c9570840789",
+      "size": 125931,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2400910.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2401073.jpg"
+        }
+      ],
+      "image_id": "2401073",
+      "path": "runs/e2_development_20260912/images/2401073.jpg",
+      "sha256": "5be1c74606dc4e117069322177935f0e4b8e792ccad76f838156705b5f8b06eb",
+      "size": 103921,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2401073.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2401287.jpg"
+        }
+      ],
+      "image_id": "2401287",
+      "path": "runs/e2_development_20260912/images/2401287.jpg",
+      "sha256": "ca618693b568c7aa00ff587fa59bef4cd8726b9c3d7b916be55b713334b75d8b",
+      "size": 151938,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2401287.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2401518.jpg"
+        }
+      ],
+      "image_id": "2401518",
+      "path": "runs/e2_development_20260912/images/2401518.jpg",
+      "sha256": "2250e6107a76bb2d5ad3a54265cbf2db1c5f4b6cf4e17cee2340e19b85740401",
+      "size": 101971,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2401518.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2401718.jpg"
+        }
+      ],
+      "image_id": "2401718",
+      "path": "runs/e2_development_20260912/images/2401718.jpg",
+      "sha256": "868082ee1a027a2b7abef877958ca2d081ffc60bccd45503834990b80d1af5c5",
+      "size": 92110,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2401718.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2401943.jpg"
+        }
+      ],
+      "image_id": "2401943",
+      "path": "runs/e2_development_20260912/images/2401943.jpg",
+      "sha256": "f84185ce63035761d963d428f8b2f087109e7ac15b4cf5215f34a2c580d8b1db",
+      "size": 48754,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2401943.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2402148.jpg"
+        }
+      ],
+      "image_id": "2402148",
+      "path": "runs/e2_development_20260912/images/2402148.jpg",
+      "sha256": "ba551ae3f9f43276536ba7cf483d9c536a7597844a300c28aab4d7b482a71c86",
+      "size": 138598,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2402148.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2403204.jpg"
+        }
+      ],
+      "image_id": "2403204",
+      "path": "runs/e2_development_20260912/images/2403204.jpg",
+      "sha256": "dc1512ddce7543041d15de8bd01749142ab26b1e53b1a5d3eab475171a5c9da6",
+      "size": 110193,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2403204.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2403507.jpg"
+        }
+      ],
+      "image_id": "2403507",
+      "path": "runs/e2_development_20260912/images/2403507.jpg",
+      "sha256": "cf440f9c9908f25a028a8a43798dacaba0555163c856c0c516ee6fb5454456a4",
+      "size": 181408,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2403507.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2403551.jpg"
+        }
+      ],
+      "image_id": "2403551",
+      "path": "runs/e2_development_20260912/images/2403551.jpg",
+      "sha256": "79d17c80bbffa248d3f3bcd26d4506a58dc0f587aa2956b99290813c46ff79b8",
+      "size": 138752,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2403551.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2404464.jpg"
+        }
+      ],
+      "image_id": "2404464",
+      "path": "runs/e2_development_20260912/images/2404464.jpg",
+      "sha256": "7a7391750be0b5590ca0436500088579b3d4eaae6cec7dd302dc3ac92fe769c4",
+      "size": 130426,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2404464.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2404536.jpg"
+        }
+      ],
+      "image_id": "2404536",
+      "path": "runs/e2_development_20260912/images/2404536.jpg",
+      "sha256": "b5a45ad438f028ad7608e57fb902f10fa52741547005ebaf31396bd9b138ef9e",
+      "size": 115914,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2404536.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2405428.jpg"
+        }
+      ],
+      "image_id": "2405428",
+      "path": "runs/e2_development_20260912/images/2405428.jpg",
+      "sha256": "a1f9409e73cb7804bfb2ae7f493575a0d002f91c80c592b7f25e33be4a565dfb",
+      "size": 139520,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2405428.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2405571.jpg"
+        }
+      ],
+      "image_id": "2405571",
+      "path": "runs/e2_development_20260912/images/2405571.jpg",
+      "sha256": "3f98c99a958b2132fcf0b09eeca742ef9acb00cc604c4c88c265014fd9ed0dbf",
+      "size": 133883,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2405571.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2405711.jpg"
+        }
+      ],
+      "image_id": "2405711",
+      "path": "runs/e2_development_20260912/images/2405711.jpg",
+      "sha256": "50e6758bd788e5370705f765a14858d4629062ddeb71e02875970da8535ea77f",
+      "size": 141564,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2405711.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2406012.jpg"
+        }
+      ],
+      "image_id": "2406012",
+      "path": "runs/e2_development_20260912/images/2406012.jpg",
+      "sha256": "3005ca51f36ef32b58e2fd3549fd860fe49f269392686163c70b735ce6770610",
+      "size": 109821,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2406012.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2406079.jpg"
+        }
+      ],
+      "image_id": "2406079",
+      "path": "runs/e2_development_20260912/images/2406079.jpg",
+      "sha256": "4711fceec3bdf49863bedc1653cab9c59b25eff5b45ec53a2a22bcd106884041",
+      "size": 96565,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2406079.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2406443.jpg"
+        }
+      ],
+      "image_id": "2406443",
+      "path": "runs/e2_development_20260912/images/2406443.jpg",
+      "sha256": "d23aad3dafc5fb5b0f8614546d2e77b97bfb0423d6f188186ecc93c486d2fe9e",
+      "size": 102109,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2406443.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2407131.jpg"
+        }
+      ],
+      "image_id": "2407131",
+      "path": "runs/e2_development_20260912/images/2407131.jpg",
+      "sha256": "cebf7a442e6df8240594155c434725ae2f4639b0b78594d18e1566f0036e7ba2",
+      "size": 91922,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2407131.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2407499.jpg"
+        }
+      ],
+      "image_id": "2407499",
+      "path": "runs/e2_development_20260912/images/2407499.jpg",
+      "sha256": "2dd965c0042966ec21da51e5dfb36cf7083cce59c45346c0709c25d74e9bcf9b",
+      "size": 86426,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2407499.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2407796.jpg"
+        }
+      ],
+      "image_id": "2407796",
+      "path": "runs/e2_development_20260912/images/2407796.jpg",
+      "sha256": "e6aea21b65ce9d4afa38fdc4d401fadd262423e9fbcd595ae18e6a09f357ac13",
+      "size": 150388,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2407796.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2408005.jpg"
+        }
+      ],
+      "image_id": "2408005",
+      "path": "runs/e2_development_20260912/images/2408005.jpg",
+      "sha256": "d87a17d6990507339fdec3189e8791c7087254e9177a92159a400062f5be876a",
+      "size": 176654,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2408005.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2408125.jpg"
+        }
+      ],
+      "image_id": "2408125",
+      "path": "runs/e2_development_20260912/images/2408125.jpg",
+      "sha256": "163245f5369c5d481be8b54cb74767e268ca1f78b91bd7aae644623821328b2e",
+      "size": 105408,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2408125.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2408272.jpg"
+        }
+      ],
+      "image_id": "2408272",
+      "path": "runs/e2_development_20260912/images/2408272.jpg",
+      "sha256": "3b9ca089375be50440cb3d2f6067682c9b7cf4bc85252a6a7846789c03ce11f1",
+      "size": 97854,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2408272.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2408926.jpg"
+        }
+      ],
+      "image_id": "2408926",
+      "path": "runs/e2_development_20260912/images/2408926.jpg",
+      "sha256": "7c08a2b99398545d94ad7edab0f4fb1e18938f0ea0a16a6f59ac84a3476f3b49",
+      "size": 138581,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2408926.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2409565.jpg"
+        }
+      ],
+      "image_id": "2409565",
+      "path": "runs/e2_development_20260912/images/2409565.jpg",
+      "sha256": "5a0918d2a5bcd4fbd5546374c0664dd5e39a2e764ddaca3a340b7ce4eaa5a6f0",
+      "size": 83553,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2409565.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2409759.jpg"
+        }
+      ],
+      "image_id": "2409759",
+      "path": "runs/e2_development_20260912/images/2409759.jpg",
+      "sha256": "2709f505aeb79d0eaea6bd602424dbc59d7a99abc7eeaee84f048007690c065b",
+      "size": 131886,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2409759.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2411379.jpg"
+        }
+      ],
+      "image_id": "2411379",
+      "path": "runs/e2_development_20260912/images/2411379.jpg",
+      "sha256": "dcdeaed02e0c0e2e5bdc878446c9adf96f4ea11784766a8d0b6c13183eb8a477",
+      "size": 174732,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2411379.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2411580.jpg"
+        }
+      ],
+      "image_id": "2411580",
+      "path": "runs/e2_development_20260912/images/2411580.jpg",
+      "sha256": "8795fbf4191a730d5c79fe5d47f65386cbb40ab623bbf05751a621d3882aca50",
+      "size": 94211,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2411580.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2411846.jpg"
+        }
+      ],
+      "image_id": "2411846",
+      "path": "runs/e2_development_20260912/images/2411846.jpg",
+      "sha256": "cf5343809813bb53f9a3d30212400fd63a50c41e6e8daaf3217acab21d4d5036",
+      "size": 171198,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2411846.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2412296.jpg"
+        }
+      ],
+      "image_id": "2412296",
+      "path": "runs/e2_development_20260912/images/2412296.jpg",
+      "sha256": "c61fc61f4164e4f5d7c9aa03ff2310ae4bc45366ee53cfc3cdf122ca31fadc85",
+      "size": 197313,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2412296.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2412603.jpg"
+        }
+      ],
+      "image_id": "2412603",
+      "path": "runs/e2_development_20260912/images/2412603.jpg",
+      "sha256": "48e46e262f9fb99dcafd933e9af088c1b3b2dceffd1836d408084e0ae8b9e364",
+      "size": 106139,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2412603.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2412888.jpg"
+        }
+      ],
+      "image_id": "2412888",
+      "path": "runs/e2_development_20260912/images/2412888.jpg",
+      "sha256": "ce465e5be72cf4225414cd216bba8fdb64b91372f85a785992dbe53912ae7abe",
+      "size": 104626,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2412888.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2413129.jpg"
+        }
+      ],
+      "image_id": "2413129",
+      "path": "runs/e2_development_20260912/images/2413129.jpg",
+      "sha256": "9eb47241ea4c219cb3428752bfa358dd574b11ea208f044130f155735c1da30a",
+      "size": 102024,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2413129.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2413149.jpg"
+        }
+      ],
+      "image_id": "2413149",
+      "path": "runs/e2_development_20260912/images/2413149.jpg",
+      "sha256": "47673a61628c021494c9ce68da85471a4a49bbb7f7dd6c6c7a38d17f7853ac05",
+      "size": 83324,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2413149.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2413226.jpg"
+        }
+      ],
+      "image_id": "2413226",
+      "path": "runs/e2_development_20260912/images/2413226.jpg",
+      "sha256": "3d59829f9b1c92fb0ff2afb14cac90b2629cd8c870be1d5286ef5cb50e1574d7",
+      "size": 106974,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2413226.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2413374.jpg"
+        }
+      ],
+      "image_id": "2413374",
+      "path": "runs/e2_development_20260912/images/2413374.jpg",
+      "sha256": "837666fc50e724886c0ebb8fabbf0eff94a34954e3d8bd7b94dda83c767eeb83",
+      "size": 97425,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2413374.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2414178.jpg"
+        }
+      ],
+      "image_id": "2414178",
+      "path": "runs/e2_development_20260912/images/2414178.jpg",
+      "sha256": "452bba7cdab5024f42d45ca76b411659041ad4991b40eb85bec1183b4a64a059",
+      "size": 81906,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2414178.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2414985.jpg"
+        }
+      ],
+      "image_id": "2414985",
+      "path": "runs/e2_development_20260912/images/2414985.jpg",
+      "sha256": "92ac43878c0e6ce988485731bee2b69051edadfddfa7a005b138d0862ab18f54",
+      "size": 141713,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2414985.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2415320.jpg"
+        }
+      ],
+      "image_id": "2415320",
+      "path": "runs/e2_development_20260912/images/2415320.jpg",
+      "sha256": "8eb8d7f478fcfcaea1c011dcdca237c9c05f47aec8dce3fad296e09d297ed1d1",
+      "size": 136010,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2415320.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2416322.jpg"
+        }
+      ],
+      "image_id": "2416322",
+      "path": "runs/e2_development_20260912/images/2416322.jpg",
+      "sha256": "300400c4700f0027991b1f4304819416890bb96b3ba76311ff579610ad958a76",
+      "size": 128299,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2416322.jpg"
+    },
+    {
+      "errors": [
+        {
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://cs.stanford.edu/people/rak248/VG_100K/2416883.jpg"
+        }
+      ],
+      "image_id": "2416883",
+      "path": "runs/e2_development_20260912/images/2416883.jpg",
+      "sha256": "894470dc476df610072db1e669c781bf2c98d54c1d4b961d73e33615728bf5af",
+      "size": 146109,
+      "status": "downloaded",
+      "url": "https://cs.stanford.edu/people/rak248/VG_100K_2/2416883.jpg"
+    }
+  ],
+  "source": "documented VG150 URL convention from train.jsonl",
+  "url_templates": [
+    "https://cs.stanford.edu/people/rak248/VG_100K/{image_id}.jpg",
+    "https://cs.stanford.edu/people/rak248/VG_100K_2/{image_id}.jpg"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "assets": [
+    {
+      "expected_sha256": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+      "path": "datasets_vg150_clean/train.jsonl",
+      "sha256": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+      "size": 230804337,
+      "status": "PRESENT_EXACT"
+    },
+    {
+      "expected_sha256": "74d99779631674a235cb3dc1093cfbdafe7533ad7af038544a0a68cffa8d5343",
+      "path": "datasets_vg150_clean/validation.jsonl",
+      "status": "MISSING"
+    },
+    {
+      "expected_sha256": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+      "path": "runs/eval_C1/pair_logits.pt",
+      "sha256": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+      "size": 353725891,
+      "status": "PRESENT_EXACT"
+    },
+    {
+      "expected_sha256": "54c8c9109f640be063703bceab414c126cf65b7a011714792574f83edb6be4be",
+      "path": "datasets_vg150_clean/frequency_prior_train.json",
+      "sha256": "54c8c9109f640be063703bceab414c126cf65b7a011714792574f83edb6be4be",
+      "size": 279803793,
+      "status": "PRESENT_EXACT"
+    },
+    {
+      "expected_sha256": "144d9f928ed9cc213acbe081b1a8791488a92ddab0ed885da7fd6bb6058c6e6a",
+      "path": "checkpoints/demo_best/frequency_prior.json",
+      "sha256": "144d9f928ed9cc213acbe081b1a8791488a92ddab0ed885da7fd6bb6058c6e6a",
+      "size": 101944045,
+      "status": "PRESENT_EXACT"
+    },
+    {
+      "expected_sha256": "76b75952829a503ab733700f49d7e902715543508a6cce383450cc4785ab0577",
+      "path": "datasets_vg150_clean/vocabulary/predicates.json",
+      "sha256": "76b75952829a503ab733700f49d7e902715543508a6cce383450cc4785ab0577",
+      "size": 1071,
+      "status": "PRESENT_EXACT"
+    },
+    {
+      "expected_sha256": "79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854",
+      "path": "checkpoints/C1_seed1234.pt",
+      "status": "MISSING"
+    },
+    {
+      "expected_sha256": null,
+      "path": "checkpoints/C0_seed1234.pt",
+      "status": "MISSING"
+    },
+    {
+      "expected_sha256": null,
+      "path": "checkpoints/C1_seed5678.pt",
+      "status": "MISSING"
+    }
+  ],
+  "created_utc": "2026-09-15T07:21:00Z",
+  "full_image_corpus": {
+    "required_now": false,
+    "status": "MISSING"
+  },
+  "selected_e2_images": {
+    "count": 170,
+    "manifest_sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+    "status": "PRESENT_EXACT"
+  },
+  "validation_hash_conflict": {
+    "checkpoint_manifest_full": "4348ddbb3ce85160d0ebc7522634c68f197b0c99906794e0e4731156740f3412",
+    "research_note_prefix": "74d99779",
+    "status": "UNRESOLVED_BYTES_ABSENT"
+  }
+}

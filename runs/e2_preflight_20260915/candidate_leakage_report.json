@@ -1,0 +1,13 @@
+{
+  "candidate_generator_source": {
+    "forbidden_executable_names": [],
+    "forbidden_imports": [],
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/e2_population_feasibility.py"
+  },
+  "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+  "model_derived_candidate_fields": [],
+  "model_derived_selection_fields": [],
+  "random_sha256": "3869aa1ed8f3c7bd7896645fef98cc5276d089f2002f69f2dbe0010c5259a090",
+  "rule": "candidate inclusion, ranking, pairing, and random-cohort selection must not consume model-derived quantities",
+  "status": "PASS"
+}

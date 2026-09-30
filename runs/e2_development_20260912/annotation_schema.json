@@ -1,0 +1,36 @@
+{
+  "annotator_ids": [
+    "annotator_1",
+    "annotator_2",
+    "annotator_3"
+  ],
+  "block_choice_values": [
+    "description_a",
+    "description_b",
+    "uncertain"
+  ],
+  "image_truth_values": [
+    "valid",
+    "invalid",
+    "uncertain",
+    "not_visible"
+  ],
+  "independence_rule": "Annotators receive the same frozen task packet independently and do not see other annotations before adjudication.",
+  "pair_truth_values": [
+    "relation_a_only",
+    "relation_b_only",
+    "both_valid",
+    "neither_visible",
+    "uncertain"
+  ],
+  "primary_inclusion": [
+    "visible_subject_and_object",
+    "truth_a_and_truth_b_are_unambiguous",
+    "pair_truth_is_relation_a_only_or_relation_b_only",
+    "direction_agreement",
+    "human_adjudication_complete"
+  ],
+  "required_annotators": 3,
+  "status": "annotation_pending",
+  "truth_rule": "Record truth_a and truth_b separately; pair_truth is relation_a_only, relation_b_only, both_valid, neither_visible, or uncertain."
+}

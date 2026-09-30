@@ -1,0 +1,13 @@
+{
+  "development_blocks": 45,
+  "development_images": 90,
+  "development_random_overlap": [],
+  "duplicate_candidate_ids": [],
+  "duplicate_development_images": [],
+  "duplicate_random_images": [],
+  "duplicate_relation_image_combinations": [],
+  "random_blocks": 40,
+  "random_images": 80,
+  "status": "PASS",
+  "within_block_same_image": []
+}

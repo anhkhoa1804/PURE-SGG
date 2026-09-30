@@ -1,0 +1,51 @@
+{
+  "candidate_cache_check": {
+    "candidate_count": 45,
+    "candidate_pair_lookup_content_safe": true,
+    "candidate_sides_expected": 90,
+    "candidate_sides_resolved": 90,
+    "frozen_e2_image_count": 170,
+    "frozen_e2_image_ids_missing_from_dump": []
+  },
+  "canonical_train_derived_m2": "NOT_AVAILABLE",
+  "dump": {
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_C1/pair_logits.pt",
+    "sha256": "2543c87512ba6b85e4bc8a629f4617ffd0fe57fccafce91325f636e0a34a4453",
+    "size_bytes": 353725891
+  },
+  "duplicate_cache_check": {
+    "duplicate_channels_verified_identical": true,
+    "duplicate_pair_keys": 4014,
+    "duplicate_slots": 8335,
+    "images_with_duplicate_pair_keys": 2263
+  },
+  "fit_feature_shape": [
+    129826,
+    768
+  ],
+  "fit_rows": {
+    "excluded_image_count": 170,
+    "fit_image_count": 10231,
+    "fit_row_count": 129826,
+    "fit_target_missing_count": 0
+  },
+  "fit_target_max": 49,
+  "fit_target_min": 0,
+  "human_gold_used": false,
+  "interpretation": "A decoder may be fit from cached validation rel_feat after excluding every frozen E2 image. This is a held-out validation-population probe, not train-split generalization.",
+  "model_scores_used_for_selection": false,
+  "packet": {
+    "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "excluded_image_ids_sha256": "ab2cf0f997f9fd9cc1f546c9a720db2b919f5b62533332b37b7fc02112edcdf0",
+    "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_development_20260912",
+    "random_cohort_sha256": "3869aa1ed8f3c7bd7896645fef98cc5276d089f2002f69f2dbe0010c5259a090"
+  },
+  "status": "AVAILABLE_CLEAN_VALIDATION_HELDOUT",
+  "validation_heldout_m2": "RECONSTRUCTIBLE",
+  "vocabulary": {
+    "background_indices": [
+      50
+    ],
+    "width": 51
+  }
+}

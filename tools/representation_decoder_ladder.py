@@ -26,6 +26,7 @@ Reuses, rather than reimplements, the validated machinery:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import os
@@ -77,6 +78,7 @@ TOTAL_DECODER_WIDTH = 51
 BACKGROUND_INDEX = 50
 FOREGROUND_INDICES = tuple(range(50))
 PROTOCOL_AMENDMENT = "docs/PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md"
+PREDICATE_IDENTITY_AMENDMENT = "docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md"
 HISTORICAL_RESULT = Path(__file__).resolve().parent.parent / "runs/paper_c_representation_decoder_ladder.json"
 IMMUTABLE_OUTPUT_ROOTS = tuple(
     Path(__file__).resolve().parent.parent / p for p in (
@@ -116,6 +118,22 @@ def _nvidia_smi() -> Dict[str, Any]:
         return {"available": True, "output": p.stdout, "returncode": int(p.returncode)}
     except OSError as exc:
         return {"available": False, "output": f"unavailable: {exc}", "returncode": None}
+
+
+def _artifact_identity(path: str) -> Dict[str, Any]:
+    """Return the byte identity required for accepted-run provenance."""
+    p = Path(path).resolve()
+    if not p.is_file():
+        raise FileNotFoundError(f"required input artifact does not exist: {p}")
+    digest = hashlib.sha256()
+    with p.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(8 * 1024 * 1024), b""):
+            digest.update(chunk)
+    return {
+        "path": str(p),
+        "size_bytes": int(p.stat().st_size),
+        "sha256": digest.hexdigest(),
+    }
 
 
 def decoder_contract(pred_vocab: List[str], background_indices: List[int]) -> Dict[str, Any]:
@@ -199,10 +217,18 @@ def _ensure_safe_output(out_path: Path, log_path: Optional[Path], provenance_pat
 
 def _initial_provenance(
     repo: Path, dump_r0: str, dump_r2: str, prior: str, train_jsonl: str,
+    predicates: str,
     out_path: Path, log_path: Optional[Path], mlp_epochs: int,
     command: Optional[List[str]],
 ) -> Dict[str, Any]:
     smi = _nvidia_smi()
+    input_paths = {
+        "dump_r0": dump_r0,
+        "dump_r2": dump_r2,
+        "prior": prior,
+        "train_jsonl": train_jsonl,
+        "predicates": predicates,
+    }
     return {
         "provenance_schema": 1,
         "status": "started",
@@ -213,14 +239,15 @@ def _initial_provenance(
         "git_status_porcelain": _git(repo, "status", "--porcelain"),
         "preregistration": "docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
         "amendment": PROTOCOL_AMENDMENT,
+        "predicate_identity_amendment": PREDICATE_IDENTITY_AMENDMENT,
         "command": list(command) if command is not None else None,
         "output_path": str(out_path),
         "console_log_path": str(log_path) if log_path is not None else None,
         "input_artifact_paths": {
-            "dump_r0": str(Path(dump_r0).resolve()),
-            "dump_r2": str(Path(dump_r2).resolve()),
-            "prior": str(Path(prior).resolve()),
-            "train_jsonl": str(Path(train_jsonl).resolve()),
+            name: str(Path(path).resolve()) for name, path in input_paths.items()
+        },
+        "input_artifacts": {
+            name: _artifact_identity(path) for name, path in input_paths.items()
         },
         "configuration": {
             "seed": SEED, "n_folds": N_FOLDS, "fold_salt": FOLD_SALT,
@@ -412,7 +439,8 @@ def run_ladder(dump_r0: str, dump_r2: str, prior: str, train_jsonl: str,
                out_path: str, mlp_epochs: int = MLP_EPOCHS,
                log_path: Optional[str] = None,
                provenance_path: Optional[str] = None,
-               command: Optional[List[str]] = None) -> Dict[str, Any]:
+               command: Optional[List[str]] = None,
+               predicates: Optional[str] = None) -> Dict[str, Any]:
     t0 = time.time()
     out = Path(out_path)
     log = Path(log_path) if log_path is not None else None
@@ -427,15 +455,19 @@ def run_ladder(dump_r0: str, dump_r2: str, prior: str, train_jsonl: str,
         raise ValueError("provenance must live in the registered ladder output directory")
     _ensure_safe_output(out, log, prov_path)
     repo = Path(__file__).resolve().parent.parent
+    predicates = predicates or str(repo / "datasets_vg150_clean/vocabulary/predicates.json")
     provenance = _initial_provenance(
-        repo, dump_r0, dump_r2, prior, train_jsonl, out, log, mlp_epochs, command)
+        repo, dump_r0, dump_r2, prior, train_jsonl, predicates,
+        out, log, mlp_epochs, command)
     prov_path.write_text(json.dumps(provenance, indent=2, sort_keys=True), encoding="utf-8")
 
     res: Dict[str, Any] = {
         "tool": "representation_decoder_ladder",
         "prereg": "docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
         "amendment": PROTOCOL_AMENDMENT,
+        "predicate_identity_amendment": PREDICATE_IDENTITY_AMENDMENT,
         "dump_r0": dump_r0, "dump_r2": dump_r2, "prior": prior,
+        "train_jsonl": train_jsonl, "predicates": predicates,
         "output_path": str(out),
         "console_log_path": str(log) if log is not None else None,
         "provenance_path": str(prov_path),
@@ -693,6 +725,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap.add_argument("--dump-r2", default="runs/eval_readout_v2_R2_pilot_v3/pair_logits.pt")
     ap.add_argument("--prior", default="datasets_vg150_clean/frequency_prior_train.json")
     ap.add_argument("--train-jsonl", default="datasets_vg150_clean/train.jsonl")
+    ap.add_argument("--predicates", default="datasets_vg150_clean/vocabulary/predicates.json")
     ap.add_argument("--out", required=True,
                     help="new registered result path; historical ladder path is rejected")
     ap.add_argument("--log", required=True,
@@ -734,7 +767,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             run_ladder(args.dump_r0, args.dump_r2, args.prior, args.train_jsonl,
                        args.out, mlp_epochs=args.mlp_epochs, log_path=args.log,
                        provenance_path=args.provenance,
-                       command=[sys.executable, str(Path(__file__).resolve()), *sys.argv[1:]])
+                       command=[sys.executable, str(Path(__file__).resolve()), *sys.argv[1:],],
+                       predicates=args.predicates)
         finally:
             sys.stdout = old_stdout
     return 0

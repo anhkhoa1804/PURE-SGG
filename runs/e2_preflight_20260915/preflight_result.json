@@ -1,0 +1,163 @@
+{
+  "created_utc": "2026-09-15T07:50:45.088481+00:00",
+  "gates": {
+    "G01 frozen population identity": {
+      "evidence": "candidate and image-manifest hashes, counts, image decode",
+      "status": "PASS"
+    },
+    "G02 candidate generation model-blind": {
+      "evidence": "candidate fields, selection flow, generator AST",
+      "status": "PASS"
+    },
+    "G03 image independence": {
+      "evidence": "block and cohort image IDs",
+      "status": "PASS"
+    },
+    "G04 annotation independence": {
+      "evidence": "single-annotator server state and browser payload isolation audited",
+      "status": "PASS"
+    },
+    "G05 schema consistency": {
+      "evidence": "validator compatibility rules present",
+      "status": "PASS"
+    },
+    "G06 adjudication safety": {
+      "evidence": "adjudicator accepts only single-valid, visible, direction-verified truth",
+      "status": "PASS"
+    },
+    "G07 human statistics": {
+      "evidence": "three annotation files absent",
+      "status": "BLOCKED_HUMAN_INPUT"
+    },
+    "G08 nuisance training lineage": {
+      "evidence": "M3/M4/M5 scorer requires explicit train source",
+      "status": "PASS"
+    },
+    "G09 M1 mapping": {
+      "evidence": "exact pair-slot and predicate-vocabulary lookup",
+      "status": "PASS"
+    },
+    "G10 geometry leakage": {
+      "evidence": "M3 path is train artifact \u2192 frozen baseline \u2192 blocks",
+      "status": "PASS"
+    },
+    "G11 random cohort model-blind": {
+      "evidence": "random candidate fields and selection metadata",
+      "status": "PASS"
+    },
+    "G12 M2 forensic status known": {
+      "evidence": "AVAILABLE_CLEAN_VALIDATION_HELDOUT",
+      "status": "PASS"
+    },
+    "G13 M6 options": {
+      "evidence": "no M6 run; interface-only preparation",
+      "status": "PASS"
+    },
+    "G14 sample-size calculation": {
+      "evidence": "paired simulation artifact",
+      "status": "PASS"
+    },
+    "G15 environment": {
+      "evidence": "environment.json",
+      "status": "PASS"
+    },
+    "G16 claim matrix": {
+      "evidence": "claim-evidence matrix document",
+      "status": "PASS"
+    },
+    "G17 failure modes": {
+      "evidence": "failure-mode matrix document",
+      "status": "PASS"
+    },
+    "G18 provenance consistency": {
+      "evidence": "provenance reconciliation",
+      "status": "PASS"
+    }
+  },
+  "identity": {
+    "candidate_count": 45,
+    "candidate_order_sha256": "aac94e821dd3a9c9770a5f89e62a18b2553cf66a71d189b5a86eecaf6aa0334e",
+    "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "development_duplicate_images": [],
+    "development_image_count": 90,
+    "development_random_overlap": [],
+    "frozen_candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "frozen_image_manifest_sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+    "frozen_order_sha256": "aac94e821dd3a9c9770a5f89e62a18b2553cf66a71d189b5a86eecaf6aa0334e",
+    "image_decode_errors": [],
+    "image_manifest_count": 170,
+    "image_manifest_missing": 0,
+    "image_manifest_sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+    "random_candidate_count": 40,
+    "random_image_count": 80,
+    "status": "PASS"
+  },
+  "independence": {
+    "development_blocks": 45,
+    "development_images": 90,
+    "development_random_overlap": [],
+    "duplicate_candidate_ids": [],
+    "duplicate_development_images": [],
+    "duplicate_random_images": [],
+    "duplicate_relation_image_combinations": [],
+    "random_blocks": 40,
+    "random_images": 80,
+    "status": "PASS",
+    "within_block_same_image": []
+  },
+  "leakage": {
+    "candidate_generator_source": {
+      "forbidden_executable_names": [],
+      "forbidden_imports": [],
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/e2_population_feasibility.py"
+    },
+    "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+    "model_derived_candidate_fields": [],
+    "model_derived_selection_fields": [],
+    "random_sha256": "3869aa1ed8f3c7bd7896645fef98cc5276d089f2002f69f2dbe0010c5259a090",
+    "rule": "candidate inclusion, ranking, pairing, and random-cohort selection must not consume model-derived quantities",
+    "status": "PASS"
+  },
+  "m2_status": "AVAILABLE_CLEAN_VALIDATION_HELDOUT",
+  "provenance": {
+    "claims": {
+      "candidate_sha256": {
+        "frozen": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+        "observed": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+        "status": "VERIFIED"
+      },
+      "image_decode": {
+        "observed_errors": 0,
+        "status": "VERIFIED"
+      },
+      "image_manifest": {
+        "frozen": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+        "observed": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+        "status": "VERIFIED"
+      },
+      "images": {
+        "historical_claim": "missing",
+        "observed": 170,
+        "status": "STALE_HISTORICAL_CLAIM"
+      },
+      "model_blind_selection": {
+        "observed": true,
+        "status": "VERIFIED"
+      }
+    },
+    "created_utc": "2026-09-15T07:50:43.950767+00:00",
+    "current_state": {
+      "candidate_matches_frozen": true,
+      "candidate_sha256": "ca53f3c0496e5323f408a6bc84d08c7991947ecae37d7d5aec2f7b2964523f80",
+      "decode_error_count": 0,
+      "development_random_overlap": 0,
+      "historical_images_claim": "missing",
+      "image_manifest_sha256": "d17b1ec99841da0959f5a46c4c9cee5516b497144a06a12cd72c656a0aee819b",
+      "missing_selected_images": 0,
+      "model_blind_candidate_generation": true,
+      "selected_image_count": 170,
+      "selected_images_present": true
+    }
+  },
+  "status": "READY_FOR_HUMAN_GOLD"
+}

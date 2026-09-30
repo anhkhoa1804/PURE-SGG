@@ -1,0 +1,266 @@
+{
+  "canonical_train_derived_m2": "NOT_AVAILABLE_TRAIN_DERIVED",
+  "clean_candidate_hits": [],
+  "hits": [
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
+      "size": 12470
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md",
+      "size": 4898
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md",
+      "size": 2308
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/forensic_compare_rel_feat.py",
+      "size": 6948
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/representation_decoder_ladder.py",
+      "size": 35856
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/forensic_compare_rel_feat.cpython-311.pyc",
+      "size": 12804
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-310.pyc",
+      "size": 30118
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-311.pyc",
+      "size": 60461
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/paper_c_representation_decoder_ladder.json",
+      "size": 29605
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_readout_v2_R2_matched_20260909T154739Z/pair_logits.pt",
+      "size": 383509319
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_preflight_20260915/m2_validation_heldout_decoder.pt",
+      "size": 2531293
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_C1/pair_logits.pt",
+      "size": 353725891
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+      "size": 931057422
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_representation_decoder_ladder.py",
+      "size": 17349
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_forensic_compare_rel_feat.py",
+      "size": 1404
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311-pytest-9.1.1.pyc",
+      "size": 75571
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_forensic_compare_rel_feat.cpython-311-pytest-9.1.1.pyc",
+      "size": 5086
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311.pyc",
+      "size": 32026
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-310.pyc",
+      "size": 17615
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
+      "size": 12470
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md",
+      "size": 4898
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md",
+      "size": 2308
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/forensic_compare_rel_feat.py",
+      "size": 6948
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/representation_decoder_ladder.py",
+      "size": 35856
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/forensic_compare_rel_feat.cpython-311.pyc",
+      "size": 12804
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-310.pyc",
+      "size": 30118
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-311.pyc",
+      "size": 60461
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/paper_c_representation_decoder_ladder.json",
+      "size": 29605
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_readout_v2_R2_matched_20260909T154739Z/pair_logits.pt",
+      "size": 383509319
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_preflight_20260915/m2_validation_heldout_decoder.pt",
+      "size": 2531293
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_C1/pair_logits.pt",
+      "size": 353725891
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+      "size": 931057422
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_representation_decoder_ladder.py",
+      "size": 17349
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_forensic_compare_rel_feat.py",
+      "size": 1404
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311-pytest-9.1.1.pyc",
+      "size": 75571
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_forensic_compare_rel_feat.cpython-311-pytest-9.1.1.pyc",
+      "size": 5086
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311.pyc",
+      "size": 32026
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-310.pyc",
+      "size": 17615
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/.cache/docling/EasyOcr/latin_g2.pth",
+      "size": 15406141
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/.cache/docling/EasyOcr/craft_mlt_25k.pth",
+      "size": 83152330
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/.cache/docling/EasyOcr/english_g2.pth",
+      "size": 15143997
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/experiments/042_doclaynet_disjoint_scout/feature_manifest.json",
+      "size": 1104
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/experiments/040_mechanism_d_counterfactual/feature_manifest.json",
+      "size": 1511
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/doc-extraction/experiments/041_role_signal_provenance/feature_manifest.json",
+      "size": 987
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREREGISTRATION.md",
+      "size": 12470
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_AMENDMENT_2026-09-11.md",
+      "size": 4898
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/docs/PAPER_C_REPRESENTATION_DECODER_LADDER_PREDICATE_IDENTITY_AMENDMENT_2026-09-11.md",
+      "size": 2308
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/forensic_compare_rel_feat.py",
+      "size": 6948
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/representation_decoder_ladder.py",
+      "size": 35856
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/forensic_compare_rel_feat.cpython-311.pyc",
+      "size": 12804
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-310.pyc",
+      "size": 30118
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tools/__pycache__/representation_decoder_ladder.cpython-311.pyc",
+      "size": 60461
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/paper_c_representation_decoder_ladder.json",
+      "size": 29605
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_readout_v2_R2_matched_20260909T154739Z/pair_logits.pt",
+      "size": 383509319
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/e2_preflight_20260915/m2_validation_heldout_decoder.pt",
+      "size": 2531293
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/runs/eval_C1/pair_logits.pt",
+      "size": 353725891
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+      "size": 931057422
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_representation_decoder_ladder.py",
+      "size": 17349
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/test_forensic_compare_rel_feat.py",
+      "size": 1404
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311-pytest-9.1.1.pyc",
+      "size": 75571
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_forensic_compare_rel_feat.cpython-311-pytest-9.1.1.pyc",
+      "size": 5086
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-311.pyc",
+      "size": 32026
+    },
+    {
+      "path": "/home/magnusfrog_frogsleap/projects/Research-No.1/tests/__pycache__/test_representation_decoder_ladder.cpython-310.pyc",
+      "size": 17615
+    }
+  ],
+  "reason": "No standalone training rel_feat tensor, decoder head, or canonical train-derived M2 fit artifact was found in accessible project storage. The cached validation dump must be audited separately for a disjoint held-out probe.",
+  "searched_roots": [
+    "/home/magnusfrog_frogsleap/projects/Research-No.1",
+    "/home/magnusfrog_frogsleap/projects/Research-No.1",
+    "/home/magnusfrog_frogsleap/projects"
+  ],
+  "status": "NOT_AVAILABLE_TRAIN_DERIVED",
+  "validation_heldout_m2": "AUDIT_WITH_TOOLS_E2_M2_RECONSTRUCTION"
+}
