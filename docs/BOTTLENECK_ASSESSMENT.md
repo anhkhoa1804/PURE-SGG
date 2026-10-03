@@ -1,5 +1,9 @@
 # Bottleneck assessment — H1…H9 against the evidence already obtained
 
+> **Historical assessment.** This earlier bottleneck map is retained as
+> provenance, not as the current Paper C plan. See
+> [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 Every row is adjudicated on measurements that already exist. No hypothesis below
 required a new experiment to reach its verdict, which is the point: the cheapest
 discriminating experiment is the one already run.

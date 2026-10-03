@@ -1,5 +1,11 @@
 # RESEARCH_STATE — living research map
 
+> **Superseded snapshot (2026-09-03).** The dated state below is preserved as
+> historical research context and is not the current plan. The official Paper
+> C state is `PAPER_C_DIRECTION_CLOSED`; see
+> [docs/research/PAPER_C_STATUS.md](research/PAPER_C_STATUS.md) and
+> [docs/research/PAPER_C_CLOSEOUT.md](research/PAPER_C_CLOSEOUT.md).
+
 Updated: 2026-09-03. Branch: `research/architecture-breakthrough`.
 This file is the single place that says what is currently believed, what is not,
 and what is running. Every claim carries its evidential class.

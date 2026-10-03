@@ -1,5 +1,9 @@
 # Experiment matrix — objective alignment before architecture
 
+> **Superseded plan (2026-10-03).** The run plan below is retained as a
+> historical preregistration-era record, not an active workflow. Paper C is
+> closed; see [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 The plan for the first serious GCP training run, and the criteria that make
 its result interpretable.
 

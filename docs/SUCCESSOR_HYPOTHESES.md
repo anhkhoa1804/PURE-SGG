@@ -1,5 +1,9 @@
 # Successor to PURE — four hypotheses, none yet committed to
 
+> **Superseded design record (2026-10-03).** The hypotheses and pending
+> suggestions below are historical and are not authorized next steps. Paper C
+> is closed; see [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 **Design activity only.** No architecture is implemented, and none will be until
 one hypothesis is strongly supported. Two of the four are already partly tested
 *within* this cycle, and one of those came back negative — recorded here so the

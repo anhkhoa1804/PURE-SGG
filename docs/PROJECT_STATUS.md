@@ -1,5 +1,11 @@
 # Project status
 
+> **Superseded snapshot.** This document records an earlier repository state
+> and is retained verbatim below for provenance. The official current Paper C
+> state is `PAPER_C_DIRECTION_CLOSED`; see
+> [docs/research/PAPER_C_STATUS.md](research/PAPER_C_STATUS.md) and
+> [docs/research/PAPER_C_CLOSEOUT.md](research/PAPER_C_CLOSEOUT.md).
+
 **Canonical current-state document.** When this document and any other
 document disagree about current state, trust this one and fix the other —
 but never silently rewrite a historical claim to make it agree; mark the

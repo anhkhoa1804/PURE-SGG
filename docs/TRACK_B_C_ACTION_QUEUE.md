@@ -1,5 +1,9 @@
 # Track B + Track C — ranked action queue
 
+> **Superseded notice (2026-10-03).** This action queue is retained for
+> provenance and is no longer authorized as a current work queue. Paper C is
+> closed; see [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 Mode: **PAPER B + PAPER C DEVELOPMENT**, Paper A frozen
 (`docs/PAPER_A_FREEZE_AUDIT.md`) and not reopened here. GPU checked idle
 before this session's only executed experiment (`p65`, CPU-only); a second

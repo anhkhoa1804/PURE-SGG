@@ -1,5 +1,10 @@
 # GCP experiment protocol — historical checkpoint reproduction
 
+> **Historical protocol notice (2026-10-03).** The workflow below is preserved
+> for provenance and is not a current Paper C launch recipe. Do not execute it
+> without a new explicit, registered authorization. Current status:
+> [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 The exact, ordered workflow for the first serious GCP run. Follow it in
 order; every step gates the next.
 

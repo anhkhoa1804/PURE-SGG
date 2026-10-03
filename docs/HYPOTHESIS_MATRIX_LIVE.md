@@ -1,5 +1,10 @@
 # Live hypothesis matrix — H1–H10 accounting scheme
 
+> **Superseded notice (2026-10-03).** This matrix is retained as a historical
+> planning record and is not a live experiment queue. Paper C is closed with
+> state `PAPER_C_DIRECTION_CLOSED`; see
+> [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 Updated **2026-09-02 after `p59`-`p62`**. `p54` (held-out TEST split, GPU) is
 **COMPLETE** (exit 0, 3 h 31 m) and its CPU replications `p59`/`p61`/`p62` are
 **COMPLETE**: the registered replication verdict is **REPLICATED** on all seven

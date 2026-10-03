@@ -1,5 +1,12 @@
 # Research-No.1 — Claude Operating Rules
 
+> **Current-state notice (2026-10-03).** The Paper C direction is
+> `PAPER_C_DIRECTION_CLOSED`; this file's older PURE/SGG mission text and
+> machine-specific dataset/GPU assumptions are historical operating context,
+> not an active Paper C authorization. See `docs/research/PAPER_C_STATUS.md`
+> and `docs/research/PAPER_C_CLOSEOUT.md`. Follow the current user request and
+> do not infer permission for a new experiment from old commands below.
+
 ## Mission
 
 This is a research codebase for Scene Graph Generation (SGG),

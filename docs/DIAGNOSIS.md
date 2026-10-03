@@ -1,5 +1,9 @@
 # The diagnosis
 
+> **Historical diagnostic snapshot.** The status and pending items below
+> describe an earlier state and are not current Paper C claims or work items.
+> See [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md) for the final status.
+
 **What long-tail SGG performance actually measures, and what PURE actually learned.**
 
 Status: **MEASURED**, on the full 10,401-image VG150 validation split

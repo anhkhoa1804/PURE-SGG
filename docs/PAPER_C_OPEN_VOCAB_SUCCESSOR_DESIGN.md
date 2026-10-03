@@ -1,5 +1,9 @@
 # Paper C — Open-vocabulary PURE successor: architecture design (no code, no GPU)
 
+> **Superseded design record (2026-10-03).** This proposal is retained for
+> historical context and is not an authorized future experiment. Paper C is
+> closed; see [PAPER_C_STATUS.md](research/PAPER_C_STATUS.md).
+
 This is a **design document only**. No model code was modified, no GPU job was
 launched, no existing preregistration was rewritten, and the C1 checkpoint /
 geometry contract is untouched by this document. Nothing below is measured
