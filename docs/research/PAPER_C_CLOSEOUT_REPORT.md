@@ -57,6 +57,9 @@ artifact was overwritten.
 
 ## Git delivery
 
-Commit SHA: pending. Remote/branch: `origin` /
-`research/pure-complete-readout-v2`. Push status: pending. This section will
-be updated only from observed Git results; no push success is inferred.
+Closeout content commit: `213d116fbcfdf6933f884fd7577f8397ed1c98e3`.
+Remote/branch: `origin` /
+`research/pure-complete-readout-v2`. Push status: initial closeout commit was
+successfully pushed. This delivery record is maintained in a follow-up,
+documentation-only commit; the final branch state is verified from Git after
+that push.
