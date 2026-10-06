@@ -1,0 +1,13 @@
+phase,recorded_timestamp,source,note
+registered C0/C1,NOT_RECORDED,runs/eval_C1/result.json,Phase order; do not infer execution time from a directory name
+readout-v2 corrected,NOT_RECORDED,runs/eval_readout_v2_R2c_20260911T023722Z/result.json,Phase order; do not infer execution time from a directory name
+A1-A6 and null ladder,NOT_RECORDED,runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json,Phase order; do not infer execution time from a directory name
+cross-seed diagnostics,NOT_RECORDED,runs/l4_breakthrough_20260930/seed_stability/fit_retry1/result.json,Phase order; do not infer execution time from a directory name
+historical conditional N4/N5,2026-10-01T17:15:21.882669+00:00,runs/paper_c_decision_pilot_20261001T123842Z/conditional_pilot_20261001T171120Z/conditional_pilot_results.json,Phase order; do not infer execution time from a directory name
+M2 common-validation bridge,2026-10-02T08:26:48.220855Z,runs/paper_c_same_validation_checkpoint_rescore_20261002T082100Z/same_validation_checkpoint_rescoring.json,Phase order; do not infer execution time from a directory name
+matched-supervision smoke,NOT_RECORDED,runs/paper_c_matched_supervision_smoke_20261002T111542Z/c1_smoke_final_audit.json,Phase order; do not infer execution time from a directory name
+full-scale O/G+O residual,2026-10-03T09:19:23.821276Z,runs/paper_c_fullscale_residual_audit_20261003T084403Z/fullscale_residual_audit.json,Phase order; do not infer execution time from a directory name
+current nuisance ladder,2026-10-03T09:32:56.715396Z,runs/paper_c_nuisance_ladder_v2_20261003T092837Z/nuisance_ladder_v2_results.json,Phase order; do not infer execution time from a directory name
+historical vocabulary forensics,2026-10-03T11:46:34Z,runs/paper_c_nuisance_vocab_contract_20261003T114634Z/vocabulary_provenance.json,Phase order; do not infer execution time from a directory name
+bounded N4-FIT pilot,2026-10-03T18:24:53.318002Z,runs/paper_c_n4fit_pilot_training_20261003T182118Z/pilot_results.json,Phase order; do not infer execution time from a directory name
+final evidence audit,2026-10-03T19:25:15Z,runs/paper_c_final_evidence_audit_20261003T185925Z/final_status.json,Phase order; do not infer execution time from a directory name

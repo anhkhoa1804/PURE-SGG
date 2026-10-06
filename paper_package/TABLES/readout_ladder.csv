@@ -1,0 +1,10 @@
+arm,WPRD,cells,form,source
+A1_frozen_baseline,0.5749881522134409,20016,"stored text_logits channel, fixed_ensemble(0.0)",runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A4_cosine_recomputed,0.5758335904938229,20016,"normalize(rel_feat) @ normalize(pred_emb).T (identity gate, not a capacity probe)",runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A2_linear,0.5801279465080909,20016,Linear(768->51) closed-form ridge on standardized rel_feat + bias,runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A3_mlp,0.5856688775586617,20016,Linear(768->768) -> GELU -> Linear(768->51),runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A5a_geometry_xfit,0.5881443828571307,20016,"19 box-geometry features + bias, cross-fitted LBFGS",runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A5b_geometry_trainfit,0.5962347576211017,20016,"same probe, fitted on train.jsonl (p37 R8 protocol)",runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+A6_fusion,0.585503429510664,20016,"Linear(768+19+1 -> 51) ridge on concat[rel_feat, geometry]",runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+N1_shuffled_label_null,0.5054514476497997,20016,A2 form fitted on permuted labels,runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json
+N2_prior_control,0.5,20016,prior scored directly,runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json

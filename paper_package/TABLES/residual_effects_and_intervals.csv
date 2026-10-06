@@ -1,0 +1,4 @@
+contrast,delta_calibrated_LL,CI_low,CI_high,images,rows,population,unit,replicates,seed,status,source
+O_plus_rel_feat minus O,-0.36603313227755896,-0.3966375880120899,-0.33616490324423837,1182,14991,fixed_validation,image,2000,20261003,exploratory_conditional,runs/paper_c_nuisance_ladder_v2_20261003T092837Z/nuisance_ladder_v2_results.json
+G+O_plus_rel_feat minus G+O,-0.005128832905433961,-0.026359921659650332,0.01586280669203568,1182,14991,fixed_validation,image,2000,20261003,exploratory_conditional,runs/paper_c_nuisance_ladder_v2_20261003T092837Z/nuisance_ladder_v2_results.json
+N4FIT_rel minus N4FIT,-0.002446222976240988,-0.002626834930734597,-0.002283543337487774,250,3142,pilot_CAL_CHECK,image,2000,20261003,pilot_only_exploratory_conditional,runs/paper_c_n4fit_pilot_training_20261003T182118Z/pilot_bootstrap.json

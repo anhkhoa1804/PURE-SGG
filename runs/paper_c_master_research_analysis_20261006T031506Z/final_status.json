@@ -1,0 +1,13 @@
+{
+  "status": "PAPER_C_NO_NEW_EXPERIMENT_JUSTIFIED",
+  "analysis_complete": true,
+  "baseline_commit": "7d6eaf2098ad601d4d573d374f99e0feccc03252",
+  "created_utc": "2026-10-06T06:53:24.852618+00:00",
+  "selected_question": "human-verified object-pair controlled relation discrimination",
+  "experiment_executed": false,
+  "gpu_hours": 0,
+  "learned_models_fit": 0,
+  "new_splits": 0,
+  "human_gold_status": "MISSING",
+  "recommendation": "SPLIT_INTO_NEW_PAPER; Paper C remains CLOSE"
+}

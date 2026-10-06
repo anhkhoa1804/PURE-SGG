@@ -1,0 +1,27 @@
+# Methods
+
+## Evidence and provenance
+
+The baseline is closeout commit `7d6eaf2098ad601d4d573d374f99e0feccc03252`. The canonical source is `runs/paper_c_canonical_train_relfeat_20260930T062248Z/code` at `ec4cca6ff01ab46929b7b428220fe0df2ba00f2a`; checkpoint and train JSONL hashes are independently checked in `independent_verification.json`. The canonical representation has 83,249 images, 1,046,427 labeled rows, 17 shards, width 768 and float16 features. All original runs remain immutable. This synthesis recomputes probabilities from saved logits on CPU and renders evidence tables; it fits no predictive model. The evidence map records each hypothesis, population, treatment, comparator, metric, uncertainty, interpretation and limitation. [E0]
+
+## Historical readout experiment
+
+The ladder uses the accepted C1 dump: 132,556 relation rows, 10,401 images and 20,016 WPRD cells across 50 foreground predicates. Learned arms use five image-based folds; the prior control is exactly 0.5 and the shuffled null is near 0.5. A3 is 768→768→51 with GELU, seed 0, 25 epochs, learning rate 0.002, weight decay 0.0001 and batch 4096. A2 is standardized ridge; A5a uses 19 box features and cross-fit LBFGS. A5b is a train-fitted geometry estimator and is not identical to A5a's fitting population. WPRD contrasts resample cells as registered; overlapping images across cells limit their interpretation as independent-image uncertainty. The A3−A1 stored delta is 0.0106807253, CI [0.0044921035, 0.0167044730]. [E1]
+
+## Current predictive residual experiment
+
+An image-disjoint canonical-train split contains FIT 75,066 images / 943,815 rows and CAL 8,183 / 102,612. Current evaluation is 1,182 images / 14,991 rows with frozen E2 exclusions. O is FIT-only ordered subject/object label counts with Laplace(1) over 51 outputs and FIT-global backoff for unsupported pairs. Exactly 12,330 validation rows have FIT-supported pairs, and 2,661 back off. G+O is a FIT-trained linear correction using the registered 19-D geometry on top of the pair-prior offset. The rel_feat readout is registered M2 trained on the same full FIT with FIT-only standardization. Temperatures and combination coefficients are fitted on CAL only. [E2]
+
+The full O/G+O combination is `z_rel + alpha * log_softmax(z_nuisance / T_nuisance)`, followed by one scalar combined temperature. Thus the saved comparison is a calibrated combined predictor against a nuisance predictor; alpha does not directly quantify the amount of relational information. Primary loss is mean negative log probability per row, in nats. Accuracy uses argmax; macro recall averages observed foreground classes. Image-cluster bootstrap resamples images with all row multiplicities and computes the row-weighted paired delta, 2,000 repetitions, seed 20261003. This preserves the row-average estimand, rather than silently switching to equal image weighting. These exploratory intervals condition on trained weights, calibration and the selected split; they do not measure training-seed uncertainty. [E2]
+
+## N4-FIT feasibility experiment
+
+Historical N4 used a 2,907-label vocabulary from an earlier 1,200-image train population; 122 of those images lie in current CAL. It cannot serve as a clean current CAL comparator. N4-FIT instead freezes 5,000 FIT images / 63,286 rows, a FIT-only 6,909-label vocabulary plus unknown, and an input width of 16,900. Inputs are geometry-8, subject and object one-hots, 768-D subject/object/union CLIP crop features and a 768-D global image vector. The new decoder is 16,900→768→51 GELU with 13,019,187 parameters. All historical visual components are preserved. [E3,E4]
+
+N4-FIT uses AdamW, seed 0, lr .002, weight decay .0001, batch 4096, 25 epochs, unweighted mean multiclass CE, no scheduler/early stopping, and the fixed final epoch. Geometry and CLIP channel mean/sample-std are FIT-only; one-hots are unstandardized. CAL-FIT contains 750 images / 9,078 rows; CAL-CHECK has 250 / 3,142. N4 temperature, rel_feat temperature, nonnegative alpha and combined temperature are fitted only on CAL-FIT. The predictor is `z_N4 + alpha * log_softmax(z_rel / T_rel)` with an additional combined temperature. The rel_feat predictor comes from the earlier full FIT model and is not refitted, so its fitting scale differs from the pilot nuisance model. This is a second reason not to present the pilot as the next matched rung of the full O/G+O experiment. [E4]
+
+Pilot bootstrap uses 2,000 image resamples, seed 20261003, percentile 95% interval. CAL-CHECK labels do not fit weights/calibration. Final validation is untouched by this pilot. The resource rule requires a stable negative increment materially greater than the earlier G+O reference magnitude; it is not a final statistical test of the full nuisance question. [E4]
+
+## Diagnostic experiments
+
+The M2 bridge freshly scores four frozen checkpoints on exact current validation identities using each run's saved scaler; it establishes common evaluation, not randomized sampling effects. FULL/A/B seed1234 smoke shares its training protocol. A zeros only geometry input to fusion_gate; B deranges incoming pair-state rows within the same image at both edge-layer interfaces, retaining target object/geometry/visual inputs and leaving singleton images unchanged. Its engineering GO cannot be promoted into confirmatory effect estimation. Cross-seed feature similarity and decoder transfer use a separate validation-held-out protocol; they cannot establish robustness of the residual model. [E5–E8]

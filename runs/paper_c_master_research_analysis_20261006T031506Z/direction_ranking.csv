@@ -1,0 +1,17 @@
+rank,candidate,direction,scientific_importance,novelty_judgment,feasibility,gpu_cost,data_requirements,annotation_requirements,inconclusive_risk,hypothesis_discrimination,conclusion_change_value,publication_value
+1,A,Human-verified controlled semantic evaluation,HIGH,MEDIUM,MEDIUM,LOW,HIGH,HIGH,MEDIUM,HIGH,HIGH,HIGH
+2,M,Object-pair-matched relation evaluation with human gold,HIGH,MEDIUM,MEDIUM,LOW,HIGH,HIGH,MEDIUM,HIGH,HIGH,HIGH
+3,O,Controlled synthetic relation evaluation,HIGH,MEDIUM,MEDIUM,LOW,HIGH,MEDIUM,MEDIUM,HIGH,HIGH,MEDIUM
+4,B,Interactional-focused human evaluation,HIGH,MEDIUM,MEDIUM,LOW,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+5,L,Cross-dataset human-validated evaluation,HIGH,MEDIUM,LOW,MEDIUM,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+6,H,Geometry-controlled relation evaluation,HIGH,MEDIUM,MEDIUM,LOW,HIGH,MEDIUM,HIGH,HIGH,MEDIUM,MEDIUM
+7,I,Appearance-controlled relation evaluation,HIGH,HIGH,LOW,MEDIUM,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+8,J,Scene-context-controlled relation evaluation,HIGH,HIGH,LOW,MEDIUM,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+9,K,Counterfactual data intervention,HIGH,HIGH,LOW,MEDIUM,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+10,C,Predicate-disjoint generalization,HIGH,MEDIUM,LOW,HIGH,HIGH,MEDIUM,HIGH,MEDIUM,MEDIUM,HIGH
+11,D,Genuinely unseen-predicate text protocol,HIGH,MEDIUM,LOW,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH
+12,F,Explicit nuisance conditioning/full comparator,MEDIUM,LOW,HIGH,MEDIUM,LOW,LOW,MEDIUM,MEDIUM,MEDIUM,MEDIUM
+13,E,Residual relation expert training,MEDIUM,MEDIUM,MEDIUM,HIGH,MEDIUM,LOW,HIGH,LOW,MEDIUM,MEDIUM
+14,N,Predicate-frequency matched analysis,MEDIUM,LOW,HIGH,LOW,LOW,LOW,MEDIUM,LOW,LOW,LOW
+15,G,Representation disentanglement,MEDIUM,MEDIUM,LOW,HIGH,HIGH,MEDIUM,HIGH,LOW,LOW,MEDIUM
+16,P,Architectural relation-isolated branch,MEDIUM,MEDIUM,LOW,HIGH,HIGH,MEDIUM,HIGH,LOW,LOW,MEDIUM

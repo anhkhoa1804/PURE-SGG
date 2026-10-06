@@ -1,0 +1,96 @@
+{
+  "validation": {
+    "images": 1182,
+    "rows": 14991,
+    "unique_labeled_pair_keys": 14991,
+    "duplicates": 0,
+    "pair_supported_rows": 12330,
+    "metrics": {
+      "O": {
+        "rows": 14991,
+        "log_loss": 1.6323624327446518,
+        "accuracy": 0.6458541791741712,
+        "macro_recall": 0.20006059858731995,
+        "classes_present": 50,
+        "finite": true
+      },
+      "G+O": {
+        "rows": 14991,
+        "log_loss": 1.3242384157227445,
+        "accuracy": 0.6561270095390568,
+        "macro_recall": 0.1218934710222276,
+        "classes_present": 50,
+        "finite": true
+      },
+      "rel_feat": {
+        "rows": 14991,
+        "log_loss": 1.4205308987009309,
+        "accuracy": 0.5887532519511707,
+        "macro_recall": 0.15908623252412046,
+        "classes_present": 50,
+        "finite": true
+      },
+      "G+O+rel_feat": {
+        "rows": 14991,
+        "log_loss": 1.3191095816086174,
+        "accuracy": 0.6200386898805951,
+        "macro_recall": 0.15402534651369526,
+        "classes_present": 50,
+        "finite": true
+      }
+    }
+  },
+  "N4FIT_CAL_CHECK": {
+    "images": 250,
+    "rows": 3142,
+    "unique_labeled_pair_keys": 3142,
+    "duplicates": 0,
+    "metrics": {
+      "N4_calibrated": {
+        "rows": 3142,
+        "log_loss": 1.5984459578155081,
+        "accuracy": 0.5566518141311266,
+        "macro_recall": 0.13864697717034738,
+        "classes_present": 46,
+        "finite": true
+      },
+      "N4_rel_calibrated": {
+        "rows": 3142,
+        "log_loss": 1.5959997348392667,
+        "accuracy": 0.5582431572246976,
+        "macro_recall": 0.13956035798889974,
+        "classes_present": 46,
+        "finite": true
+      },
+      "N4_raw": {
+        "rows": 3142,
+        "log_loss": 2.419526820198378,
+        "accuracy": 0.5566518141311266,
+        "macro_recall": 0.13864697717034738,
+        "classes_present": 46,
+        "finite": true
+      },
+      "N4_rel_raw": {
+        "rows": 3142,
+        "log_loss": 2.419353159827957,
+        "accuracy": 0.5582431572246976,
+        "macro_recall": 0.13956035798889974,
+        "classes_present": 46,
+        "finite": true
+      }
+    }
+  },
+  "immutable_hashes": {
+    "checkpoints/C1_seed1234.pt": "79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854",
+    "datasets_vg150_clean/train.jsonl": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+    "runs/canonical_train_representation_full_20261001T020630Z/representation/canonical_train_relfeat_manifest.json": "f70b819eb22a40b431f32280fd6b04d74caeb821fc37764fdb288d6abdb9c8d4"
+  },
+  "canonical_source_commit": "ec4cca6ff01ab46929b7b428220fe0df2ba00f2a",
+  "stored_bootstrap_checks": {
+    "residual_contrasts": 2,
+    "pilot_saved_draws": 2000,
+    "new_resampling": false,
+    "pilot_percentiles_match": true
+  },
+  "method": "Independent float64 log-sum-exp from saved 51-output logits; no fitting, inference, resampling or new split"
+}

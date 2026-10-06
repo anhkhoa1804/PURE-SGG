@@ -1,0 +1,324 @@
+{
+  "baseline_commit": "7d6eaf2098ad601d4d573d374f99e0feccc03252",
+  "created_utc": "2026-10-06T06:53:24.852618+00:00",
+  "evidence": [
+    {
+      "id": "E0",
+      "hypothesis": "Artifact/probability identity",
+      "tier": "C",
+      "population": "1182/14991 validation; 250/3142 CAL-CHECK",
+      "treatment": "saved logits and canonical artifacts",
+      "comparator": "recorded metrics/hash values",
+      "metric": "exact recomputation",
+      "uncertainty_and_limitation": "no new inference",
+      "source": "runs/paper_c_final_evidence_audit_20261003T185925Z/posthoc_metrics.json",
+      "source_sha256": "641c63be540a625d6b43008257934a1e89cd4306a6f7728e90e7512687e80bce"
+    },
+    {
+      "id": "E1",
+      "hypothesis": "Decodability and geometry competition",
+      "tier": "A",
+      "population": "10401 images/132556 rows/20016 WPRD cells",
+      "treatment": "A1-A6 readouts and N1/N2",
+      "comparator": "frozen text/prior/null",
+      "metric": "WPRD",
+      "uncertainty_and_limitation": "cell-bootstrap conditional intervals",
+      "source": "runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json",
+      "source_sha256": "846e8f1dac516a0b3b43dee8a2209bc1cb9709f418225f2bd47adf267146cccf"
+    },
+    {
+      "id": "E2",
+      "hypothesis": "Complementary prediction after O/G+O",
+      "tier": "A",
+      "population": "FIT75066/943815; CAL8183/102612; VAL1182/14991",
+      "treatment": "frozen M2+nuisance offset",
+      "comparator": "O and G+O",
+      "metric": "calibrated row LL",
+      "uncertainty_and_limitation": "2000 image-bootstrap; exploratory; one split/seed",
+      "source": "runs/paper_c_nuisance_ladder_v2_20261003T092837Z/nuisance_ladder_v2_results.json",
+      "source_sha256": "182f644d024345c26e7b949072da580030b40e0bd5a95639293d5b95e9fb7477"
+    },
+    {
+      "id": "E3",
+      "hypothesis": "Historical N4 admissibility",
+      "tier": "C",
+      "population": "old1200 train;1078 FIT/122 CAL overlap",
+      "treatment": "vocabulary/weight provenance",
+      "comparator": "strict current FIT/CAL discipline",
+      "metric": "identity overlap",
+      "uncertainty_and_limitation": "historical 2907-label map cannot be reused for current CAL",
+      "source": "runs/paper_c_nuisance_vocab_contract_20261003T114634Z/vocabulary_provenance.json",
+      "source_sha256": "517ee396c7fabdebc3a1ed699508da3c597368f655607062c69e61802014e1aa"
+    },
+    {
+      "id": "E4",
+      "hypothesis": "Richer nuisance pilot",
+      "tier": "B",
+      "population": "FIT5000/63286; CALFIT750/9078; CHECK250/3142",
+      "treatment": "16900->768->51 N4FIT; frozen fullFIT M2 offset",
+      "comparator": "N4FIT",
+      "metric": "calibrated CALCHECK LL",
+      "uncertainty_and_limitation": "2000 image-bootstrap seed20261003; pilot; scale/orientation differ",
+      "source": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/pilot_results.json",
+      "source_sha256": "05a112234b1f2590ccf17e847c15df04b16200e5fb1d9ae39109494da6dfa7ac"
+    },
+    {
+      "id": "E5",
+      "hypothesis": "M2 sampling composition",
+      "tier": "B",
+      "population": "same VAL1182/14991;2.5k/5k/10k/15k train",
+      "treatment": "saved historical checkpoints and balanced15k",
+      "comparator": "identity-aligned rescoring",
+      "metric": "LL/accuracy/macro recall",
+      "uncertainty_and_limitation": "2000 images seed11;descriptive;train rows differ",
+      "source": "runs/paper_c_same_validation_checkpoint_rescore_20261002T082100Z/same_validation_checkpoint_rescoring.json",
+      "source_sha256": "f328b7cea362e526eda197a7752195fe35ec3e561106159e612e2f77e9cff7c5"
+    },
+    {
+      "id": "E6",
+      "hypothesis": "Seed similarity and transfer",
+      "tier": "B",
+      "population": "10231 nonE2 images/129826 rows;2051 image test",
+      "treatment": "within/cross seed readout",
+      "comparator": "same decoder applied across representations",
+      "metric": "similarity/accuracy",
+      "uncertainty_and_limitation": "2000 images seed11;different from residual protocol",
+      "source": "runs/l4_breakthrough_20260930/seed_stability/fit_retry1/result.json",
+      "source_sha256": "5fd9e1b57d9303f205e86a08f3dcc90e2b940c162e2d59282fc1992994e8b0e7"
+    },
+    {
+      "id": "E7",
+      "hypothesis": "Registered path interventions",
+      "tier": "C",
+      "population": "750/200/200 smoke;VAL1182/14991",
+      "treatment": "FULL/A/B seed1234",
+      "comparator": "matched objective/initialization protocol",
+      "metric": "engineering integrity and descriptive metrics",
+      "uncertainty_and_limitation": "smoke only;no seed5678 or B2",
+      "source": "runs/paper_c_matched_supervision_smoke_20261002T111542Z/c1_smoke_final_audit.json",
+      "source_sha256": "1697a2e8cd53832a36e19c33814ce4fa755cc465311a1a79e1f49520322ebcbc"
+    },
+    {
+      "id": "E8",
+      "hypothesis": "Readout-v2",
+      "tier": "C",
+      "population": "historical10401/132556/20016 cells",
+      "treatment": "corrected R2c",
+      "comparator": "R0",
+      "metric": "WPRD",
+      "uncertainty_and_limitation": "no corrected paired CI found;older R2 treatment invalid",
+      "source": "runs/eval_readout_v2_R2c_20260911T023722Z/result.json",
+      "source_sha256": "d4d568eb81016173640a3a9f89e7eba50414178b1df29957ee667a589f7501cb"
+    },
+    {
+      "id": "E9",
+      "hypothesis": "Geometry/units/Fourier mechanism",
+      "tier": "C",
+      "population": "historical diagnostic populations",
+      "treatment": "source arithmetic and finite-probe recovery",
+      "comparator": "raw/shuffled geometry",
+      "metric": "constant channels and probe R2",
+      "uncertainty_and_limitation": "not proof of mathematical information destruction",
+      "source": "docs/FOURIER_NULL_AND_INVERTIBILITY_RESULT.md",
+      "source_sha256": "96d835f68e1700ff36c5fb322c8972ce232fa7d8148dc1271a76ff292f9eeac3"
+    },
+    {
+      "id": "E10",
+      "hypothesis": "Semantic/interactional evaluation",
+      "tier": "D",
+      "population": "45 dev blocks/90 images;40 random/80 images",
+      "treatment": "human independent truth and contrast task",
+      "comparator": "object/geometry/visual controls proposed",
+      "metric": "both-correct block accuracy",
+      "uncertainty_and_limitation": "human gold absent;current validation endpoint0 eligible",
+      "source": "runs/e2_development_20260912/FROZEN_CANDIDATE_MANIFEST.json",
+      "source_sha256": "d4fd069e5b83c5c32184a418ca7386e02a39c8b96801414ecdc7e6d78d9fc4eb"
+    },
+    {
+      "id": "E11",
+      "hypothesis": "Entity scope and architecture",
+      "tier": "C",
+      "population": "canonical source commit ec4cca6",
+      "treatment": "ground_nodes->_forward_impl->forward_pairs",
+      "comparator": "source data-flow inspection",
+      "metric": "scope/gradient consumers",
+      "uncertainty_and_limitation": "no independent relation-only pathway",
+      "source": "runs/paper_c_canonical_train_relfeat_20260930T062248Z/code/openvocab_rel/models/relational_model.py",
+      "source_sha256": "6ccb855a20122f3917b87bcca2f561a1bc3d271f16cd140b5b0a448bb45558db"
+    },
+    {
+      "id": "E12",
+      "hypothesis": "Unseen-predicate feasibility",
+      "tier": "D",
+      "population": "all50 real predicates in all original splits",
+      "treatment": "alias-aware fresh unseen-supervision design",
+      "comparator": "current closed-set C1",
+      "metric": "design only",
+      "uncertainty_and_limitation": "no clean split/training or unseen evaluation executed",
+      "source": "docs/PAPER_C_PREDICATE_DISJOINT_SPLIT_AUDIT.md",
+      "source_sha256": "df462f4d5d384debeda70a07bf98b16f40e2745716fc01e2bdc6be151043aeb0"
+    },
+    {
+      "id": "E13",
+      "hypothesis": "Registered C0/C1 geometry treatment",
+      "tier": "A",
+      "population": "seed1234 matched20016 WPRD cells;3x12000 training samples",
+      "treatment": "pixel-space geometry plus Fourier scale .01",
+      "comparator": "registered locked C0",
+      "metric": "delta WPRD +.008261",
+      "uncertainty_and_limitation": "cell CI [.003831,.012697];registered +.010 target missed;seed2 also misses",
+      "source": "runs/eval_C1/result.json",
+      "source_sha256": "8895f6d6bfd14f96bf178002e993dea0dc36d6eea8ad8395e750d0c456eda236"
+    },
+    {
+      "id": "E14",
+      "hypothesis": "Historical conditional N4/N5 pilot",
+      "tier": "B",
+      "population": "train1200/14746;VAL1182/14991",
+      "treatment": "historical N5 nuisance plus rel_feat",
+      "comparator": "historical N4",
+      "metric": "LL3.094027 vs2.742337;delta-.351690",
+      "uncertainty_and_limitation": "CI[-.396702,-.304290];small historical train scale and capacity change;not current CAL-safe comparator",
+      "source": "runs/paper_c_decision_pilot_20261001T123842Z/conditional_pilot_20261001T171120Z/conditional_pilot_results.json",
+      "source_sha256": "862704b18c0556053187d2876fedc9f163395f710418ae4615ace4562fbd6758"
+    }
+  ],
+  "sources": {
+    "ladder": {
+      "path": "runs/paper_c_representation_decoder_ladder_rerun_20260911T105648Z/result.json",
+      "sha256": "846e8f1dac516a0b3b43dee8a2209bc1cb9709f418225f2bd47adf267146cccf"
+    },
+    "residual": {
+      "path": "runs/paper_c_nuisance_ladder_v2_20261003T092837Z/nuisance_ladder_v2_results.json",
+      "sha256": "182f644d024345c26e7b949072da580030b40e0bd5a95639293d5b95e9fb7477"
+    },
+    "full": {
+      "path": "runs/paper_c_fullscale_residual_audit_20261003T084403Z/fullscale_residual_audit.json",
+      "sha256": "3da880d23ab9e9cf6d142d148aec2d05429486133c4e86f9aeb62b30391e6eb5"
+    },
+    "full_predictions": {
+      "path": "runs/paper_c_fullscale_residual_audit_20261003T084403Z/fullscale_residual_row_predictions.npz",
+      "sha256": "1ee30be9c68ab6659fabd9bd8fb5b941bf323dd8caa7058708a5cebf887e73fc"
+    },
+    "n4": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/pilot_results.json",
+      "sha256": "05a112234b1f2590ccf17e847c15df04b16200e5fb1d9ae39109494da6dfa7ac"
+    },
+    "n4_config": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/n4fit_training_config.json",
+      "sha256": "573c56722da4d42eac9a85667e2d07007dbeaf982bece05cf7e2c022c3dae484"
+    },
+    "n4_predictions": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/calcheck_predictions.npz",
+      "sha256": "e96dbd36538354d8485a97baa154239343da47ffda27e574a3a00f913a9492d0"
+    },
+    "n4_bootstrap": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/pilot_bootstrap.json",
+      "sha256": "3e39c46762cefa3fa8fbecfccfc4498810f58052406bfb9b59bdbc2f88be9ceb"
+    },
+    "n4_decision": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/fullscale_decision.md",
+      "sha256": "9297ac9bf0b95d278385a891c5867981b638d80839553d18887d9d4cbd78154f"
+    },
+    "bridge": {
+      "path": "runs/paper_c_same_validation_checkpoint_rescore_20261002T082100Z/same_validation_checkpoint_rescoring.json",
+      "sha256": "f328b7cea362e526eda197a7752195fe35ec3e561106159e612e2f77e9cff7c5"
+    },
+    "seed": {
+      "path": "runs/l4_breakthrough_20260930/seed_stability/fit_retry1/result.json",
+      "sha256": "5fd9e1b57d9303f205e86a08f3dcc90e2b940c162e2d59282fc1992994e8b0e7"
+    },
+    "seed_similarity": {
+      "path": "runs/l4_breakthrough_20260930/seed_stability/representation_metrics.json",
+      "sha256": "eddbc1c37cfa28076e72ec76f52f8949e35feee31b83bf3ad82c46fb932f07ff"
+    },
+    "smoke": {
+      "path": "runs/paper_c_matched_supervision_smoke_20261002T111542Z/smoke_result_forensics.json",
+      "sha256": "e3ef9ccbea462712f3da8e952c77e5c3406fed2f2a358352a27eb5f0466d61ba"
+    },
+    "smoke_audit": {
+      "path": "runs/paper_c_matched_supervision_smoke_20261002T111542Z/c1_smoke_final_audit.json",
+      "sha256": "1697a2e8cd53832a36e19c33814ce4fa755cc465311a1a79e1f49520322ebcbc"
+    },
+    "readout": {
+      "path": "runs/eval_readout_v2_R2c_20260911T023722Z/result.json",
+      "sha256": "d4d568eb81016173640a3a9f89e7eba50414178b1df29957ee667a589f7501cb"
+    },
+    "vocab": {
+      "path": "runs/paper_c_nuisance_vocab_contract_20261003T114634Z/vocabulary_provenance.json",
+      "sha256": "517ee396c7fabdebc3a1ed699508da3c597368f655607062c69e61802014e1aa"
+    },
+    "geometry": {
+      "path": "docs/GEOMETRY_INPUT_DEGENERACY_RESULT.md",
+      "sha256": "1a1f9ced7abdb8eab48b8d1509f12cc91dce4361da52c981d9a499866839fde7"
+    },
+    "fourier": {
+      "path": "docs/FOURIER_NULL_AND_INVERTIBILITY_RESULT.md",
+      "sha256": "96d835f68e1700ff36c5fb322c8972ce232fa7d8148dc1271a76ff292f9eeac3"
+    },
+    "predicate_disjoint": {
+      "path": "docs/PAPER_C_PREDICATE_DISJOINT_SPLIT_AUDIT.md",
+      "sha256": "df462f4d5d384debeda70a07bf98b16f40e2745716fc01e2bdc6be151043aeb0"
+    },
+    "e2_manifest": {
+      "path": "runs/e2_development_20260912/FROZEN_CANDIDATE_MANIFEST.json",
+      "sha256": "d4fd069e5b83c5c32184a418ca7386e02a39c8b96801414ecdc7e6d78d9fc4eb"
+    },
+    "e2_schema": {
+      "path": "runs/e2_development_20260912/annotation_schema.json",
+      "sha256": "5b480e896ec74e4272171cf2a181e14ad7dca5bd22b2ec39c350bdf2b54fe354"
+    },
+    "e2_design": {
+      "path": "docs/PAPER_C_E2_POPULATION_REDESIGN_AMENDMENT_2026-09-12.md",
+      "sha256": "e692d6daa70c9986e389fc441169d9f5989d15e0fde85acd1ddc31bebf5b4aac"
+    },
+    "e2_human": {
+      "path": "docs/E2_HUMAN_STATISTICAL_FIDELITY_AUDIT_20260915.md",
+      "sha256": "d491116ceedef901c73d563ac367121b41a29ab1a323dce8ecb86418de4a3079"
+    },
+    "model_source": {
+      "path": "runs/paper_c_canonical_train_relfeat_20260930T062248Z/code/openvocab_rel/models/relational_model.py",
+      "sha256": "6ccb855a20122f3917b87bcca2f561a1bc3d271f16cd140b5b0a448bb45558db"
+    },
+    "train_source": {
+      "path": "runs/paper_c_canonical_train_relfeat_20260930T062248Z/code/openvocab_rel/train.py",
+      "sha256": "4138d2ec3d7f27d25ab18ad5486a5c1b9135fb9dbadad1bb7e1cf6742d8aa95e"
+    },
+    "audit_metrics": {
+      "path": "runs/paper_c_final_evidence_audit_20261003T185925Z/posthoc_metrics.json",
+      "sha256": "641c63be540a625d6b43008257934a1e89cd4306a6f7728e90e7512687e80bce"
+    },
+    "audit_index": {
+      "path": "runs/paper_c_final_evidence_audit_20261003T185925Z/evidence_index.json",
+      "sha256": "896e69996add05acb6e37a172a75bc1635d130bdb7a1755d866630373cd8d13d"
+    },
+    "audit_status": {
+      "path": "runs/paper_c_final_evidence_audit_20261003T185925Z/final_status.json",
+      "sha256": "b4d2b29c49e4e0c529da4cd5984b925cacb668d6381436b9d25dda7f55beed69"
+    },
+    "c1_result": {
+      "path": "runs/eval_C1/result.json",
+      "sha256": "8895f6d6bfd14f96bf178002e993dea0dc36d6eea8ad8395e750d0c456eda236"
+    },
+    "c1_preregistration": {
+      "path": "docs/PAPER_C_C0_C1_PREREGISTRATION.md",
+      "sha256": "80f6f06ce3906b1cbbd1f0db1eda1611ee62796e6343ef89fc710796c734deee"
+    },
+    "c1_result_report": {
+      "path": "docs/PAPER_C_C1_RESULT.md",
+      "sha256": "92fab0009a6f86721431d41d20086dc8d0275d337a4b10044f843b9dc82e54d5"
+    },
+    "c1_seed2_report": {
+      "path": "docs/PAPER_C_C1_SEED2_RESULT.md",
+      "sha256": "356ea2675e9da9a7da5a9bc691072b947d72f9e017d878b0f450f16ba950523b"
+    },
+    "conditional": {
+      "path": "runs/paper_c_decision_pilot_20261001T123842Z/conditional_pilot_20261001T171120Z/conditional_pilot_results.json",
+      "sha256": "862704b18c0556053187d2876fedc9f163395f710418ae4615ace4562fbd6758"
+    },
+    "n4_training_source": {
+      "path": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/n4fit_pilot.py",
+      "sha256": "b0b5a61b7b4986a50b2a9545dbdd19beb56c862ed252b9fa5c053ceb7243518e"
+    }
+  }
+}
