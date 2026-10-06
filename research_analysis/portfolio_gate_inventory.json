@@ -1,0 +1,32 @@
+{
+  "schema": "research-no-1-portfolio-gate-inventory-v1",
+  "repository": ".",
+  "branch_at_audit": "research/paper-c-next-direction",
+  "head_at_audit": "0b306a4020e41356f29e5053a902b065d6ae94e1",
+  "classification_policy": "Historical and untracked run artifacts are preserved unless proven safe to delete; no historical result is rewritten.",
+  "artifacts": [
+    {"path":"runs/paper_c_canonical_train_relfeat_20260930T062248Z/code","class":"FROZEN_HISTORICAL","role":"canonical source snapshot; commit ec4cca6ff01ab46929b7b428220fe0df2ba00f2a","provenance_sensitive":true},
+    {"path":"checkpoints/C1_seed1234.pt","class":"FROZEN_HISTORICAL","role":"canonical C1 checkpoint","provenance_sensitive":true},
+    {"path":"runs/canonical_train_representation_full_20261001T020630Z","class":"FROZEN_HISTORICAL","role":"canonical rel_feat representation and identity manifests","provenance_sensitive":true},
+    {"path":"tools/within_pair_discrimination.py","class":"CURRENT_ANALYSIS","role":"WPRD construction and cell-level scoring","provenance_sensitive":true},
+    {"path":"tools/metric_grounding_correlation.py","class":"HISTORICAL / PROVENANCE","role":"12-arm metric correlation diagnostic; its permutation p-values treat arms as exchangeable","provenance_sensitive":true},
+    {"path":"tools/geometry_causal_ablation.py","class":"HISTORICAL / PROVENANCE","role":"registered inference-time geometry ablation analysis","provenance_sensitive":true},
+    {"path":"openvocab_rel/geometry.py","class":"ACTIVE","role":"geometry feature implementation","provenance_sensitive":true},
+    {"path":"openvocab_rel/models/relational_model.py","class":"ACTIVE","role":"current C1 model geometry path","provenance_sensitive":true},
+    {"path":"scripts/train/run_c0_c1.sh","class":"HISTORICAL / PROVENANCE","role":"registered C0/C1/C1a/C1b paired training launcher","provenance_sensitive":true},
+    {"path":"tests/test_geometry_contract_flags.py","class":"ACTIVE","role":"regression coverage for normalized-vs-pixel geometry units and C1a flags","provenance_sensitive":true},
+    {"path":"tools/l4_c1_fidelity.py, tools/l4_lineage_audit.py, tools/l4_seed_stability.py and matching tests/test_l4_*.py","class":"CURRENT_ANALYSIS","role":"pre-existing untracked identity/lineage/seed diagnostic utilities; not modified or executed beyond the full CPU test suite","provenance_sensitive":true},
+    {"path":"runs/paper_c_fullscale_residual_audit_20261003T084403Z","class":"FROZEN_HISTORICAL","role":"registered image-disjoint FIT/CAL nuisance audit and manifests","provenance_sensitive":true},
+    {"path":"runs/paper_c_n4fit_pilot_training_20261003T182118Z","class":"FROZEN_HISTORICAL","role":"bounded N4-FIT pilot, fixed CAL-FIT/CAL-CHECK and saved predictions","provenance_sensitive":true},
+    {"path":"runs/p49_metric_grounding","class":"FROZEN_HISTORICAL","role":"12-arm WPRD metric correlation on validation cache","provenance_sensitive":true},
+    {"path":"runs/p53_metric_grounding_vg150only","class":"FROZEN_HISTORICAL","role":"12-arm WPRD metric correlation restricted to VG150 object labels","provenance_sensitive":true},
+    {"path":"runs/p61_test_metric_grounding","class":"FROZEN_HISTORICAL","role":"held-out test split WPRD metric correlation","provenance_sensitive":true},
+    {"path":"runs/p70_geometry_causal_ablation","class":"FROZEN_HISTORICAL","role":"inference-time geometry-input ablation with paired cell outputs","provenance_sensitive":true},
+    {"path":"runs/C0_seed1234, runs/C1_seed1234, runs/C1_seed5678, runs/eval_*","class":"UNSAFE_TO_DELETE","role":"untracked historical run outputs visible in initial git status","provenance_sensitive":true},
+    {"path":"runs/* (159 top-level run directories; most untracked)","class":"UNSAFE_TO_DELETE","role":"historical, failed, blocked, or completed experiment provenance; intentionally left in place","provenance_sensitive":true},
+    {"path":"research_analysis/*","class":"CURRENT_ANALYSIS","role":"new finite portfolio gate outputs and reproducible CPU analysis","provenance_sensitive":true},
+    {"path":"tools/portfolio_gate_analysis.py","class":"CURRENT_ANALYSIS","role":"identity-checked R2 nested prior/residual and descriptive R3 robustness analysis","provenance_sensitive":true}
+  ],
+  "inventory_counts": {"tracked_files": 498, "top_level_runs_directories": 159, "initial_untracked_items_at_least": 175},
+  "cleanup_decision": "No historical or uncertain run/cache/checkpoint files deleted; no broad ignore pattern added."
+}

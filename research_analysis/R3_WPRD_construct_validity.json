@@ -1,0 +1,334 @@
+{
+  "conclusion": "WPRD has descriptive responsiveness to score changes and is exactly 0.5 for the pair-prior arm in these artifacts, but correlation p-values treat highly dependent arms as exchangeable observations. These data do not validate WPRD as a general construct distinct from SGG quality.",
+  "design_facts": {
+    "independent_model_draws": 1,
+    "pair_prior_WPRD": {
+      "test_all_labels": 0.5,
+      "validation_all_labels": 0.5,
+      "validation_vg150_only": 0.5
+    },
+    "permutation_method": "historical script permutes arm ranks over 2,000 draws, seed 0; plus-one p-value; does not account for arm-family dependence",
+    "random_null_WPRD": {
+      "test_all_labels": 0.5063173392882937,
+      "validation_all_labels": 0.5040989023941725,
+      "validation_vg150_only": 0.49799480723779116
+    },
+    "repeated_treatment_families": {
+      "PURE_text_to_classifier_sweep": 5,
+      "geometry_including_fusion": 5,
+      "prior_and_random_null": 2
+    },
+    "unit": "12 deterministic scoring arms derived from one checkpoint/cache, evaluated on shared image-relation cache",
+    "within_arm_R_mR_WPRD_filtering": "same 12 saved arm rows in each corr.json; no missing metric fields"
+  },
+  "missing": [
+    "independent model/checkpoint families",
+    "cluster-aware inference over independently trained models",
+    "pre-registered construct validity criterion",
+    "a controlled planted relation signal and matched shortcut/null system",
+    "complete cell-level WPRD bootstrap artifacts for the correlation population"
+  ],
+  "results": {
+    "test_all_labels": {
+      "descriptive_three_family_means": [
+        {
+          "R": 65.80546200275421,
+          "mR": 21.596552136916813,
+          "pareto": -2.7665320912592257,
+          "wprd": 0.5031586696441468
+        },
+        {
+          "R": 67.17668890953064,
+          "mR": 21.978496274185463,
+          "pareto": -0.04890204645550622,
+          "wprd": 0.5596664043689387
+        },
+        {
+          "R": 67.56933212280273,
+          "mR": 18.68602026787054,
+          "pareto": -3.341378052770433,
+          "wprd": 0.5978434621037589
+        }
+      ],
+      "documented_population": {
+        "eligibility": "unrestricted raw-name subject/object groups; exact cell count not saved",
+        "images": 10403,
+        "relation_rows": 132334,
+        "split": "test",
+        "wprd_cells": null
+      },
+      "n_arms": 12,
+      "sha256": "68e54e3aa7484f2ce0d6483e245d19d76a47cc9cfbf0db1b7098914e9db3f019",
+      "source": "runs/p61_test_metric_grounding/corr.json",
+      "stored_correlations": {
+        "Pareto gap": {
+          "leave_one_arm_out_rho": [
+            -0.36363636363636365,
+            -0.8090909090909091,
+            -0.4090909090909091,
+            -0.4090909090909091,
+            -0.4090909090909091,
+            -0.3727272727272728,
+            -0.3727272727272728,
+            -0.43636363636363645,
+            -0.45454545454545453,
+            -0.43636363636363645,
+            -0.43636363636363645,
+            -0.45454545454545453
+          ],
+          "leave_one_arm_out_rho_max": -0.36363636363636365,
+          "leave_one_arm_out_rho_min": -0.8090909090909091,
+          "permutation_p": 0.14392803598200898,
+          "rho": -0.44755244755244755
+        },
+        "R@50": {
+          "leave_one_arm_out_rho": [
+            0.8974966337290643,
+            0.8974966337290643,
+            0.8883849927775,
+            0.9157199156321926,
+            0.9181818181818183,
+            0.9181818181818183,
+            0.9430548384868849,
+            0.9066082746806284,
+            0.9248315565837565,
+            0.9248315565837565,
+            0.9066082746806284,
+            0.8883849927775
+          ],
+          "leave_one_arm_out_rho_max": 0.9430548384868849,
+          "leave_one_arm_out_rho_min": 0.8883849927775,
+          "permutation_p": 0.0004997501249375312,
+          "rho": 0.9141870411815418
+        },
+        "mR@50": {
+          "leave_one_arm_out_rho": [
+            -0.7272727272727273,
+            -0.8090909090909091,
+            -0.7272727272727273,
+            -0.7272727272727273,
+            -0.7272727272727273,
+            -0.690909090909091,
+            -0.690909090909091,
+            -0.7090909090909092,
+            -0.7272727272727273,
+            -0.7090909090909092,
+            -0.7090909090909092,
+            -0.7272727272727273
+          ],
+          "leave_one_arm_out_rho_max": -0.690909090909091,
+          "leave_one_arm_out_rho_min": -0.8090909090909091,
+          "permutation_p": 0.0079960019990005,
+          "rho": -0.7272727272727273
+        }
+      },
+      "three_family_rank_correlations_not_inferential": {
+        "Pareto gap": -0.5,
+        "R@50": 1.0,
+        "mR@50": -0.5
+      }
+    },
+    "validation_all_labels": {
+      "descriptive_three_family_means": [
+        {
+          "R": 65.7378762960434,
+          "mR": 22.070655151658798,
+          "pareto": -2.613922718428981,
+          "wprd": 0.5020494511970863
+        },
+        {
+          "R": 67.26153373718262,
+          "mR": 22.862139411064156,
+          "pareto": 0.5582281319958454,
+          "wprd": 0.5645418290059225
+        },
+        {
+          "R": 67.51350283622742,
+          "mR": 19.29726678905873,
+          "pareto": -3.006644490009578,
+          "wprd": 0.6034105208494385
+        }
+      ],
+      "documented_population": {
+        "eligibility": "unrestricted raw-name subject/object groups",
+        "images": 10401,
+        "relation_rows": 132556,
+        "split": "validation",
+        "wprd_cells": 20016
+      },
+      "n_arms": 12,
+      "sha256": "74894d1d1fe06928ae27b00eee3da67d1d75eccd0c6cddf6d7d688e4307bb7ba",
+      "source": "runs/p49_metric_grounding/corr.json",
+      "stored_correlations": {
+        "Pareto gap": {
+          "leave_one_arm_out_rho": [
+            -0.36363636363636365,
+            -0.7272727272727273,
+            -0.3272727272727273,
+            -0.3272727272727273,
+            -0.3272727272727273,
+            -0.3272727272727273,
+            -0.3272727272727273,
+            -0.33636363636363636,
+            -0.3545454545454546,
+            -0.33636363636363636,
+            -0.33636363636363636,
+            -0.3545454545454546
+          ],
+          "leave_one_arm_out_rho_max": -0.3272727272727273,
+          "leave_one_arm_out_rho_min": -0.7272727272727273,
+          "permutation_p": 0.23588205897051473,
+          "rho": -0.3706293706293706
+        },
+        "R@50": {
+          "leave_one_arm_out_rho": [
+            0.6727272727272727,
+            0.6727272727272727,
+            0.6636363636363638,
+            0.7363636363636363,
+            0.8000000000000002,
+            0.7545454545454545,
+            0.7545454545454545,
+            0.8181818181818182,
+            0.7636363636363637,
+            0.790909090909091,
+            0.7181818181818183,
+            0.7000000000000001
+          ],
+          "leave_one_arm_out_rho_max": 0.8181818181818182,
+          "leave_one_arm_out_rho_min": 0.6636363636363638,
+          "permutation_p": 0.0079960019990005,
+          "rho": 0.7412587412587412
+        },
+        "mR@50": {
+          "leave_one_arm_out_rho": [
+            -0.7272727272727273,
+            -0.7272727272727273,
+            -0.6454545454545455,
+            -0.6454545454545455,
+            -0.6454545454545455,
+            -0.6454545454545455,
+            -0.6454545454545455,
+            -0.6090909090909091,
+            -0.6272727272727273,
+            -0.6090909090909091,
+            -0.6090909090909091,
+            -0.6272727272727273
+          ],
+          "leave_one_arm_out_rho_max": -0.6090909090909091,
+          "leave_one_arm_out_rho_min": -0.7272727272727273,
+          "permutation_p": 0.02048975512243878,
+          "rho": -0.6503496503496503
+        }
+      },
+      "three_family_rank_correlations_not_inferential": {
+        "Pareto gap": -0.5,
+        "R@50": 1.0,
+        "mR@50": -0.5
+      }
+    },
+    "validation_vg150_only": {
+      "descriptive_three_family_means": [
+        {
+          "R": 70.35236060619354,
+          "mR": 21.038273983977895,
+          "pareto": -2.9485353419714615,
+          "wprd": 0.49899740361889555
+        },
+        {
+          "R": 70.6581175327301,
+          "mR": 22.0299256856165,
+          "pareto": -0.05395109072351465,
+          "wprd": 0.5696105477102741
+        },
+        {
+          "R": 70.946364402771,
+          "mR": 18.913433939387517,
+          "pareto": -2.336663258196771,
+          "wprd": 0.6272001098706459
+        }
+      ],
+      "documented_population": {
+        "decidable_rows": 31125,
+        "eligibility": "subject and object both in VG150 object vocabulary",
+        "eligible_object_rows": 37121,
+        "images": 10401,
+        "relation_rows": 132556,
+        "split": "validation",
+        "wprd_cells": null
+      },
+      "n_arms": 12,
+      "sha256": "50627e48c7f34c94893062e8e2a4720ab0cb891cc8e4200b6224592079dc3eeb",
+      "source": "runs/p53_metric_grounding_vg150only/corr.json",
+      "stored_correlations": {
+        "Pareto gap": {
+          "leave_one_arm_out_rho": [
+            -0.07272727272727274,
+            -0.44545454545454555,
+            -0.22727272727272727,
+            -0.07272727272727274,
+            -0.06363636363636364,
+            -0.06363636363636364,
+            -0.045454545454545456,
+            -0.03636363636363637,
+            -0.11818181818181818,
+            -0.03636363636363637,
+            -0.02727272727272728,
+            -0.11818181818181818
+          ],
+          "leave_one_arm_out_rho_max": -0.02727272727272728,
+          "leave_one_arm_out_rho_min": -0.44545454545454555,
+          "permutation_p": 0.7241379310344828,
+          "rho": -0.11188811188811189
+        },
+        "R@50": {
+          "leave_one_arm_out_rho": [
+            0.9636363636363637,
+            0.9363636363636365,
+            0.9545454545454546,
+            0.9545454545454546,
+            0.9363636363636365,
+            0.9545454545454546,
+            0.9545454545454546,
+            0.9363636363636365,
+            0.9454545454545454,
+            0.9636363636363637,
+            0.9363636363636365,
+            0.9454545454545454
+          ],
+          "leave_one_arm_out_rho_max": 0.9636363636363637,
+          "leave_one_arm_out_rho_min": 0.9363636363636365,
+          "permutation_p": 0.0004997501249375312,
+          "rho": 0.951048951048951
+        },
+        "mR@50": {
+          "leave_one_arm_out_rho": [
+            -0.7090909090909092,
+            -0.7090909090909092,
+            -0.6181818181818182,
+            -0.6181818181818182,
+            -0.6181818181818182,
+            -0.6181818181818182,
+            -0.6181818181818182,
+            -0.5909090909090909,
+            -0.6090909090909091,
+            -0.5909090909090909,
+            -0.5818181818181819,
+            -0.6090909090909091
+          ],
+          "leave_one_arm_out_rho_max": -0.5818181818181819,
+          "leave_one_arm_out_rho_min": -0.7090909090909092,
+          "permutation_p": 0.025487256371814093,
+          "rho": -0.6293706293706294
+        }
+      },
+      "three_family_rank_correlations_not_inferential": {
+        "Pareto gap": 0.5,
+        "R@50": 1.0,
+        "mR@50": -0.5
+      }
+    }
+  },
+  "schema": "paper-c-r3-wprd-construct-validity-audit-v1",
+  "status": "COMPLETED_DESCRIPTIVE_DEPENDENCE_AUDIT"
+}

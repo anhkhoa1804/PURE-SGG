@@ -1,0 +1,20 @@
+{
+  "files": {
+    "research_analysis/FINAL_REPORT.md": "d0a93978a0caa39b1177e6e98884439c9a146e96de718df756720d9a98da333e",
+    "research_analysis/R1_fixed_geometry_C1.json": "f5474f1dc25e85c3616b50846fc277a36e45980a1fad40157396d1a068fa99cb",
+    "research_analysis/R1_fixed_geometry_C1.md": "8fe7f9685730a9a644527d3be17ecf4573e436c191f4d08b57d8c83995788e49",
+    "research_analysis/R2_nested_nuisance_analysis.json": "1a2755e5244a9a16eec06fdcdf5c86e6a6ef42277d50d651d0e6791410403df5",
+    "research_analysis/R2_nested_nuisance_analysis.md": "90564270190544775cdf6ae7fcbd4c5942767a834a4a311e1f96cb8a1828e56d",
+    "research_analysis/R3_WPRD_construct_validity.json": "053998dfb645457b3b30f9b6bcfc819b2948746f12f4e9ebbe39094246044402",
+    "research_analysis/R3_WPRD_construct_validity.md": "651e3161874ce92234b272fc07a865fd49d7392550e480ce49f44529ac355139",
+    "research_analysis/README.md": "57d675444146ab0e75d338d0c60ee9d471bde2a132885d9a682bfa2778fa5fdd",
+    "research_analysis/decision_matrix.md": "0347b3ba43f19d9f845a36537273094757ae8ad74fd87b0fa8bda880a76acd6e",
+    "research_analysis/portfolio_gate_decision.md": "5143cd5d85061c0928d490e15142312abf93cb16a34fe2065c4429cbf22af939",
+    "research_analysis/portfolio_gate_inventory.json": "65a394cf18a9e5fae59a41b201967003c74753c69e5580f9c66d8b2ee652d923",
+    "research_analysis/portfolio_gate_inventory.md": "7c723d35fef52d4a253d045b7ab75ba47f4c5aa26ffb457527e5961a20c50d85",
+    "research_analysis/repo_cleanup_report.md": "9ff60393e122a0d0d4872b24fbb32a058a95845e377c7c4404de038f156c5e93",
+    "tests/test_portfolio_gate_analysis.py": "3f535d8fc7c557551c5a37cec4e612fa3b7a557e955908d2ca1ea308bfb9a4bd",
+    "tools/portfolio_gate_analysis.py": "966dd7a91db5a81e6f848a036f43a91054614f444f850d9f30669d0426eabdc1"
+  },
+  "schema": "portfolio-gate-artifact-hashes-v1"
+}

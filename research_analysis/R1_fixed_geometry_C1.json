@@ -1,0 +1,16 @@
+{
+  "schema": "paper-c-portfolio-r1-fixed-geometry-registration-v1",
+  "status": "R1_BLOCKED_GPU_RESOURCE",
+  "hypothesis": "Restoring pixel-scale geometry input alone while retaining Fourier scale 1.0 changes paired-cell WPRD relative to frozen C0.",
+  "estimand": "C1a minus C0 macro WPRD on identical eligible validation cells at seed 1234 under the fixed evaluator protocol",
+  "treatment": {"arm": "C1a", "geom_input_pixel_space": true, "geom_fourier_scale": 1.0},
+  "comparator": {"arm": "C0", "geom_input_pixel_space": false, "geom_fourier_scale": 1.0, "source": "runs/eval_C0/result.json"},
+  "seed": 1234,
+  "training": {"launcher": "scripts/train/run_c0_c1.sh", "epochs": 3, "samples_per_epoch": 12000, "batch_size": 6, "accum_steps": 4, "learning_rate": 0.00002, "schedule": "cosine", "warmup_steps": 300, "optimizer": "registered stage-3 launcher recipe", "checkpoint_selection": "fixed final checkpoint; no validation selection", "initialization": "same frozen PURE initialization as registered C0/C1"},
+  "evaluation": {"tool": "tools/c0_c1_evaluate.py", "split": "full existing validation", "primary": "macro WPRD on paired eligible cells", "bootstrap_replicates": 2000, "bootstrap_seed": 11, "bootstrap_unit": "registered paired cells", "secondary": ["R@50", "mR@50", "geometry channels", "fusion gate"]},
+  "interpretation": {"no_new_success_threshold": true, "existing_plus_0_010_reference_is_context_only": true, "semantic_claims_authorized": false},
+  "stopping_rule": "one training arm and one full evaluation; stop on resource/integrity failure; no retry or additional seed",
+  "resource_budget_gpu_hours": 12,
+  "pre_execution_commit": "0b306a4020e41356f29e5053a902b065d6ae94e1",
+  "resource_check": {"timestamp_utc": "2026-10-06T07:53:38Z", "gpu": "NVIDIA L4", "memory_used_mib": 5802, "memory_total_mib": 23034, "utilization_percent": 15, "competing_pid": 24793, "competing_process_memory_mib": 5794, "launched": false, "reason": "active workload; no competition or retry"}
+}
