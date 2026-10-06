@@ -15,6 +15,12 @@ work was launched.
 | `CUDA_VISIBLE_DEVICES='' .venv/bin/python -m openvocab_rel.train --help` | PASS | Help path only; no training launched. |
 | `CUDA_VISIBLE_DEVICES='' .venv/bin/python -c 'import openvocab_rel; import openvocab_rel.config; import openvocab_rel.datasets.vg150_loader; import openvocab_rel.evals; import openvocab_rel.models.relational_model; import openvocab_rel.train'` | PASS | Core package imports only. |
 
+Closeout documentation follow-up on 2026-10-06 reran the documented command
+`CUDA_VISIBLE_DEVICES='' .venv/bin/python -m pytest -q`: **PASS — 611 passed,
+25 warnings, 366.31 s**. The warnings were existing PyTorch transformer
+configuration and test scalar-conversion warnings; there were no failures.
+This run was CPU-only and made no model or research-artifact changes.
+
 `pytest.ini` sets `testpaths=tests` and excludes run/data/checkpoint trees so
 the documented bare pytest invocation does not treat embedded research source
 snapshots as the live suite. Optional/historical dependencies and real-data

@@ -62,4 +62,8 @@ Remote/branch: `origin` /
 `research/pure-complete-readout-v2`. Push status: initial closeout commit was
 successfully pushed. This delivery record is maintained in a follow-up,
 documentation-only commit; the final branch state is verified from Git after
-that push.
+that push (`4f72f03b208eec0472c51f1d83329891a99735eb`). On 2026-10-06, a
+documentation-only follow-up aligned current docs with the final audit's
+12,330 / 14,991 pair-support count, added the requested standalone codebase
+inventory, and reran the documented CPU suite (611 passed, 25 warnings).
+Its commit and push result are recorded in the current closeout handoff.

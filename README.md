@@ -51,6 +51,13 @@ The later residual comparisons were:
 | G+O → G+O + rel_feat | −0.0051288329 | [−0.0263599217, +0.0158628067] |
 | N4-FIT pilot → N4-FIT + rel_feat | −0.0024462230 | [−0.0026268349, −0.0022835433] exploratory |
 
+The final saved pair-prior row audit identifies 12,330 of 14,991 validation
+rows as supported by a training pair (82.25%). An earlier summary reported
+12,402; that count is superseded by the identity-checked saved-row artifact
+and must not be used as the current figure. See
+[`posthoc_metrics.json` in the final evidence audit](runs/paper_c_final_evidence_audit_20261003T185925Z/posthoc_metrics.json)
+and its documented consistency note in `evidence_index.json`.
+
 The balanced-15k M2 run reported log-loss 1.6304535145, accuracy
 0.5614035088, and macro recall 0.1412721492 on 1,182 validation images / 14,991
 rows. Historical prefix M2 metrics used 129,826 validation rows, so those
@@ -114,6 +121,8 @@ active workflow. Large checkpoints, datasets, tensor caches, and many run
 payloads are excluded from Git by `.gitignore`; a clone alone is not a complete
 artifact archive. The [historical artifact index](docs/archive/HISTORICAL_ARTIFACTS.md)
 maps major preserved runs without moving or rewriting them.
+The [closeout codebase inventory](docs/research/CLOSEOUT_CODEBASE_INVENTORY.md)
+classifies active, historical, generated, and retained legacy areas.
 
 ## Active workflow
 
