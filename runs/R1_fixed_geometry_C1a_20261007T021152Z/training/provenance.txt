@@ -1,0 +1,12 @@
+arm=C1a
+seed=1234
+epochs=3
+samples_per_epoch=12000
+geom_input_pixel_space=true
+geom_fourier_scale=1.0
+git_commit=93495d0932ff3d7ad275931d139d12d24c01f3e7
+git_dirty=179
+resume_from=checkpoints/demo_best/pure_best_adapt_light_mR50.pt
+ckpt_sha256=8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442
+started_utc=2026-10-07T02:18:22Z
+gpu=NVIDIA L4, 23034 MiB

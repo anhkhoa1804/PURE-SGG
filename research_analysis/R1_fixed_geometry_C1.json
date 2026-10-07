@@ -1,16 +1,81 @@
 {
-  "schema": "paper-c-portfolio-r1-fixed-geometry-registration-v1",
-  "status": "R1_BLOCKED_GPU_RESOURCE",
-  "hypothesis": "Restoring pixel-scale geometry input alone while retaining Fourier scale 1.0 changes paired-cell WPRD relative to frozen C0.",
-  "estimand": "C1a minus C0 macro WPRD on identical eligible validation cells at seed 1234 under the fixed evaluator protocol",
-  "treatment": {"arm": "C1a", "geom_input_pixel_space": true, "geom_fourier_scale": 1.0},
-  "comparator": {"arm": "C0", "geom_input_pixel_space": false, "geom_fourier_scale": 1.0, "source": "runs/eval_C0/result.json"},
+  "schema": "paper-c-portfolio-r1-fixed-geometry-result-v2",
+  "status": "BLOCKED_TECHNICAL",
+  "hypothesis": "Correcting the geometry input-units contract alone materially changes the C1 result under frozen seed 1234.",
+  "estimand": "C1a minus frozen C0 macro WPRD on identical eligible validation cells, with Fourier scale held at 1.0 in both arms.",
+  "treatment": {
+    "arm": "C1a",
+    "geom_input_pixel_space": true,
+    "geom_fourier_scale": 1.0,
+    "result": "not evaluated"
+  },
+  "parent": {
+    "arm": "C0",
+    "geom_input_pixel_space": false,
+    "geom_fourier_scale": 1.0,
+    "wprd_macro": 0.5667271196244782,
+    "artifact": "runs/eval_C0/result.json"
+  },
+  "historical_c1_context": {
+    "wprd_macro": 0.5749881522134409,
+    "geom_input_pixel_space": true,
+    "geom_fourier_scale": 0.01,
+    "artifact": "runs/eval_C1/result.json",
+    "primary_comparator": false,
+    "reason": "Fourier scale differs; historical C1 therefore does not isolate the units correction."
+  },
   "seed": 1234,
-  "training": {"launcher": "scripts/train/run_c0_c1.sh", "epochs": 3, "samples_per_epoch": 12000, "batch_size": 6, "accum_steps": 4, "learning_rate": 0.00002, "schedule": "cosine", "warmup_steps": 300, "optimizer": "registered stage-3 launcher recipe", "checkpoint_selection": "fixed final checkpoint; no validation selection", "initialization": "same frozen PURE initialization as registered C0/C1"},
-  "evaluation": {"tool": "tools/c0_c1_evaluate.py", "split": "full existing validation", "primary": "macro WPRD on paired eligible cells", "bootstrap_replicates": 2000, "bootstrap_seed": 11, "bootstrap_unit": "registered paired cells", "secondary": ["R@50", "mR@50", "geometry channels", "fusion gate"]},
-  "interpretation": {"no_new_success_threshold": true, "existing_plus_0_010_reference_is_context_only": true, "semantic_claims_authorized": false},
-  "stopping_rule": "one training arm and one full evaluation; stop on resource/integrity failure; no retry or additional seed",
-  "resource_budget_gpu_hours": 12,
-  "pre_execution_commit": "0b306a4020e41356f29e5053a902b065d6ae94e1",
-  "resource_check": {"timestamp_utc": "2026-10-06T07:53:38Z", "gpu": "NVIDIA L4", "memory_used_mib": 5802, "memory_total_mib": 23034, "utilization_percent": 15, "competing_pid": 24793, "competing_process_memory_mib": 5794, "launched": false, "reason": "active workload; no competition or retry"}
+  "threshold": {
+    "material_success_margin_absolute_wprd": 0.01,
+    "source": "docs/PAPER_C_C0_C1_PREREGISTRATION.md",
+    "applied": false,
+    "reason": "No completed endpoint metric."
+  },
+  "training": {
+    "command": "RUN_NAME=R1_C1a_seed1234_20261007T021152Z OUT_DIR=runs/R1_fixed_geometry_C1a_20261007T021152Z/training SAVE_PATH=runs/R1_fixed_geometry_C1a_20261007T021152Z/checkpoint.pt ARM=C1a SEED=1234 EPOCHS=3 SAMPLES_PER_EPOCH=12000 PYTHON=.venv/bin/python bash scripts/train/run_c0_c1.sh",
+    "started_utc": "2026-10-07T02:18:22Z",
+    "training_completed": false,
+    "completed_epoch_checkpoints": 1,
+    "interrupted_during": "registered 60-batch in-training validation diagnostic after epoch 0",
+    "exit_status": 130,
+    "stop_reason": "unrelated GPU process appeared; R1 stopped per resource policy",
+    "optimizer": "AdamW, fresh optimizer state",
+    "initialization": "checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+    "initialization_sha256": "8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442",
+    "partial_checkpoint": "runs/R1_fixed_geometry_C1a_20261007T021152Z/checkpoint.pt",
+    "partial_checkpoint_sha256": "1bebd6104688c4c50484fe0d1a507caed2e23c23f5592628490ff697fd0cda82",
+    "partial_checkpoint_bytes": 5293175545
+  },
+  "evaluation": {
+    "launched": false,
+    "metric": "macro WPRD, cap 64",
+    "images": null,
+    "rows": null,
+    "cells": null,
+    "paired_bootstrap_replicates": 2000,
+    "paired_bootstrap_seed": 11,
+    "ci95": null,
+    "delta_wprd": null
+  },
+  "resource_contention": {
+    "time_utc": "2026-10-07T02:57:19Z",
+    "gpu": "NVIDIA L4",
+    "utilization_percent": 100,
+    "memory_total_mib": 23034,
+    "memory_used_mib_combined_sample": 7852,
+    "r1_process_pid": 17600,
+    "unrelated_process_pid": 32655,
+    "unrelated_process": "experiments/005_omnidocbench/prepare.py",
+    "unrelated_process_gpu_memory_mib": 186,
+    "r1_process_only_sampled_memory_max_mib": 12034,
+    "pid_24793": "not present; never signalled"
+  },
+  "regression_test": {
+    "command": ".venv/bin/python -m pytest tests/test_geometry.py tests/test_geometry_contract_flags.py tests/test_model_forward.py -q",
+    "passed": 18,
+    "failed": 0,
+    "warnings": 5
+  },
+  "interpretation": "BLOCKED_TECHNICAL; this is not a null result and no materiality conclusion is available.",
+  "portfolio": "MERGE_A_B_AND_FOLD_C"
 }

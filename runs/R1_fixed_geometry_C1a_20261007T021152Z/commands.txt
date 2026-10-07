@@ -1,0 +1,8 @@
+Training (one invocation only; run from repository root):
+RUN_NAME=R1_C1a_seed1234_20261007T021152Z OUT_DIR=runs/R1_fixed_geometry_C1a_20261007T021152Z/training SAVE_PATH=runs/R1_fixed_geometry_C1a_20261007T021152Z/checkpoint.pt ARM=C1a SEED=1234 EPOCHS=3 SAMPLES_PER_EPOCH=12000 PYTHON=.venv/bin/python bash scripts/train/run_c0_c1.sh > runs/R1_fixed_geometry_C1a_20261007T021152Z/training.log 2>&1
+
+Full evaluation (one invocation only; after a separate fresh GPU check):
+.venv/bin/python tools/c0_c1_evaluate.py --arm C1a --ckpt runs/R1_fixed_geometry_C1a_20261007T021152Z/checkpoint.pt --out_dir runs/R1_fixed_geometry_C1a_20261007T021152Z/evaluation --eval_batches 0 --batch_size 12 --fourier_scale 0.01
+
+The evaluator maps C1a to pixel-scale geometry and Fourier scale 1.0 itself; its CLI default Fourier scale is ignored for C1a. The existing comparator is CPU-only:
+.venv/bin/python tools/c0_c1_compare.py --c0 runs/eval_C0/result.json --c1 runs/R1_fixed_geometry_C1a_20261007T021152Z/evaluation/result.json --label_c0 frozen_C0 --label_c1 corrected_C1a --out runs/R1_fixed_geometry_C1a_20261007T021152Z/comparison.json

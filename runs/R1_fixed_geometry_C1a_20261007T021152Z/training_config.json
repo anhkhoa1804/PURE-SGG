@@ -1,0 +1,66 @@
+{
+  "experiment": "R1_fixed_geometry_C1a_same_seed",
+  "arm": "C1a",
+  "seed": 1234,
+  "geometry": {
+    "geom_input_pixel_space": true,
+    "geom_fourier_scale": 1.0,
+    "only_intervention_vs_parent": "pixel-scale boxes instead of boxes divided by img_res"
+  },
+  "parent": {
+    "arm": "C0",
+    "geom_input_pixel_space": false,
+    "geom_fourier_scale": 1.0,
+    "result": "runs/eval_C0/result.json",
+    "wprd_macro": 0.5667271196244782
+  },
+  "historical_C1_context": {
+    "result": "runs/eval_C1/result.json",
+    "wprd_macro": 0.5749881522134409,
+    "not_primary_comparator_reason": "historical C1 uses geom_fourier_scale=0.01; C1a uses 1.0 to isolate units correction"
+  },
+  "training": {
+    "launcher": "scripts/train/run_c0_c1.sh",
+    "epochs": 3,
+    "samples_per_epoch": 12000,
+    "batch_size": 6,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 24,
+    "optimizer": "AdamW",
+    "model_weight_decay": 0.01,
+    "clip_weight_decay": 0.0,
+    "learning_rate": 0.00002,
+    "schedule": "cosine",
+    "warmup_steps": 300,
+    "amp": true,
+    "amp_dtype": "bfloat16",
+    "gradient_checkpointing": true,
+    "checkpoint_selection": "fixed final epoch; no validation selection",
+    "initialization": "checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+    "initialization_sha256": "8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442",
+    "optimizer_state": "fresh; not resumed",
+    "objective": "registered full stage-3 objective and exact launcher loss weights"
+  },
+  "evaluation": {
+    "tool": "tools/c0_c1_evaluate.py",
+    "arm": "C1a",
+    "split": "existing full validation",
+    "batch_size": 12,
+    "eval_batches": 0,
+    "primary_metric": "macro WPRD, cap=64",
+    "paired_bootstrap": {
+      "tool": "tools/c0_c1_compare.py",
+      "replicates": 2000,
+      "seed": 11,
+      "unit": "paired WPRD cell"
+    }
+  },
+  "decision": {
+    "material_success_threshold_absolute_delta_wprd": 0.01,
+    "threshold_source": "docs/PAPER_C_C0_C1_PREREGISTRATION.md, Success threshold",
+    "same_seed_only": true,
+    "between_seed_uncertainty_estimated": false
+  },
+  "resource_budget_gpu_hours": 12,
+  "no_other_experiments": true
+}

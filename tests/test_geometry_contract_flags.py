@@ -40,6 +40,62 @@ def test_pixel_boxes_keep_all_eight_channels_informative():
         assert g[:, col].std().item() > 0.0, f"column {col} is constant"
 
 
+def test_c1a_model_path_passes_unscaled_pixel_boxes_to_geometry(monkeypatch):
+    """Exercise the actual RelationalModel path, not just the geometry helper."""
+    import openvocab_rel.models.relational_model as rel_mod
+    from openvocab_rel.config import TrainConfig
+    from openvocab_rel.models.relational_model import RelationalModel
+
+    cfg = TrainConfig()
+    cfg.emb_dim = 32
+    cfg.clip_input_res = 64
+    cfg.progressive_node_layers = 1
+    cfg.progressive_edge_layers = 0
+    cfg.progressive_bilinear_layers = 0
+    cfg.deformable_num_points = 4
+    cfg.relation_context_layers = 0
+    cfg.gradient_checkpointing = False
+    cfg.learned_prune_k = 0
+    cfg.geom_input_pixel_space = True
+    model = RelationalModel(cfg, clip_vision_dim=48, text_dim=None).eval()
+
+    boxes = torch.tensor(
+        [[2.0, 3.0, 24.0, 31.0], [15.0, 8.0, 49.0, 44.0],
+         [28.0, 18.0, 61.0, 58.0]], dtype=torch.float32
+    )
+    captured = {}
+    original = rel_mod.geom_feats_torch
+
+    def capture_geometry(subject_boxes, object_boxes):
+        captured["subject"] = subject_boxes.detach().clone()
+        captured["object"] = object_boxes.detach().clone()
+        return original(subject_boxes, object_boxes)
+
+    monkeypatch.setattr(rel_mod, "geom_feats_torch", capture_geometry)
+    feat_map = torch.randn(1, 48, 8, 8)
+    pairs = [[(0, 1), (1, 2), (2, 0)]]
+    with torch.no_grad():
+        _regs, rel_feats, _swaps, _assigns, _gates, _kept = model.forward_from_featmap(
+            feat_map, obj_boxes=[boxes], pairs=pairs, return_swapped=False
+        )
+
+    box_identity = {tuple(row.tolist()): i for i, row in enumerate(boxes)}
+    captured_pairs = {
+        (box_identity[tuple(s.tolist())], box_identity[tuple(o.tolist())])
+        for s, o in zip(captured["subject"], captured["object"])
+    }
+    assert captured_pairs == set(pairs[0])
+    assert float(captured["subject"].abs().max()) > 1.0
+    assert float(captured["object"].abs().max()) > 1.0
+    geom = original(captured["subject"], captured["object"])
+    assert geom.shape == (3, 8)
+    assert torch.isfinite(geom).all()
+    for col in range(8):
+        assert geom[:, col].std().item() > 0.0, f"C1a geometry column {col} collapsed"
+    assert rel_feats[0].shape == (3, cfg.emb_dim)
+    assert torch.isfinite(rel_feats[0]).all()
+
+
 def test_six_channels_are_scale_invariant_only_log_areas_shift():
     """Pixel vs normalised differ ONLY by a constant offset in a1, a2.
 

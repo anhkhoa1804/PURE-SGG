@@ -1,0 +1,32 @@
+{
+  "preflight": {
+    "timestamp_utc": "2026-10-07T02:08:20Z",
+    "gpu": "NVIDIA L4",
+    "memory_total_mib": 23034,
+    "memory_used_mib": 0,
+    "utilization_percent": 4,
+    "compute_processes": 0,
+    "pid_24793_present": false,
+    "disk_available_gib": 24
+  },
+  "immediate_pretrain_gate": {
+    "timestamp_utc": "2026-10-07T02:18:08Z",
+    "gpu": "NVIDIA L4",
+    "memory_total_mib": 23034,
+    "memory_used_mib": 0,
+    "utilization_percent": 4,
+    "compute_processes": 0,
+    "pid_24793_present": false,
+    "disk_available_gib": 24
+  },
+  "training": {
+    "started_utc": "2026-10-07T02:18:22Z",
+    "stop_time_utc": "approximately 2026-10-07T02:58Z; process exited with status 130 after SIGINT",
+    "elapsed_observed": "approximately 40 minutes",
+    "sampled_gpu_memory_max_mib_r1_process": 12034,
+    "gpu_memory_mib_combined_at_contention": 7852,
+    "disk_available_gib_at_stop": 19,
+    "unrelated_workload": "PID 32655, experiments/005_omnidocbench/prepare.py, 186 MiB GPU memory",
+    "final_status": "interrupted; no retry"
+  }
+}

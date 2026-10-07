@@ -2,7 +2,7 @@
 
 ## Verdict
 
-Corrected R2 supports an exploratory, bounded nested predictive increment for frozen `rel_feat` beyond the saved FIT-trained G+O predictor. It does not establish semantic specificity or full-population residual signal. The prior `−0.622110` R2 headline is retracted. Portfolio remains `MERGE_A_B_AND_FOLD_C`; R1 was not run and remains blocked/not authorized by this correction.
+Corrected R2 supports an exploratory, bounded nested predictive increment for frozen `rel_feat` beyond the saved FIT-trained G+O predictor. It does not establish semantic specificity or full-population residual signal. The prior `−0.622110` R2 headline is retracted. Portfolio remains `MERGE_A_B_AND_FOLD_C`; the single authorized R1 attempt was interrupted for resource contention and produced no evaluated endpoint.
 
 ## What Was Verified
 
@@ -10,7 +10,7 @@ Corrected R2 supports an exploratory, bounded nested predictive increment for fr
 - Bounded N4-FIT pilot partition: CAL-FIT 750 / 9,078 rows, CAL-CHECK 250 / 3,142 rows. The four corrected arms use identical CAL-CHECK relation keys and frozen 51-class labels.
 - Ordered pair prior: full FIT pair table, Laplace-1 smoothing, FIT-global Laplace-1 backoff; 197,661 observed ordered pairs. CAL-CHECK support is 2,610/3,142.
 - R3 correlation tables: 12 complete arm rows in each p49/p53/p61 artifact, all from a shared checkpoint/cache family. Prior-only WPRD is 0.5; planted shortcut and strong-VLM ceiling evidence are absent.
-- Historical geometry study bundled pixel-unit and Fourier-scale changes. No corrected fixed-geometry R1 outcome exists.
+- Historical geometry study bundled pixel-unit and Fourier-scale changes. The registered C1a units-only run reached its epoch-0 checkpoint, then was stopped during the launcher diagnostic after unrelated GPU PID 32655 appeared. No corrected fixed-geometry R1 endpoint exists; this is blocked, not a null result.
 
 ## R2 — Nested Nuisance
 
@@ -24,22 +24,22 @@ WPRD remains a narrow within-pair predicate discrimination statistic, not a gene
 
 ## R1 — Fixed Geometry C1
 
-Not run. The previous gate recorded an occupied GPU resource (PID 24793); no process was killed. No R1 outcome is inferred. This correction does not authorize an R1 launch. Before any future R1, freeze the same-seed fixed-geometry design, success margin, metric, stop rule, baseline and artifact paths; perform a fresh `nvidia-smi`; identify PID 24793's command/owner/process tree and confirm relation to this workload before considering any process action.
+**`BLOCKED_TECHNICAL`**. The C1a run (seed 1234, pixel-scale boxes, Fourier scale 1.0) was interrupted during its in-training validation diagnostic after unrelated GPU PID 32655 appeared with 186 MiB allocated and the device at 100% utilization. We interrupted only our R1 PID; no final WPRD evaluation ran, so no delta, CI, or materiality conclusion is available. PID 24793 was absent at preflight and was never signalled. The partial epoch-0 checkpoint is preserved but is not a completed model. See `R1_fixed_geometry_C1.md` and `R1_CORRECTION_SUMMARY.md`.
 
 ## Publication Decision
 
-Remain with `MERGE_A_B_AND_FOLD_C`. Corrected R2 is a bounded predictive pilot, not the missing distinct C geometry result. Fullscale N4-FIT and U/S were not evaluated; no full-population G+O+U+S residual inference or final interactional-family endpoint exists.
+Remain with `MERGE_A_B_AND_FOLD_C`. Corrected R2 is a bounded predictive pilot, not the missing distinct C geometry result. R1 is blocked rather than negative; this single-run authorization does not permit a retry. Fullscale N4-FIT and U/S were not evaluated; no full-population G+O+U+S residual inference or final interactional-family endpoint exists.
 
 ## What We Should Not Do
 
 - Do not cite −0.622110 as the intended R2 contrast.
 - Do not infer semantic, causal, or interaction-specific information from these predictive results.
-- Do not launch R1, fullscale N4, seed 5678, B2, open-vocabulary work, or C1 residual retraining from this correction.
+- Do not retry R1 under this one-run authorization, or launch fullscale N4, seed 5678, B2, open-vocabulary work, or C1 residual retraining.
 - Do not terminate PID 24793 or touch historical artifacts.
 
 ## Next Finite Step
 
-No new experiment is authorized here. Any future R1 must return through its own frozen design and resource gate; otherwise retain the present merge/close decision.
+Proceed with merged A+B+C paper consolidation. Do not launch another GPU run under this authorization.
 
 ## Reproducibility
 

@@ -1,0 +1,23 @@
+{
+  "status": "BLOCKED_TECHNICAL",
+  "reason": "An unrelated GPU workload appeared during the registered in-training diagnostic; stopped the R1 process as required.",
+  "contention_first_observed_utc": "2026-10-07T02:57:19Z",
+  "r1_interrupt_sent_utc": "between 2026-10-07T02:57:19Z and 2026-10-07T02:58:45Z",
+  "r1_process_exit_observed_utc": "approximately 2026-10-07T02:58Z",
+  "unrelated_process": {
+    "pid": 32655,
+    "command": "experiments/005_omnidocbench/prepare.py",
+    "gpu_memory_mib": 186,
+    "relation_to_r1": "unrelated; separate command tree"
+  },
+  "r1_process": {
+    "pid": 17600,
+    "signal": "SIGINT",
+    "exit_status": 130,
+    "last_stage": "epoch-0 in-training 60-batch validation diagnostic",
+    "checkpoint_written": "checkpoint.pt",
+    "evaluation_launched": false
+  },
+  "pid_24793": "absent during preflight; never signalled",
+  "retry": false
+}

@@ -1,0 +1,9 @@
+Contention observed 2026-10-07 02:57:19 UTC during the single R1 training run.
+
+GPU: NVIDIA L4; sampled utilization 100%; sampled total memory used 7,852 MiB / 23,034 MiB.
+
+Compute processes subsequently enumerated:
+- PID 17600: `.venv/bin/python -u -m openvocab_rel.train ... --run_name R1_C1a_seed1234_20261007T021152Z` (this R1 task).
+- PID 32655: `.venv/bin/python experiments/005_omnidocbench/prepare.py --dataset experiments/034a_omnidocbench_snapshot/dataset/full --backend baseline ...` (unrelated workload; 186 MiB reported GPU memory).
+
+The process trees were separate. Only R1 PID 17600 received SIGINT. PID 32655 was not signalled. PID 24793 was absent at preflight and was never signalled. The R1 Python process exited 130 after KeyboardInterrupt during the registered in-training diagnostic. No final evaluation or retry followed.

@@ -1,0 +1,2 @@
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n2     98G   70G   24G  76% /mnt/research-work

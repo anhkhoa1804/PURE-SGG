@@ -1,0 +1,19 @@
+{
+  "repository": "/mnt/research-work/legacy/leanhkhoa150204/Research-No.1",
+  "branch": "research/paper-c-next-direction",
+  "pre_run_head": "93495d0932ff3d7ad275931d139d12d24c01f3e7",
+  "canonical_source_snapshot_commit": "ec4cca6ff01ab46929b7b428220fe0df2ba00f2a",
+  "python": "3.10.12",
+  "torch": "2.9.1+cu129",
+  "torch_cuda_build": "12.9",
+  "transformers": "5.15.1",
+  "expected_gpu": "NVIDIA L4, 23034 MiB",
+  "driver": "580.178.04",
+  "cuda_driver_report": "13.0",
+  "checkpoint_sha256": "79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854",
+  "train_jsonl_sha256": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+  "initialization_checkpoint_sha256": "8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442",
+  "training_launcher": "scripts/train/run_c0_c1.sh",
+  "evaluation_tool": "tools/c0_c1_evaluate.py",
+  "comparison_tool": "tools/c0_c1_compare.py"
+}
