@@ -1,0 +1,66 @@
+{
+  "calibrated_O_prior_vs_wrong_current_O_only": {
+    "comparable": false,
+    "explanation": "The prior table, 51 outputs, FIT counts, Laplace smoothing, and FIT-global unsupported-pair backoff match. The rows and image population differ, and the old validation score is temperature-calibrated while the previous R2 O score is raw on CAL-CHECK. The 0.175515 loss difference is therefore not a model regression comparison.",
+    "historical": {
+      "calibration": "temperature fit on full CAL; T=0.6527293293",
+      "images": 1182,
+      "log_loss": 1.6323624327446515,
+      "population": "fixed current validation",
+      "rows": 14991
+    },
+    "previous_R2": {
+      "calibration": "no temperature; raw FIT pair log-probabilities",
+      "images": 250,
+      "log_loss": 1.8078775991028484,
+      "population": "bounded CAL-CHECK",
+      "rows": 3142
+    },
+    "same_backoff": true,
+    "same_calibration": false,
+    "same_fitting_regime": false,
+    "same_image_count": false,
+    "same_labels": true,
+    "same_pair_counts_vocabulary_support_and_backoff": true,
+    "same_pair_support_rule": true,
+    "same_population": false,
+    "same_population_labels_calibration_split_or_fitting_regime": false,
+    "same_row_count": false,
+    "same_split": false,
+    "same_supported_row_set": false
+  },
+  "historical_O_plus_rel_vs_previous_R2_O_plus_rel": {
+    "comparable": false,
+    "explanation": "The evaluation population and fit/calibration regime differ. The former is full-validation scoring after full-CAL fitting; the latter is CAL-CHECK after CAL-FIT fitting. These values must not be differenced or pooled.",
+    "historical": {
+      "images": 1182,
+      "log_loss": 1.2663293004670928,
+      "population": "fixed current validation",
+      "rows": 14991,
+      "source": "nuisance_ladder_v2 results; O+rel offset and temperature fit on full CAL"
+    },
+    "previous_R2": {
+      "images": 250,
+      "log_loss": 1.1857673743258468,
+      "population": "bounded CAL-CHECK",
+      "rows": 3142,
+      "source": "bounded pilot; raw O parent and untemperatured rel log-probabilities"
+    },
+    "same_backoff": true,
+    "same_calibration": false,
+    "same_fitting_regime": false,
+    "same_image_count": false,
+    "same_labels": true,
+    "same_pair_support_rule": true,
+    "same_population": false,
+    "same_population_labels_calibration_split_or_fitting_regime": false,
+    "same_row_count": false,
+    "same_split": false,
+    "same_supported_row_set": false
+  },
+  "retracted_headline": {
+    "delta_log_loss": -0.6221102247770016,
+    "reason": "It compared raw O and a residual fit without matched parent calibration; corrected here using CAL-FIT-calibrated fixed O and G+O parents with an explicit alpha=0 nesting point.",
+    "status": "RETRACTED_AS_INTENDED_R2_HEADLINE"
+  }
+}

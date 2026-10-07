@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Reproduce the bounded CPU portfolio-gate analyses from frozen artifacts.
+"""Reproduce legacy R3 summaries and delegate current R2 to its correction.
 
-This tool does not train a neural model, read final validation outcomes, or
-modify historical artifacts. R2 fits only a scalar residual coefficient on
-the already frozen CAL-FIT rows; the ordered-pair prior is a FIT-only count
-table. R3 reads saved WPRD correlation tables and computes descriptive
-leave-one-arm-out robustness summaries.
+This tool does not train a neural model or modify historical artifacts. Its
+R2 entrypoint delegates to ``tools/r2_nested_correction.py``; the old
+independent/raw pair-prior comparison is retained under an explicitly
+superseded function name for forensic reference. R3 reads saved WPRD tables
+and computes descriptive leave-one-arm-out summaries.
 """
 from __future__ import annotations
 
@@ -258,7 +258,8 @@ def image_cluster_bootstrap(row_delta: np.ndarray, image_ids: np.ndarray, seed: 
             "estimate": float(row_delta.mean()), "replicate_values": vals.tolist()}
 
 
-def run_r2() -> dict[str, Any]:
+def run_r2_superseded_invalid_comparison() -> dict[str, Any]:
+    """Retained for audit only; not a valid R2 comparison and never a headline."""
     pair_prob, global_prob, prior_meta = fit_pair_prior()
     full_split = read_json(AUDIT / "train_calibration_manifest.json")
     full_fit_ids = set(map(str, full_split["fit_image_ids"]))
@@ -385,16 +386,20 @@ def run_r3() -> dict[str, Any]:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    r2 = run_r2()
+    # Do not allow this historical entrypoint to overwrite the corrected
+    # R2 result with its former uncalibrated O-only comparison.
+    from tools.r2_nested_correction import main as corrected_r2_main
+    corrected_r2_main()
     r3 = run_r3()
-    (OUT / "R2_nested_nuisance_analysis.json").write_text(json.dumps(r2, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
     (OUT / "R3_WPRD_construct_validity.json").write_text(json.dumps(r3, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
     hash_targets = [path for path in OUT.rglob("*") if path.is_file() and path.name != "hashes.json"]
     hash_targets.extend([ROOT / "tools/portfolio_gate_analysis.py", ROOT / "tests/test_portfolio_gate_analysis.py"])
     hashed = {str(path.relative_to(ROOT)): sha256(path) for path in sorted(hash_targets)}
     (OUT / "hashes.json").write_text(json.dumps({"schema": "portfolio-gate-artifact-hashes-v1", "files": hashed}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({"R2_delta_log_loss": r2["CAL_CHECK"]["delta_log_loss"], "R2_alpha": r2["residual"]["alpha"],
-                      "R2_CI95": r2["bootstrap"]["ci95_percentile"], "R3": {k: v["stored_correlations"] for k, v in r3["results"].items()}}, indent=2))
+    r2 = json.loads((OUT / "R2_nested_nuisance_analysis.json").read_text(encoding="utf-8"))
+    print(json.dumps({"R2_G_plus_O_delta_log_loss": r2["G_plus_O"]["G+O"]["delta"]["log_loss"],
+                      "R2_O_delta_log_loss": r2["G_plus_O"]["O"]["delta"]["log_loss"],
+                      "R3": {k: v["stored_correlations"] for k, v in r3["results"].items()}}, indent=2))
 
 
 if __name__ == "__main__":

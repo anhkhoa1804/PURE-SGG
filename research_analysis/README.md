@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The portfolio decision is to **merge A/B and fold C into the measurement/audit paper**. R2 found predictive residual beyond an ordered noun-pair prior on a bounded held-out set. WPRD is interpretable for the narrow within-pair endpoint, but its arm-correlation p-values are not model-level inference. A single C1a isolation run was scientifically justified and registered, but is **blocked** because the fresh L4 check found an active workload. No R1 outcome is inferred, and no semantic or open-vocabulary result is established.
+The portfolio decision is to **merge A/B and fold C into the measurement/audit paper**. Corrected R2 finds a bounded nested predictive increment beyond the saved G+O predictor on CAL-CHECK; it is pilot-only and not semantic evidence. The earlier `−0.622110` R2 headline is retracted for the intended contrast. WPRD remains a narrow within-pair endpoint, and its arm-correlation p-values are not model-level inference. R1 was not run in this correction; no outcome is inferred, and no semantic or open-vocabulary result is established.
 
 ## What was investigated
 
@@ -10,17 +10,16 @@ This gate asks whether C1’s geometry result is separable from nuisance predict
 
 ## Newly tested
 
-R2 reuses the frozen full-scale FIT/CAL image split and existing pilot predictions. A 51-class ordered pair prior is fit only on FIT; one nonnegative residual coefficient is fit only on 750 CAL-FIT images; evaluation uses 250 disjoint CAL-CHECK images. R3 rechecks saved WPRD tables and computes descriptive leave-one-arm-out correlation ranges. R1 was registered as a single C1a condition; its pre-run resource gate found an active L4 workload, so it was not launched.
+R2 reuses the FIT-only pair prior, the registered FIT-only G+O model, and existing bounded pilot predictions. Parent temperatures and a nonnegative residual coefficient are fit only on 750 CAL-FIT images; all four arms are evaluated on the same 250-image / 3,142-row CAL-CHECK set. R3 audits saved WPRD tables and their dependence limits. No R1 experiment was launched in this correction.
 
 ## Headline R2 result
 
-| CAL-CHECK | O only | O + rel_feat | Delta |
+| CAL-CHECK contrast | Calibrated parent LL | Calibrated extended LL | Delta (image-cluster exploratory 95% CI) |
 |---|---:|---:|---:|
-| Log-loss | 1.807878 | 1.185767 | −0.622110 |
-| Accuracy | 0.663590 | 0.679504 | +0.015913 |
-| Macro recall | 0.227013 | 0.184865 | −0.042148 |
+| O → O + rel_feat | 1.598961 | 1.280646 | −0.318314 [−0.357666, −0.276130] |
+| G+O → G+O + rel_feat | 1.315260 | 1.255252 | −0.060008 [−0.074317, −0.044480] |
 
-Image-cluster 95% CI for log-loss delta: [−0.672765, −0.569993]. Bounded-pilot result; it does not isolate geometry, appearance, or semantics.
+The former raw O/CAL-CHECK delta `−0.622110` is retained only as a retracted historical computation, not as an R2 headline. Accuracy rises while macro recall falls in both corrected contrasts; the gain is not uniform. These are pilot-only results and do not isolate appearance/context or establish semantics.
 
 ## Prior evidence and boundary
 
@@ -39,4 +38,4 @@ Current portfolio recommendation: `MERGE_A_B_AND_FOLD_C`. Do not present WPRD as
 
 ## Reproduction
 
-CPU-only R2/R3 computation: `.venv/bin/python tools/portfolio_gate_analysis.py`. It reads frozen manifests, canonical training JSONL, and saved pilot predictions; it does not read validation outcomes. Exact artifact hashes and split counts are recorded in the JSON outputs.
+CPU-only corrected R2 computation: `CUDA_VISIBLE_DEVICES='' .venv/bin/python tools/r2_nested_correction.py`. It reads frozen manifests, canonical training JSONL, saved FIT model weights, and saved pilot predictions; validation is used only to reproduce saved parent metrics. Exact identities, hashes, split counts, and CI replicates are recorded in `R2_nested_nuisance_analysis.json`.

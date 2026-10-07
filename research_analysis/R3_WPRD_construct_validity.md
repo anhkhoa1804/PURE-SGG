@@ -52,3 +52,17 @@ WPRD can be reported as a specialized within-pair discrimination endpoint with i
 The one bounded R1 condition was justified because R2 gives a clean nested predictive contrast, WPRD’s narrow target is supported by its construction and prior null, and the existing geometry comparison bundled pixel-unit restoration with Fourier bandwidth. The L4 resource gate then blocked execution; do not use the historical rank-correlation p-values to justify broader claims.
 
 Full structured audit and leave-one-arm-out numbers: [R3_WPRD_construct_validity.json](R3_WPRD_construct_validity.json).
+
+## Completeness Check for Paper A Rating
+
+This is an artifact audit only; no new R3 analysis or experiment was run.
+
+| Requirement | Status | Evidence / limitation |
+|---|---|---|
+| Exact Spearman sample size recovery | DONE | Each saved correlation table has exactly 12 complete arm rows (`runs/p49_metric_grounding/corr.json`, `runs/p53_metric_grounding_vg150only/corr.json`, `runs/p61_test_metric_grounding/corr.json`). These are 12 deterministic scoring arms from one shared cache/checkpoint, not 12 independent model draws. |
+| Planted-shortcut sensitivity | NOT DONE | No controlled planted relation signal with matched shortcut features is present in the saved R3 artifacts. |
+| Strong-VLM ceiling | NOT AVAILABLE | No saved strong-VLM scoring arm or ceiling artifact in the Paper A WPRD correlation bundles. Existing oracle/ceiling-style projects elsewhere are not a strong-VLM construct-validity control and are not substituted. |
+| Dependence-aware significance | PARTIAL | `R3_WPRD_construct_validity.json` records leave-one-arm-out ranges and historical arm-permutation p-values. The latter do not preserve scorer-family dependence; there is no independent-model cluster bootstrap or valid model-level inferential test. |
+| Prior-only / null controls | DONE | The three saved correlation artifacts give pair-prior WPRD exactly 0.5 and random-null WPRD near 0.5; this addresses an object-pair-constant shortcut only, not appearance, geometry, or context. |
+
+The historical reported correlations are recoverable with **n=12 arms**, but their nominal permutation p-values must not be read as independent-model evidence. No result from this completeness check changes WPRD's narrow descriptive interpretation or authorizes an experiment.

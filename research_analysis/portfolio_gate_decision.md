@@ -1,13 +1,15 @@
 # Portfolio gate decision
 
-## Decision: `R1_BLOCKED`
+## Decision: `R1_BLOCKED`; portfolio `MERGE_A_B_AND_FOLD_C`
 
-R2 completed without identity or split failures. A FIT-only ordered-pair prior was held fixed, a single residual coefficient was calibrated on CAL-FIT, and O-only versus O+rel_feat was scored on disjoint CAL-CHECK rows. This resolves the stated independent-decoder identification concern for the pair-prior contrast.
+The earlier R2 headline `ΔLL = −0.622110` is retracted for the intended nested question. It used raw O logits, omitted the primary G+O contrast, and its O-only number was incorrectly compared in prose to a calibrated full-validation O result.
 
-R3 does **not** validate WPRD as a general SGG quality measure. It supports the narrower WPRD construct as within-pair predicate discrimination: the object-pair prior is exactly chance, its statistic is explicitly conditioned within ordered object-class groups, and the saved p70 geometry removal changes the metric on paired cells. This is enough to interpret one narrow geometry comparison, not to make semantic claims.
+Corrected R2 uses fixed FIT-trained O and G+O parent scores, temperatures and one nonnegative rel_feat offset fitted only on CAL-FIT, and the same 250-image / 3,142-row CAL-CHECK for all arms. The primary G+O→G+O+rel_feat calibrated LL change is **−0.060008** (image-cluster exploratory 95% CI **[−0.074317, −0.044480]**). Accuracy rises slightly, but macro recall falls slightly; this is not a uniform predicate gain. The secondary O→O+rel_feat change is **−0.318314** (CI **[−0.357666, −0.276130]**). See `R2_nested_nuisance_analysis.md` and its JSON/CSV for exact values and protocol.
 
-The prior C0→C1 training intervention changed both `geom_input_pixel_space` and `geom_fourier_scale`. Existing launcher `scripts/train/run_c0_c1.sh` defines C1a as `pixel_space=true, Fourier_scale=1.0`, which differs from C0 only in pixel-space geometry input. The confound is concrete; a single C1a run at seed 1234, followed by the existing full-split endpoint and paired comparison against frozen C0, can determine whether the geometry-only condition moves WPRD. It is bounded to one training arm and one evaluation, no sweep or second seed.
+This supports a bounded pilot predictive increment for the frozen readout beyond the registered G+O predictor. It does not test U/S, does not give full-population inference, and does not establish semantic specificity. U/S remain unavailable under the clean identity-safe protocol.
 
-The narrow R1 question is scientifically justified, but the required fresh L4 check found an active workload (PID 24793, 5,802/23,034 MiB, 15% utilization). Per the no-competition rule the run was not launched and was not retried. Thus R1 is execution-blocked, not a null result. Its predeclared protocol and interpretation rule are preserved in `R1_fixed_geometry_C1.md` and its machine-readable companion.
+R3 completeness is mixed: exact correlation sample size is recovered (12 dependent scoring arms, one underlying checkpoint/cache family); prior-only and random-null controls exist; planted-shortcut and strong-VLM ceiling controls are absent; dependence-aware inferential treatment remains incomplete. WPRD remains interpretable only as a narrow within-pair discrimination statistic.
 
-Portfolio decision for the current evidence: **`MERGE_A_B_AND_FOLD_C`**. Without the geometry-only result, C1’s geometry effect remains the already-reported weak bundled effect and should not be advanced as a separate paper. Do not infer that C1a would be null or positive.
+R1 was not run and is outside this correction. The previous R1 resource gate recorded active PID 24793; do not terminate it without first confirming command, owner/process tree, and relation to this workload. Any future R1 must have a separately frozen same-seed fixed-geometry design, preregistered success margin/metric/stopping rule/baseline/artifact paths, and a fresh `nvidia-smi` gate. The prior R1 blocked status is not a null result, and this correction does not authorize R1.
+
+Portfolio decision remains **`MERGE_A_B_AND_FOLD_C`**: the corrected bounded R2 estimate does not establish the distinct geometry contribution needed for a separate C paper, while the WPRD validity limitations remain. Do not start a new experiment campaign from this correction.
