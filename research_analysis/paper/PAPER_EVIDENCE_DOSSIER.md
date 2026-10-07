@@ -6,7 +6,7 @@ When predicate-supervised scene-graph representations and metrics appear to capt
 
 ## 2. Main Thesis
 
-The repository supports predictive decodability and a bounded incremental predictive contribution from frozen `rel_feat` beyond a fixed G+O parent on one CAL-CHECK pilot. It also shows that object-pair priors are predictively useful, that a historical geometry path violated its feature-construction units contract, and that WPRD should be interpreted narrowly as within-pair score discrimination. The evidence does not identify semantic relational understanding, causal geometry effects, or open-vocabulary generalization.
+The repository supports predictive decodability and an exploratory decoder-held-out predictive comparison from frozen `rel_feat` beyond a fixed G+O parent on one CAL-CHECK pilot. Encoder-held-out status is **not established**: the C1 training-file identity and consumed image IDs are not run-bound, a current-file reconstruction indicates candidate overlap, and the upstream initializer's training/selection populations are unknown. The evidence does not identify semantic relational understanding, causal geometry effects, or open-vocabulary generalization. See `R2_ENCODER_PROVENANCE_AUDIT.md/json` and `R2_OOS_FINAL.md/json`.
 
 ## 3. Evidence Chain
 
@@ -30,7 +30,7 @@ Historical C0 WPRD is **0.5667271196** and historical C1 WPRD is **0.5749881522*
 
 ### 3.4 Nested nuisance readout
 
-Corrected nested R2 fixes the FIT-trained parent and adds a nonnegative scalar multiple of frozen `rel_feat` log-probabilities. On common CAL-CHECK (**250 images / 3,142 rows**): O LL **1.598961→1.280646**, Δ **−0.318314**, CI **[−0.357666, −0.276130]**; G+O LL **1.315260→1.255252**, Δ **−0.060008**, CI **[−0.074317, −0.044480]**. Source: `research_analysis/R2_nested_nuisance_analysis.json` and `.md` §§6–8. Unit: relation-row mean calibrated log-loss; CIs: paired image-cluster bootstrap, **2,000** resamples, seed **20261003**. Status: corrected, bounded, exploratory. The zero-offset configuration recovers the parent exactly; selected CAL-FIT objective is no worse than parent. The fixed parent is not refit in the extension.
+Corrected nested R2 fixes the FIT-trained parent and adds a nonnegative scalar multiple of frozen `rel_feat` log-probabilities. On common CAL-CHECK (**250 images / 3,142 rows**): O LL **1.598961→1.280646**, Δ **−0.318314**, CI **[−0.357666, −0.276130]**; G+O LL **1.315260→1.255252**, Δ **−0.060008**, CI **[−0.074317, −0.044480]**. Source: `research_analysis/R2_nested_nuisance_analysis.json` and `.md` §§6–8. Unit: relation-row mean calibrated log-loss; CIs: paired image-cluster bootstrap, **2,000** resamples, seed **20261003**. Status: corrected, bounded, exploratory. The zero-offset configuration recovers the parent exactly; selected CAL-FIT objective is no worse than parent. The fixed parent is not refit in the extension. The CAL-CHECK labels are held out from fitting the R2 offset, but encoder-held-out evaluation is not established; see the provenance audit.
 
 For G+O, accuracy changes **0.667091→0.668364** and macro recall **0.137086→0.135990**. Source: same R2 artifacts; same rows/units. Thus reduced log-loss does not imply a broad argmax or class-balanced gain.
 
@@ -55,7 +55,7 @@ We cannot claim semantic relational understanding, semantic specificity, causal 
 
 ## 6. Statistical Qualifications
 
-R2 uncertainty resamples images and retains relation rows, but is conditional on one fitted set of weights, one selected split, and calibration. It is exploratory, not confirmatory; it does not estimate seed/training uncertainty. The earlier WPRD cell-based intervals and R2 image-cluster intervals use different units and answer different questions. The R3 nominal permutation p-values shuffle dependent scorer arms and are not valid independent-model inference. Per-predicate estimates have small supports in the tail; no new thresholds or groups are introduced here.
+R2 uncertainty resamples images and retains relation rows, but is conditional on one fitted set of weights, one selected split, and calibration. It is exploratory, not confirmatory; it does not estimate seed/training uncertainty. In addition, C1 encoder exposure is unresolved, so this is not encoder-held-out evidence. The earlier WPRD cell-based intervals and R2 image-cluster intervals use different units and answer different questions. The R3 nominal permutation p-values shuffle dependent scorer arms and are not valid independent-model inference. Per-predicate estimates have variable support; no new thresholds or groups are introduced here.
 
 ## 7. Experimental Limitations
 
@@ -74,7 +74,7 @@ R2 uses a 250-image CAL-CHECK pilot. Full-scale U/S nuisance reconstruction was 
 
 ## 9. Remaining Evidence Gaps
 
-The full-scale G+O+U+S contrast; completed corrected-geometry R1 endpoint; independent-model WPRD validity evidence; controlled separation of appearance, scene context, and geometry; adjudicated semantic relation labels; and an eligible frozen interactional-family evaluation remain absent. These are gaps, not null results.
+The full-scale G+O+U+S contrast; encoder-held-out R2-OOS estimate; completed corrected-geometry R1 endpoint; independent-model WPRD validity evidence; controlled separation of appearance, scene context, and geometry; adjudicated semantic relation labels; and an eligible frozen interactional-family evaluation remain absent. C1's upstream checkpoint training/selection population is not recoverable from current artifacts. These are gaps, not null results.
 
 ## 10. Publication Risk Assessment
 

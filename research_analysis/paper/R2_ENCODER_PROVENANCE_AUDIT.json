@@ -1,0 +1,136 @@
+{
+  "schema": "paper-c-r2-encoder-provenance-audit-v1",
+  "status": "PROVENANCE_INCONCLUSIVE",
+  "r2_status": "DECODER_HELD_OUT_FROM_R2_OFFSET_FITTING; ENCODER_HELD_OUT_NOT_ESTABLISHED",
+  "r2_population": {
+    "CAL_FIT": {
+      "images": 750,
+      "rows": 9078,
+      "source": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/population_manifests/calfit_calcheck_manifest.json",
+      "image_ids_are_frozen_in_source": true
+    },
+    "CAL_CHECK": {
+      "images": 250,
+      "rows": 3142,
+      "source": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/population_manifests/calfit_calcheck_manifest.json",
+      "image_ids_are_frozen_in_source": true
+    },
+    "all_cal": {
+      "images": 1000,
+      "rows": 12220,
+      "calfit_calcheck_image_overlap": 0,
+      "e2_overlap_images": 0
+    }
+  },
+  "c1_finetuning": {
+    "checkpoint": "checkpoints/C1_seed1234.pt",
+    "checkpoint_sha256": "79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854",
+    "training_commit": "2c35bba26baced2b63e5afc41b4693e349e9889",
+    "source": "runs/C1_seed1234/provenance.txt; logs/C1_seed1234.log; runs/C1_seed1234_launch.log; scripts/train/run_c0_c1.sh at training commit",
+    "configured_split": "local-jsonl datasets_vg150_clean/train.jsonl",
+    "configured_train_population_current_file": {
+      "images": 83249,
+      "relation_rows": 1046427,
+      "sha256_current": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4"
+    },
+    "sample_budget": "12000 samples per epoch x 3 epochs",
+    "loader_behavior": "At the C1 training commit, the local JSONL dataset reports length=samples_per_epoch for train; shuffled map-style sampling over indices 0..11999 visits that index frame each epoch.",
+    "run_bound_train_jsonl_sha256": null,
+    "consumed_image_ids_logged": false,
+    "exact_actual_consumed_id_set_recoverable": false,
+    "current_file_candidate_frame": {
+      "images": 12000,
+      "relation_rows": 151018,
+      "cal_fit_overlap_images": 119,
+      "cal_fit_overlap_rows": 1400,
+      "cal_check_overlap_images": 37,
+      "cal_check_overlap_rows": 430,
+      "all_cal_overlap_images": 156,
+      "all_cal_overlap_rows": 1830,
+      "cal_fit_image_ids": ["1159268", "1159940", "1160034", "1592927", "2315862", "2316070", "2316726", "2316987", "2317264", "2317586", "2317631", "2318051", "2319796", "2321097", "2322093", "2324199", "2327850", "2328401", "2329278", "2329279", "2329838", "2330076", "2331416", "2333752", "2333796", "2334134", "2334659", "2335482", "2335592", "2336696", "2337217", "2338009", "2338277", "2338821", "2339422", "2340319", "2341766", "2341946", "2343357", "2343528", "2343805", "2344887", "2345285", "2346852", "2347125", "2348244", "2350110", "2351072", "2351601", "2352102", "2354116", "2354280", "2355044", "2356405", "2357145", "2357784", "2359243", "2363997", "2365752", "2366370", "2366848", "2367588", "2368073", "2368210", "2368817", "2369636", "2370030", "2370967", "2375132", "2376387", "2376937", "2377194", "2378400", "2379704", "2380403", "2381463", "2382779", "2383017", "2383331", "2384835", "2386214", "2387423", "2389783", "2390479", "2391392", "2391692", "2392737", "2393406", "2393797", "2394267", "2395507", "2396070", "2396694", "2396884", "2397133", "2397530", "2399805", "2401359", "2401626", "2401938", "2404725", "2405249", "2406042", "2406240", "2406936", "2407121", "2407305", "2408773", "2411596", "2414606", "2414887", "2417393", "285630", "285979", "314", "3598", "713609", "713731", "713924"],
+      "cal_check_image_ids": ["1159271", "1159401", "150262", "1592296", "2316447", "2316538", "2318046", "2319946", "2328538", "2330399", "2330842", "2337741", "2346277", "2351891", "2351896", "2352352", "2359226", "2360880", "2367197", "2370825", "2372077", "2372334", "2372629", "2374564", "2375067", "2376310", "2380148", "2383294", "2388328", "2403595", "2404561", "2408192", "2409715", "2411006", "2411600", "2412890", "4158"]
+    },
+    "selection_and_stopping": {
+      "c1_finetune_epochs": 3,
+      "save_best_checkpoints": false,
+      "final_checkpoint_rule": "fixed final epoch budget",
+      "c1_early_stopping": false,
+      "in_training_validation_diagnostic": "60 batches per epoch; validation split; diagnostic only per registered script",
+      "upstream_initializer": "checkpoints/demo_best/pure_best_adapt_light_mR50.pt",
+      "initializer_sha256": "8845c3af7dc39ad7c4c3aa0ba6dfd064a95d182db30be47cccc5f90f7f0ad442",
+      "initializer_training_images": "UNKNOWN",
+      "initializer_training_split": "UNKNOWN",
+      "initializer_checkpoint_selection_split": "UNKNOWN",
+      "initializer_early_stopping_population": "UNKNOWN",
+      "reason": "Historical checkpoint manifest states original dataset/split and evaluation split/image count are unknown; predecessor checkpoint is absent and original dataset preparation is unavailable."
+    }
+  },
+  "split_reconciliation": {
+    "current_train": {"images": 83249, "relation_rows": 1046427},
+    "current_validation": {"images": 10401, "relation_rows": 132556},
+    "current_test": {"images": 10403, "relation_rows": 132334},
+    "calfit_overlap_current_train": 750,
+    "calcheck_overlap_current_train": 250,
+    "calfit_overlap_current_validation": 0,
+    "calcheck_overlap_current_validation": 0,
+    "calfit_overlap_current_test": 0,
+    "calcheck_overlap_current_test": 0,
+    "current_train_validation_overlap_images": 0,
+    "current_train_test_overlap_images": 0,
+    "current_validation_test_overlap_images": 0,
+    "duplicate_ids_in_each_current_split": 0
+  },
+  "image_identity_handling": {
+    "R2_CAL_FIT_CAL_CHECK_sampling_unit": "image_id, with relation rows inherited from selected images",
+    "CAL_FIT_CAL_CHECK_overlap_images": 0,
+    "CAL_E2_overlap_images": 0,
+    "current_train_validation_test_duplicate_or_cross_split_overlap": 0,
+    "C1_run_logged_consumed_image_ids": false
+  },
+  "cached_feature_extraction": {
+    "canonical_C1_relfeat_inference": {
+      "images": 83249,
+      "relation_rows": 1046427,
+      "source": "runs/canonical_train_representation_full_20261001T020630Z/representation/canonical_train_relfeat_manifest.json",
+      "role": "frozen-checkpoint inference/cache extraction; not encoder training"
+    },
+    "bounded_N4FIT_features_used_for_R2_sidecar": {
+      "FIT_images": 5000,
+      "FIT_rows": 63286,
+      "CAL_images": 1000,
+      "CAL_rows": 12220,
+      "source": "runs/paper_c_n4fit_pilot_training_20261003T182118Z/extraction_provenance.json",
+      "role": "frozen-C1 feature inference/cache; not encoder training"
+    }
+  },
+  "historical_data_identity": {
+    "current_train_jsonl_sha256": "306fc0db96ca716bbc78c2cf32d49fdc695ab0074004a99c7399c850a1c605a4",
+    "historical_manifest_train_jsonl_sha256": "36bc2923b1a3ddb56e331e9b645607606003bd1c8298d1c950b2cdcca7e31ae5",
+    "c1_training_run_bound_train_hash": null,
+    "ordered_image_identity_equivalence_proven": false
+  },
+  "decision": {
+    "provenance_classification": "PROVENANCE_INCONCLUSIVE",
+    "encoder_held_out": false,
+    "decoder_held_out": "CAL-CHECK is held out from R2 fitting; CAL-FIT is used for temperatures/alpha fitting.",
+    "checkpoint_selection_held_out": "UNKNOWN because upstream initializer selection population is unknown.",
+    "r2_oos_run": false,
+    "r2_oos_status": "BLOCKED_PROVENANCE_INCONCLUSIVE",
+    "r2_oos_eligible_population": null,
+    "r2_oos_delta": null,
+    "r2_oos_ci": null,
+    "practical_threshold": null,
+    "reason": "No available population can be proven outside the full encoder training and checkpoint-selection lineage; fitting on current validation/test would falsely label encoder exposure as held out.",
+    "portfolio_decision": "MERGE_A_B_AND_FOLD_C",
+    "R1_status": "BLOCKED_TECHNICAL",
+    "R3_status": "PARTIAL"
+  },
+  "source_hashes": {
+    "calfit_calcheck_manifest_sha256": "2b440a75bebe889c7aaa27f1a809841d8821ebea6a235f32a108757b21dd5b41",
+    "cal_row_manifest_sha256": "1156bae982ff9fd8f9dadfade18e4750778eca3c33387d16b68ecad65854770e",
+    "C1_provenance_sha256": "2259edeca9a6000b1d10bddea26ac5cd86f5dd0861c56388fd56550878c991f0",
+    "C1_launcher_sha256": "8b35be451e48a19815cf66d36dde6d3a115a0114fe42d96d31b0540a0b854b58",
+    "loader_at_C1_commit": "git show 2c35bba26baced2b63e5afc41b4693e349e9889:openvocab_rel/datasets/vg150_loader.py",
+    "historical_checkpoint_manifest_sha256": "710394c3619a392e0b79236a6452556f691adb887339d8ba6ca8a37655a37084"
+  }
+}

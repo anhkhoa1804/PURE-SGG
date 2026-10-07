@@ -1,0 +1,46 @@
+{
+  "schema": "paper-c-r2-oos-final-v1",
+  "status": "BLOCKED_PROVENANCE_INCONCLUSIVE",
+  "experiment_run": false,
+  "reason": "No population can be proven outside the full C1 encoder training and checkpoint-selection lineage.",
+  "current_r2": {
+    "CAL_CHECK_images": 250,
+    "CAL_CHECK_rows": 3142,
+    "delta_calibrated_ll": -0.06000767908111817,
+    "exploratory_image_cluster_ci95": [-0.07431709242125338, -0.04448041021553684],
+    "R2_offset_fitted_on_CAL_CHECK": false,
+    "encoder_held_out": false
+  },
+  "provenance": {
+    "classification": "PROVENANCE_INCONCLUSIVE",
+    "C1_direct_finetune_current_file_candidate_overlap_CAL_FIT": 119,
+    "C1_direct_finetune_current_file_candidate_overlap_CAL_CHECK": 37,
+    "run_bound_actual_overlap": null,
+    "upstream_initializer_training_ids": "UNKNOWN",
+    "upstream_initializer_selection_population": "UNKNOWN"
+  },
+  "protocol": {
+    "frozen": false,
+    "reason": "Eligibility gate failed; no valid encoder-held-out population was identified.",
+    "folds": null,
+    "practical_threshold": null,
+    "bootstrap": null,
+    "shuffle_control": "NOT_RUN_SCOPE_CONTROL"
+  },
+  "results": {
+    "eligible_images": null,
+    "eligible_rows": null,
+    "delta_ll": null,
+    "ci95": null,
+    "fold_deltas": null,
+    "accuracy": null,
+    "macro_recall": null
+  },
+  "decision": "NO_R2_OOS_CLAIM; current R2 is not encoder-held-out evidence",
+  "sources": [
+    "research_analysis/paper/R2_ENCODER_PROVENANCE_AUDIT.md",
+    "research_analysis/paper/R2_ENCODER_PROVENANCE_AUDIT.json",
+    "research_analysis/R2_nested_nuisance_analysis.json",
+    "docs/HISTORICAL_CHECKPOINT_MANIFEST.md"
+  ]
+}
