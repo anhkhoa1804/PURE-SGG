@@ -24,11 +24,11 @@ WPRD remains a narrow within-pair predicate discrimination statistic, not a gene
 
 ## R1 — Fixed Geometry C1
 
-**`BLOCKED_TECHNICAL`**. The C1a run (seed 1234, pixel-scale boxes, Fourier scale 1.0) was interrupted during its in-training validation diagnostic after unrelated GPU PID 32655 appeared with 186 MiB allocated and the device at 100% utilization. We interrupted only our R1 PID; no final WPRD evaluation ran, so no delta, CI, or materiality conclusion is available. PID 24793 was absent at preflight and was never signalled. The partial epoch-0 checkpoint is preserved but is not a completed model. See `R1_fixed_geometry_C1.md` and `R1_CORRECTION_SUMMARY.md`.
+**`BLOCKED_TECHNICAL`**. The corrected-geometry R1 run was initiated under a frozen protocol but did not complete because unrelated GPU contention appeared. Consequently no corrected C1 WPRD, delta, or materiality conclusion is available. Epoch 0 completed and an intermediate checkpoint was written before interruption during the in-training validation diagnostic; the full evaluator was never launched. The recorded process evidence identifies PID 32655 as a separate OmniDocBench command tree but does not establish its owner. PID 24793 was absent at preflight and was never signalled. The partial checkpoint is preserved and classified `PARTIAL_NONFINAL`; it is not a completed model or corrected C1 result. See `R1_artifact_audit.md`.
 
 ## Publication Decision
 
-Remain with `MERGE_A_B_AND_FOLD_C`. Corrected R2 is a bounded predictive pilot, not the missing distinct C geometry result. R1 is blocked rather than negative; this single-run authorization does not permit a retry. Fullscale N4-FIT and U/S were not evaluated; no full-population G+O+U+S residual inference or final interactional-family endpoint exists.
+Remain with `MERGE_A_B_AND_FOLD_C`. Corrected R2 is a bounded predictive pilot, not the missing distinct C geometry result. R1 is blocked rather than negative. It is optional future strengthening, not required for paper completion; this closure pass does not authorize a retry. Fullscale N4-FIT and U/S were not evaluated; no full-population G+O+U+S residual inference or final interactional-family endpoint exists.
 
 ## What We Should Not Do
 
