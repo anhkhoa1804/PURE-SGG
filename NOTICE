@@ -1,0 +1,21 @@
+Third-party material in this repository
+=======================================
+
+The license above covers the original research code, scripts, configs and
+documents written for this project. The following third-party material is
+NOT covered by it:
+
+1. tools/cross_model/patches/vctree_maskrcnn_benchmark_torch2_compat.patch
+   A small compatibility patch (ATen API updates in maskrcnn_benchmark/csrc/).
+   It modifies files from facebookresearch/maskrcnn-benchmark, which is
+   MIT-licensed, Copyright (c) Facebook, Inc. and its affiliates. The
+   original copyright headers are preserved in the patch. The patch targets
+   mods333/energy-based-scene-graph, a VCTree fork whose license is not
+   declared on GitHub (reported as NOASSERTION); the upstream terms of that
+   fork and of Scene-Graph-Benchmark.pytorch it derives from have not been
+   verified. Anyone redistributing the patched code should check those terms
+   first.
+
+No other copyright or license headers were found in the tracked files. Model
+checkpoints, datasets and external codebases are not included in this
+repository and are governed by their own terms.
