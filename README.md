@@ -12,6 +12,23 @@ open-vocabulary relation understanding, interactional-family superiority, or
 predictive residual beyond a full-population G+O+U+S nuisance model. Fullscale
 N4-FIT was not run, and no C1 retraining was authorized from this branch.
 
+## Repository layout
+
+```text
+openvocab_rel/   Python package: CLIP/predicate utilities, dataset and config code
+tools/           Analysis and probe scripts (WPRD readout ladder, geometry, cross-model)
+tests/           Pytest suite for the package and analysis tools
+configs/         Experiment configuration files
+scripts/         Operational and data-preparation scripts
+data/            Dataset manifests and validation reports (no raw datasets)
+runs/            Small JSON/JSONL result records per run; tensors and checkpoints are kept outside Git
+research_analysis/  Final analysis memos, claim boundary and reports
+paper_package/   Paper drafts (abstract, discussion, conclusion) and figures
+docs/            Research notes, experiment write-ups and audit records
+notes/           LaTeX status notes and an index
+CLAUDE.md        Operating rules for AI-assisted work in this repository
+```
+
 ## Research question
 
 The evolved question was whether predicate-supervised relation representations
