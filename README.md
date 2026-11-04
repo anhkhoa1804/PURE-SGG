@@ -1,5 +1,17 @@
 # Research-No.1 / Paper C
 
+Paper C studies whether predicate-supervised relation representations on
+Visual Genome (VG150) retain predictive structure beyond nuisance variables.
+The direction is **closed**. This repository keeps the evidence, the claim
+boundary, and the reproducibility record.
+
+**Start here**
+
+- [Closeout](docs/research/PAPER_C_CLOSEOUT.md): disposition and what was not pursued.
+- [Evidence ledger](docs/research/PAPER_C_EVIDENCE_LEDGER.md): each result tied to its artifact and its limits.
+- [Experimental timeline](docs/research/PAPER_C_EXPERIMENTAL_TIMELINE.md): chronology from A1–A6 through the strategic stop.
+- [Claim boundary](research_analysis/FINAL_CLAIM_BOUNDARY.md) and [reproducibility](docs/research/PAPER_C_REPRODUCIBILITY.md).
+
 ## Current status
 
 **`PAPER_C_DIRECTION_CLOSED`.** The current Paper C research direction was
@@ -72,8 +84,10 @@ The final saved pair-prior row audit identifies 12,330 of 14,991 validation
 rows as supported by a training pair (82.25%). An earlier summary reported
 12,402; that count is superseded by the identity-checked saved-row artifact
 and must not be used as the current figure. See
-[`posthoc_metrics.json` in the final evidence audit](runs/paper_c_final_evidence_audit_20261003T185925Z/posthoc_metrics.json)
-and its documented consistency note in `evidence_index.json`.
+in `runs/paper_c_final_evidence_audit_20261003T185925Z/posthoc_metrics.json`
+(validation split), with its consistency note in that folder's
+`evidence_index.json`. That run folder is not tracked in this clone; the
+ledger records the path and its checksums for anyone holding the archive.
 
 The balanced-15k M2 run reported log-loss 1.6304535145, accuracy
 0.5614035088, and macro recall 0.1412721492 on 1,182 validation images / 14,991
@@ -113,8 +127,9 @@ forensic, and the bounded N4-FIT pilot followed by the strategic stop.
 
 ## Reproducibility
 
-The canonical C1 source snapshot is preserved at
-`runs/paper_c_canonical_train_relfeat_20260930T062248Z/code`, commit
+The canonical C1 source snapshot is recorded at
+`runs/paper_c_canonical_train_relfeat_20260930T062248Z/code` (not tracked in
+this clone; see the [historical artifact index](docs/archive/HISTORICAL_ARTIFACTS.md)), commit
 `ec4cca6ff01ab46929b7b428220fe0df2ba00f2a`. The canonical checkpoint is
 `checkpoints/C1_seed1234.pt`, SHA256
 `79ca156524539ea1cdaaa61fde5420ad9f21145d21703a42e8c290a6c06d6854`. The
