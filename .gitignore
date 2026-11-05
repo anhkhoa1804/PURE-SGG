@@ -55,6 +55,7 @@ ENV/
 *.arrow
 *.zip
 *.pdf
+!docs/reports/**/*.pdf
 
 # Download/model caches and local experiment-service state
 /.cache/

@@ -24,6 +24,15 @@ open-vocabulary relation understanding, interactional-family superiority, or
 predictive residual beyond a full-population G+O+U+S nuisance model. Fullscale
 N4-FIT was not run, and no C1 retraining was authorized from this branch.
 
+## Reports and slides
+
+- [Capstone defense presentation (PDF, 53 pages)](docs/reports/capstone/Capstone-Defense-Presentation.pdf):
+  *Retrieving People and Objects from Textual Descriptions via Multimodal Learning* (HK252-DATN-160).
+- [Thesis LaTeX source](docs/reports/capstone/thesis-source/main.tex), with figures in
+  `docs/reports/capstone/thesis-source/pics/`. The licensed font files are not included.
+
+![PURE pipeline overview](docs/reports/capstone/thesis-source/pics/pipeline-overview.png)
+
 ## Repository layout
 
 ```text
